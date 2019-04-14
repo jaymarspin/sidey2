@@ -23,6 +23,7 @@ const routes: Routes = [
  
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'moderateresto', loadChildren: './moderateresto/moderateresto.module#ModeraterestoPageModule' },
+  { path: 'title-edit', loadChildren: './moderate/title-edit/title-edit.module#TitleEditPageModule' },
 
   
 ];

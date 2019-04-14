@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
+import { TitleEditPage } from '../moderate/title-edit/title-edit.page'
+import { ModalController,ToastController } from '@ionic/angular'
+import { from } from 'rxjs';
 @Component({
   selector: 'app-moderateresto',
   templateUrl: './moderateresto.page.html',
@@ -15,7 +18,7 @@ export class ModeraterestoPage implements OnInit {
      {src: "https://www.wallpaperup.com/uploads/wallpapers/2015/07/24/761368/c2177ff23f862b515dd9f1517b011727-700.jpg",title:"sample2"}
    
   ]
-  constructor(private androidFullScreen: AndroidFullScreen) { }
+  constructor(private androidFullScreen: AndroidFullScreen,private modal: ModalController) { }
    
    
   ngOnInit() {
@@ -30,6 +33,22 @@ export class ModeraterestoPage implements OnInit {
   }
   onViewDidEnter(){
     
+  }
+  async presentModal() {
+    const modal = await this.modal.create({
+      component: TitleEditPage,
+      cssClass: 'my-custom-modal-css',
+       componentProps: { 
+        
+       }
+    });
+    modal.onDidDismiss() 
+      .then((data) => {
+
+        const pos = data['data']; 
+       
+    });
+    await modal.present();
   }
 
 

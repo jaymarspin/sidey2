@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpModule} from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {ModalmapPageModule} from './modalmap/modalmap.module';
+import { TitleEditPageModule } from './moderate/title-edit/title-edit.module'
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
 @NgModule({
@@ -23,11 +24,12 @@ import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
     HttpModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ModalmapPageModule
+    ModalmapPageModule,
+    TitleEditPageModule
   ],
   providers: [
     StatusBar,
-    PostService,
+    PostService, 
     Geolocation,
     NativeGeocoder,
     SplashScreen,
@@ -37,3 +39,4 @@ import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+  
