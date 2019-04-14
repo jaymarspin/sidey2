@@ -1,0 +1,36 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
+@Component({
+  selector: 'app-moderateresto',
+  templateUrl: './moderateresto.page.html',
+  styleUrls: ['./moderateresto.page.scss'],
+})
+export class ModeraterestoPage implements OnInit {
+  slideOpts = {
+    effect: 'flip'
+  };
+   items:any  = [
+     {src: "https://image.dhgate.com/0x0/f2/albu/g7/M00/09/B9/rBVaSlpqpheAGqouAAJzzx7VRgs819.jpg",title:"sample"},
+     {src: "https://www.feathr.com/images/uploads/Sketch-MartinCreed.jpg",title:"sample2"},
+     {src: "https://www.wallpaperup.com/uploads/wallpapers/2015/07/24/761368/c2177ff23f862b515dd9f1517b011727-700.jpg",title:"sample2"}
+   
+  ]
+  constructor(private androidFullScreen: AndroidFullScreen) { }
+   
+   
+  ngOnInit() {
+    this.androidFullScreen.isImmersiveModeSupported()
+  .then(() => this.androidFullScreen.immersiveMode())
+  .catch(err => console.log(err)); 
+  }
+  ngOnDestroy(){
+    this.androidFullScreen.isImmersiveModeSupported()
+  .then(() => this.androidFullScreen.showUnderSystemUI())
+  .catch(err => console.log(err));
+  }
+  onViewDidEnter(){
+    
+  }
+
+
+}

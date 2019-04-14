@@ -1,0 +1,102 @@
+
+<ion-content>
+    
+      <ion-row>
+        <ion-col class="row-col" >
+            <ion-icon name="arrow-round-back" id= 'back' (click)="goback()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+          <ion-col class="row-col">
+              <ion-label id="place-label">Add a place</ion-label>
+          </ion-col>
+        </ion-row>
+        <div class="main">
+            <ion-list>
+                <ion-item class="item-divider">
+                    <ion-label position="floating">Restaurant Name</ion-label>
+                    <ion-input [(ngModel)]='restaurant' #ctl='ngModel'></ion-input>
+                  </ion-item>
+                  <ion-item class="item-divider" (click)="presentModal()">
+                      <ion-label position="floating">Location</ion-label>
+                      <ion-input [(ngModel)]='address' #ctl='ngModel'>{{administrative}}</ion-input>
+                    </ion-item>  
+
+                    <ion-item class="item-divider">
+                        <ion-label position="floating">Contact Info</ion-label>
+                        <ion-input [(ngModel)]='contact' #ctl='ngModel'></ion-input>
+                      </ion-item>  
+                      
+                          
+                      
+                  </ion-list>
+                  <ion-button color="secondary" expand="block" style="margin-top: 20px;" type='submit' (click)="placeadd()">Submit</ion-button>
+      
+    </div>
+</ion-content>
+<style>
+  .row-col{
+    padding: 15px;
+  }
+  #place-label{
+    font-weight: bold;
+    font-size: 30px
+  }
+  #back{
+    font-size: 30px;
+  }#back:active{
+    opacity: 0.4;
+    transition: all 0.4s;
+  }
+  .main{
+    padding: 20px;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    
+  }
+  #locate{
+    position: relative;
+    border: none;
+    top: 5px;
+    font-size: 30px;
+    z-index: 2;
+  }
+  span{
+    font-size:40px;
+    color: red;
+    position: relative;
+    top: 15px;
+  }
+ 
+  .separator{
+    width: 100%;
+    position: relative;
+    float: left;
+    clear: both;
+  }
+  .input{
+    position: relative;
+    width: 100%;
+    clear: both;
+    float: left;
+    border-bottom: 1px solid #ccc
+  }
+  .place{
+    float: right;
+    width: calc(100% - 40px);
+  }
+  .item-holder{
+    display: block;
+    position: relative;
+    clear: both;
+    height: auto;
+    overflow: hidden;
+
+  }
+  .item-holder:last-of-type{
+    margin-top: 30px;
+  }
+</style>

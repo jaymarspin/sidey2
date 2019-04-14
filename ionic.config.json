@@ -1,0 +1,7 @@
+{
+  "name": "sidey",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

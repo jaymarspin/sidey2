@@ -1,0 +1,176 @@
+
+<ion-content id="content"
+>
+
+
+    <div id="header">
+      <ion-buttons slot="start" id="side">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+  
+        <ion-input placeholder="Search here" id="input"></ion-input>
+      
+        <ion-buttons slot="dark" id="moreIcon" >
+          <ion-button color="dark">
+            <ion-icon slot="icon-only" name="more"></ion-icon>
+          </ion-button>      
+        </ion-buttons>
+    
+        
+      </div>
+
+      <div id="menu-wrapper">
+
+          <ion-segment scrollable color="secondary" id="menus">
+              <ion-segment-button checked (click)="listing()" value="listings">
+                  <ion-label>Listings</ion-label>
+              </ion-segment-button>
+              <ion-segment-button (click)="events()" value="events">
+                  <ion-label>Events</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="cuisines">
+                  <ion-label>Cuisines</ion-label>
+              </ion-segment-button>
+              <ion-segment-button>
+                  <ion-label>Standard</ion-label>
+              </ion-segment-button>
+              <ion-segment-button>
+                  <ion-label>Standard</ion-label>
+              </ion-segment-button>
+              <ion-segment-button>
+                  <ion-label>Standard</ion-label>
+              </ion-segment-button>
+              <ion-segment-button>
+                  <ion-label>Standard</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+
+
+          <!-- <ul>
+            <li><ion-buttons slot="dark" >
+              <ion-button color="light">
+                Listing
+              </ion-button>      
+            </ion-buttons></li>
+            <li><ion-buttons slot="dark" ">
+              <ion-button color="light">
+                Events
+              </ion-button>      
+            </ion-buttons></li>
+            <li><ion-buttons slot="dark" >
+              <ion-button color="light">
+                Cuisines
+              </ion-button>      
+            </ion-buttons></li>
+            <li><ion-buttons slot="dark" >
+              <ion-button color="light">
+                Tops
+              </ion-button>      
+            </ion-buttons></li>
+          </ul> -->
+      </div>
+
+      <style>
+        #side{
+          color: #333;
+          top: 11px;
+          position: absolute;
+        }
+        
+#header{
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 10;
+  border-bottom: 1px solid #e8ebef;
+  background-color: #fff;
+}
+
+        #menu-wrapper{
+          position: fixed;
+          
+          width: 100%;
+          margin-top: 52px;
+          background-color: #f5f5f5;
+          overflow: hidden;
+          z-index: 2;
+          padding: 0px;
+          text-align:center;
+          
+          
+        }
+        
+        #menu-wrapper ul{
+          padding: 0;
+          position: relative;
+          list-style-type: none;
+          text-align: center;
+          
+          padding-top: 5px;
+          padding-bottom: 5px;
+          
+          width: 100%;
+         
+
+        }
+        #menu-wrapper ul li{
+          align-content: center;
+          width: 24.5%;
+          display: inline-block;
+          text-align: center;
+          line-height: 20px;
+          border: none;
+          padding: 0;
+         
+        }
+        
+      </style>
+      <div id="maincontent">
+        <!-- <ion-scroll scrollX='true' style="white-space: nowrap" >
+          
+        </ion-scroll> -->
+       
+       
+        <router-outlet></router-outlet>
+
+              <!-- <app-listing></app-listing> -->
+  
+      </div>
+</ion-content>
+
+
+<style>
+#maincontent{
+  position: relative;
+  margin-top: 110px;
+  height: auto;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+#input{
+  float: left;
+  --padding-start: 40px;
+  --padding-end: 35px;
+  line-height: 35px;
+  font-size: 16px;
+ 
+
+}
+
+
+#searchIcon, #moreIcon{
+  position: absolute;
+  font-size: 25px;
+  top: 10px;
+  color: #ccc;
+  
+}
+#moreIcon{
+  right: 0px;
+  color: #333;
+  top: 11px;
+  font-size: 20px;
+}
+
+</style>
