@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-title-edit',
@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./title-edit.page.scss'],
 })
 export class TitleEditPage implements OnInit {
-
+  @Input('title') title
   constructor() { }
-
+  
   ngOnInit() {
   }
 

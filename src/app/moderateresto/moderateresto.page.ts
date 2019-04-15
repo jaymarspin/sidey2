@@ -9,6 +9,7 @@ import { from } from 'rxjs';
   styleUrls: ['./moderateresto.page.scss'],
 })
 export class ModeraterestoPage implements OnInit {
+  title = "three grills and a grill"
   slideOpts = {
     effect: 'flip'
   };
@@ -39,7 +40,7 @@ export class ModeraterestoPage implements OnInit {
       component: TitleEditPage,
       cssClass: 'my-custom-modal-css',
        componentProps: { 
-        
+          title: this.title
        }
     });
     modal.onDidDismiss() 

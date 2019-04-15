@@ -3,7 +3,7 @@ import {PostService} from '../post/post.service'
 import { ModalController,ToastController } from '@ionic/angular'
 import { ModalmapPage } from '../modalmap/modalmap.page'
 import { NativeGeocoder, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
-
+import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,14 +17,21 @@ export class PlaceAddPage implements OnInit {
   restaurant: any;
   address: any;
   contact: any;
-  constructor(public post: PostService,public modal: ModalController, public nativeCoder: NativeGeocoder,private toastController: ToastController,private router: Router) { }
+  constructor(public post: PostService,public modal: ModalController, public nativeCoder: NativeGeocoder,private toastController: ToastController,private router: Router,public loadingController: LoadingController) { }
   lat: any;
   long: any;
   latlng: any
   administrative: any
+  private loading: any;
 
+  private async presentLoading(message): Promise<any> {
+    this.loading = await this.loadingController.create({
+      message: message
+    });
+    return await this.loading.present();
+  }
   ngOnInit() {
-  
+    
         
   }
   async presentToast(message:any) {
@@ -43,18 +50,27 @@ export class PlaceAddPage implements OnInit {
       lat: this.lat,
       lng: this.long
     } 
-    this.router.navigate(['moderateresto']); // to be removed
+     
+     
     this.post.postData(body,'add_resto.php').subscribe((Response)=>{
-      console.log(Response)
-      if(Response.message == "success"){
-        this.presentToast('Successfully Submitted.')
-        //this.router.navigate(['moderateresto']);
-      }else this.presentToast('Error Occured. Try Again Later');      
+      this.presentLoading("uploading... please wait").then((data) =>{
+        if(Response.message == "success"){
+          this.loading.dismiss().then(() =>{
+            this.router.navigate(['moderateresto']);
+          });
+          
+          
+        }else{
+          this.loading.dismiss().then(() =>{
+            this.presentToast('Error Occured. Try Again Later');
+          });
+          
+        }  
+      })
+      
+           
     })
   }
-
-  
-  
   goback(){
     this.router.navigate(['home']);
   }
