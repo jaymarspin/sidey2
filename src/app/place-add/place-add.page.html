@@ -20,7 +20,7 @@
                   </ion-item>
                   <ion-item class="item-divider" (click)="presentModal()">
                       <ion-label position="floating">Location</ion-label>
-                      <ion-input [(ngModel)]='address' #ctl='ngModel'>{{administrative}}</ion-input>
+                      <ion-input [(ngModel)]='address' value="{{administrative}}" #ctl='ngModel'></ion-input>
                     </ion-item>  
 
                     <ion-item class="item-divider">

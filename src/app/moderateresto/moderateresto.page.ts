@@ -3,13 +3,14 @@ import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
 import { TitleEditPage } from '../moderate/title-edit/title-edit.page'
 import { ModalController,ToastController } from '@ionic/angular'
 import { from } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-moderateresto',
   templateUrl: './moderateresto.page.html',
   styleUrls: ['./moderateresto.page.scss'],
 })
 export class ModeraterestoPage implements OnInit {
-  title = "three grills and a grill"
+ 
   slideOpts = {
     effect: 'flip'
   };
@@ -19,11 +20,17 @@ export class ModeraterestoPage implements OnInit {
      {src: "https://www.wallpaperup.com/uploads/wallpapers/2015/07/24/761368/c2177ff23f862b515dd9f1517b011727-700.jpg",title:"sample2"}
    
   ]
-  constructor(private androidFullScreen: AndroidFullScreen,private modal: ModalController) { }
+  private title:any
+  private id:any
+  private address:any
+  constructor(private androidFullScreen: AndroidFullScreen,private modal: ModalController,private activateRoute: ActivatedRoute) { }
    
    
   ngOnInit() {
-    this.androidFullScreen.isImmersiveModeSupported()
+    this.title = this.activateRoute.snapshot.paramMap.get("title")
+    this.id = this.activateRoute.snapshot.paramMap.get("id")
+    this.address = this.activateRoute.snapshot.paramMap.get("address")
+    this.androidFullScreen.isImmersiveModeSupported() 
   .then(() => this.androidFullScreen.immersiveMode())
   .catch(err => console.log(err)); 
   }
