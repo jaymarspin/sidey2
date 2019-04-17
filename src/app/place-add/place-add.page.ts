@@ -5,10 +5,10 @@ import { ModalmapPage } from '../modalmap/modalmap.page'
 import { NativeGeocoder, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-place-add',
-  templateUrl: './place-add.page.html',
+  templateUrl: './place-add.page.html', 
   styleUrls: ['./place-add.page.scss'],
 
 })
@@ -17,7 +17,45 @@ export class PlaceAddPage implements OnInit {
   restaurant: any;
   address: any;
   contact: any;
-  constructor(public post: PostService,public modal: ModalController,public navCtrl: NavController, public nativeCoder: NativeGeocoder,private toastController: ToastController,private router: Router,public loadingController: LoadingController) { }
+  former: FormGroup
+  error_message = {
+    restaurant: [
+      {type: 'required', message: 'This Field is Required'},
+      {type: 'minLength', message: 'character 5'},
+      {type: 'maxLength', message: 'character 10'},
+      
+    ],
+    password: [
+      {type: 'required', message: 'This Field is Required'},
+      {type: 'minLength', message: 'character length must be is less than 5'},
+      {type: 'maxLength', message: 'character length must be is greater than 10'},
+      {type: 'pattern', message: 'invalid email'},
+    ]
+  }
+  constructor(public post: PostService,public modal: ModalController,public navCtrl: NavController, public nativeCoder: NativeGeocoder,private toastController: ToastController,private router: Router,public loadingController: LoadingController,private validators: Validators,private formBuilder: FormBuilder) {
+
+    this.former = this.formBuilder.group({
+      restaurant: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        
+      ])),
+      address: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(0),
+        Validators.maxLength(50),
+        
+      ])),
+      contact: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(30),
+        
+      ]))
+    });
+
+   }
   lat: any;
   long: any;
   latlng: any

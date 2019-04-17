@@ -13,26 +13,32 @@
           </ion-col>
         </ion-row>
         <div class="main">
+            <form [formGroup]="former">
             <ion-list>
                 <ion-item class="item-divider">
                     <ion-label position="floating">Restaurant Name</ion-label>
-                    <ion-input [(ngModel)]='restaurant' #ctl='ngModel'></ion-input>
+                    <ion-input [(ngModel)]='restaurant' ctl='ngModel' formControlName="restaurant"></ion-input>
+                    <ng-container *ngFor="let error of error_message.restaurant">
+                        <div *ngIf="former.get('restaurant').hasError(error.minLength)">
+                          {{error.message}}
+                        </div>
+                      </ng-container>
                   </ion-item>
                   <ion-item class="item-divider" (click)="presentModal()">
                       <ion-label position="floating">Location</ion-label>
-                      <ion-input [(ngModel)]='address' value="{{administrative}}" #ctl='ngModel'></ion-input>
+                      <ion-input [(ngModel)]='address' value="{{administrative}}" ctl='ngModel' formControlName="address"></ion-input>
                     </ion-item>  
 
                     <ion-item class="item-divider">
                         <ion-label position="floating">Contact Info</ion-label>
-                        <ion-input [(ngModel)]='contact' #ctl='ngModel'></ion-input>
+                        <ion-input [(ngModel)]='contact' ctl='ngModel' formControlName="contact"></ion-input>
                       </ion-item>  
                       
                           
                       
                   </ion-list>
-                  <ion-button color="secondary" expand="block" style="margin-top: 20px;" type='submit' (click)="placeadd()">Submit</ion-button>
-      
+                  <ion-button [disabled]="!former.valid" color="secondary" expand="block" style="margin-top: 20px;" type='submit' (click)="placeadd()">Submit</ion-button>
+                </form>
     </div>
 </ion-content>
 <style>

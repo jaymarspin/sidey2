@@ -22,6 +22,7 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Camera} from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -49,7 +50,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
     Camera,
     WebView,
     AndroidFullScreen,
-    
+    Validators,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
