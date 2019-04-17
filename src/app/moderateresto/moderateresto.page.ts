@@ -3,8 +3,9 @@ import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
 import { TitleEditPage } from '../moderate/title-edit/title-edit.page'
 import { AddFoodPage } from '../moderate/add-food/add-food.page'
 import { EditSchedPage } from '../moderate/edit-sched/edit-sched.page'
-import { ModalController,ToastController } from '@ionic/angular'
+import { ModalController,ToastController, NavController } from '@ionic/angular'
 import { from } from 'rxjs';
+
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalmapPage } from '../modalmap/modalmap.page'
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -27,7 +28,7 @@ export class ModeraterestoPage implements OnInit {
   public title:any
   public id:any
   public address:any
-  constructor(private androidFullScreen: AndroidFullScreen,private modal: ModalController,private activateRoute: ActivatedRoute,private statusBar: StatusBar) { }
+  constructor(private androidFullScreen: AndroidFullScreen,private modal: ModalController,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router) { }
    
    
   ngOnInit() {
@@ -46,8 +47,8 @@ export class ModeraterestoPage implements OnInit {
   .then(() => this.androidFullScreen.showUnderSystemUI())
   .catch(err => console.log(err));
   }
-  onViewDidEnter(){
-    
+  try(){
+    this.router.navigate(["add-food"]);
   }
 
   editTile(){

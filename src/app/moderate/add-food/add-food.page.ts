@@ -6,6 +6,7 @@ import { from } from 'rxjs';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 @Component({
   selector: 'app-add-food',
   templateUrl: './add-food.page.html',
@@ -16,7 +17,8 @@ export class AddFoodPage implements OnInit {
   price:any
   imgsrc:any 
   former: FormGroup
-  constructor(private imagePicker: ImagePicker,private file: File,private camera: Camera,private webview: WebView,private validators: Validators,private formBuilder: FormBuilder,private modalCtrl: ModalController) { 
+
+  constructor(private imagePicker: ImagePicker,private file: File,private camera: Camera,private webview: WebView,private validators: Validators,private formBuilder: FormBuilder,private modalCtrl: ModalController,private keyboard: Keyboard) { 
     this.former = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
         Validators.required,
@@ -37,7 +39,13 @@ export class AddFoodPage implements OnInit {
 
   ngOnInit() {
     this.imgsrc = "assets/icon/eating.png"
+    
+    
   }
+  onViewDidEnter(){
+    this.keyboard.show();
+  }
+
   dismiss(){
     this.modalCtrl.dismiss()
   }
@@ -46,6 +54,7 @@ export class AddFoodPage implements OnInit {
     let postData = new FormData()
     
   }
+
   pickImage(){
     let options = {
       title: "Select picture",

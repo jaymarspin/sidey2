@@ -22,7 +22,7 @@ import { File } from '@ionic-native/file/ngx';
 import { Camera} from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Validators } from '@angular/forms';
-
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -43,7 +43,7 @@ import { Validators } from '@angular/forms';
     PostService, 
     Geolocation,
     NativeGeocoder,
-
+    Keyboard,
     SplashScreen,
     ImagePicker,
     File,
