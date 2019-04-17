@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
+import {ModalController} from '@ionic/angular'
 import { from } from 'rxjs';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -15,7 +16,7 @@ export class AddFoodPage implements OnInit {
   price:any
   imgsrc:any 
   former: FormGroup
-  constructor(private imagePicker: ImagePicker,private file: File,private camera: Camera,private webview: WebView,private validators: Validators,private formBuilder: FormBuilder) { 
+  constructor(private imagePicker: ImagePicker,private file: File,private camera: Camera,private webview: WebView,private validators: Validators,private formBuilder: FormBuilder,private modalCtrl: ModalController) { 
     this.former = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
         Validators.required,
@@ -36,7 +37,9 @@ export class AddFoodPage implements OnInit {
 
   ngOnInit() {
   }
-
+  dismiss(){
+    this.modalCtrl.dismiss()
+  }
   addFood(){
     alert(this.name+"-"+this.price)
     let postData = new FormData()

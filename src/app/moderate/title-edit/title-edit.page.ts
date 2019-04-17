@@ -1,4 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
+import {ModalController} from '@ionic/angular'
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-title-edit',
@@ -8,7 +9,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 export class TitleEditPage implements OnInit {
   @Input('title') title
   former: FormGroup
-  constructor(private validators: Validators,private formBuilder: FormBuilder) { 
+  constructor(private validators: Validators,private formBuilder: FormBuilder,private modalCtrl: ModalController) { 
     this.former = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
         Validators.required,
@@ -20,6 +21,9 @@ export class TitleEditPage implements OnInit {
      
     });
 
+  }
+  dismiss(){
+    this.modalCtrl.dismiss()
   }
   
   ngOnInit() {
