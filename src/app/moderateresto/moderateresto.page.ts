@@ -7,6 +7,7 @@ import { ModalController,ToastController } from '@ionic/angular'
 import { from } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalmapPage } from '../modalmap/modalmap.page'
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 @Component({
   selector: 'app-moderateresto',
   templateUrl: './moderateresto.page.html',
@@ -26,16 +27,19 @@ export class ModeraterestoPage implements OnInit {
   public title:any
   public id:any
   public address:any
-  constructor(private androidFullScreen: AndroidFullScreen,private modal: ModalController,private activateRoute: ActivatedRoute) { }
+  constructor(private androidFullScreen: AndroidFullScreen,private modal: ModalController,private activateRoute: ActivatedRoute,private statusBar: StatusBar) { }
    
    
   ngOnInit() {
+    
     this.title = this.activateRoute.snapshot.paramMap.get("title")
     this.id = this.activateRoute.snapshot.paramMap.get("id")
     this.address = this.activateRoute.snapshot.paramMap.get("address")
     this.androidFullScreen.isImmersiveModeSupported() 
-  .then(() => this.androidFullScreen.immersiveMode())
-  .catch(err => console.log(err)); 
+  .then(() => this.androidFullScreen.immersiveMode().then(()=>{
+    this.statusBar.backgroundColorByHexString('#888');
+  }))
+  .catch(err => alert(err)); 
   }
   ngOnDestroy(){
     this.androidFullScreen.isImmersiveModeSupported()

@@ -36,6 +36,7 @@ export class AddFoodPage implements OnInit {
   }
 
   ngOnInit() {
+    this.imgsrc = "assets/icon/eating.png"
   }
   dismiss(){
     this.modalCtrl.dismiss()
