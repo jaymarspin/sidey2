@@ -13,8 +13,15 @@ import { HttpModule} from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {ModalmapPageModule} from './modalmap/modalmap.module';
 import { TitleEditPageModule } from './moderate/title-edit/title-edit.module'
+import { AddFoodPageModule } from './moderate/add-food/add-food.module'
+import { EditSchedPageModule } from './moderate/edit-sched/edit-sched.module'
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { Camera} from '@ionic-native/camera/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -25,15 +32,24 @@ import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
     IonicModule.forRoot(),
     AppRoutingModule,
     ModalmapPageModule,
-    TitleEditPageModule
+    TitleEditPageModule,
+    AddFoodPageModule,
+    EditSchedPageModule
+  
   ],
-  providers: [
+  providers: [ 
     StatusBar,
     PostService, 
     Geolocation,
     NativeGeocoder,
+    FileChooser,
     SplashScreen,
+    ImagePicker,
+    File,
+    Camera,
+    WebView,
     AndroidFullScreen,
+    
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -132,6 +132,10 @@ export class ModalmapPage {
           var latter = marker.getLatLng()
             self.modalCtrl.dismiss(latter)
         }
+        cancelButton.onclick = function(e){
+         
+            self.modalCtrl.dismiss()
+        }
 
 
 

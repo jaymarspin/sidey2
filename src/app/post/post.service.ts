@@ -7,7 +7,7 @@ import 'rxjs/RX';
   providedIn: 'root'
 })
 export class PostService {
-  server: string = "http://localhost:8888/r_server/"
+  server: string = "http://192.168.1.16:8888/r_server/"
   constructor(public http: Http) { }
   
 

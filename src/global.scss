@@ -10,12 +10,9 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 .my-custom-modal-css .modal-wrapper {
-    width: 90%;
-    height: 350px;
-    
     position: fixed; 
     display: block;  
-    border-radius: 10px;
+    
  }
  .row-col{
     padding: 15px;
@@ -28,11 +25,14 @@
     transition: all 0.4s;
   }.moderate-input{
       padding: 20px;
+      padding-bottom: 0px;
   }.minus-top{
-      margin-top: -10px;
+      margin-top: 0px;
   }
   
   .place-label{
     font-weight: bold;
     font-size: 30px
+  }.margin-bot{
+    margin-bottom: 20px;
   }

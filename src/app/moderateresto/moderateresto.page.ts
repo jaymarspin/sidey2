@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
 import { TitleEditPage } from '../moderate/title-edit/title-edit.page'
+import { AddFoodPage } from '../moderate/add-food/add-food.page'
+import { EditSchedPage } from '../moderate/edit-sched/edit-sched.page'
 import { ModalController,ToastController } from '@ionic/angular'
 import { from } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ModalmapPage } from '../modalmap/modalmap.page'
 @Component({
   selector: 'app-moderateresto',
   templateUrl: './moderateresto.page.html',
@@ -20,9 +23,9 @@ export class ModeraterestoPage implements OnInit {
      {src: "https://www.wallpaperup.com/uploads/wallpapers/2015/07/24/761368/c2177ff23f862b515dd9f1517b011727-700.jpg",title:"sample2"}
    
   ]
-  private title:any
-  private id:any
-  private address:any
+  public title:any
+  public id:any
+  public address:any
   constructor(private androidFullScreen: AndroidFullScreen,private modal: ModalController,private activateRoute: ActivatedRoute) { }
    
    
@@ -42,13 +45,38 @@ export class ModeraterestoPage implements OnInit {
   onViewDidEnter(){
     
   }
-  async presentModal() {
+
+  editTile(){
+    let data = {
+      title: this.title
+    }
+    this.presentModal(TitleEditPage,data)
+  }
+  addFood(){
+    
+    this.presentModal(AddFoodPage,null)
+  }
+  editAddress(){
+    
+    this.presentModal(ModalmapPage,null).then((data) =>{
+      
+    })
+  }
+  editSched(){
+    
+    this.presentModal(EditSchedPage,null)
+  }
+  addBeverages(){
+    let data = {
+      role: "beverage"
+    }
+    this.presentModal(AddFoodPage,data)
+  }
+  async presentModal(component:any,data:any) {
     const modal = await this.modal.create({
-      component: TitleEditPage,
+      component: component,
       cssClass: 'my-custom-modal-css',
-       componentProps: { 
-          title: this.title
-       }
+       componentProps: data
     });
     modal.onDidDismiss() 
       .then((data) => {
