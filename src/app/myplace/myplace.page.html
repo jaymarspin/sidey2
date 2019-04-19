@@ -16,17 +16,17 @@
           
             
         
-          <ion-virtual-scroll [items]="result">
-            <ion-card *virtualItem="let item">
-                <ion-card-header>
-                  <ion-card-subtitle>{{item.name}}</ion-card-subtitle>
-                  <ion-card-title>{{item.name}}</ion-card-title>
-                </ion-card-header>
-              </ion-card>
+    <div class="" *ngFor="let item of result" (click)="goToResto(item.id,item.name,item.address)">
+        <ion-card>
+            <ion-card-header>
+              <ion-card-subtitle>{{item.name}}</ion-card-subtitle>
+              <ion-card-title>{{item.address}}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
 
 
-          </ion-virtual-scroll>
-<ion-label>I love coding</ion-label>
+        </div>
+
      
       
       

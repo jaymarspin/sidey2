@@ -12,8 +12,8 @@ export class MyplacePage implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
   result = []
 
-  doSomething(id:any,title:any,address:any){
-    console.log(address)
+  goToResto(id:any,title:any,address:any){
+    this.router.navigate(["moderateresto",id,title,address]);
     
   }
   ngOnInit() {

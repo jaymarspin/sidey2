@@ -32,7 +32,7 @@ export class AppComponent {
     },
     {
       title: 'My Place(s)',
-      url: '/owning',
+      url: '/myplace',
       icon: 'beer'
     }
 
