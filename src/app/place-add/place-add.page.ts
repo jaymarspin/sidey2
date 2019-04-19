@@ -6,6 +6,8 @@ import { NativeGeocoder, NativeGeocoderOptions } from '@ionic-native/native-geoc
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+
+  import { from } from 'rxjs';
 @Component({
   selector: 'app-place-add',
   templateUrl: './place-add.page.html', 
@@ -93,7 +95,7 @@ export class PlaceAddPage implements OnInit {
      try{
       // this.router.navigate(["moderateresto",124,"Three grills and a ril","General Santos City"]);
       this.post.postData(body,'add_resto.php').subscribe((Response)=>{
-        console.log(Response)
+     
         this.presentLoading("uploading... please wait").then(() =>{
           if(Response[0].message == "success"){
             this.loading.dismiss().then(() =>{

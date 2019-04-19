@@ -5,7 +5,7 @@ import { AlertController } from '@ionic/angular';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-
+import { LoadingController } from '@ionic/angular';
  
 @Component({
   selector: 'app-modalmap',
@@ -21,42 +21,60 @@ export class ModalmapPage {
   long: any;
   @ViewChild('map') mapContainer: ElementRef
   
+
+  private isloading:boolean = false;
+  public loading: any;
   map:any = null
-  constructor(public navController: NavController,public geo: Geolocation,public alertController: AlertController,public modalCtrl: ModalController){}
+  constructor(public navController: NavController,public geo: Geolocation,public alertController: AlertController,public modalCtrl: ModalController,private loadingCtrl: LoadingController){}
   @Input('lat') r_lat: any
   @Input('long') r_long:any
+
+
+
+  private async presentLoading(message): Promise<any> {
+    this.loading = await this.loadingCtrl.create({
+      message: message
+    });
+    return await this.loading.present().then(()=> this.isloading = true);
+  }
+
+
   ionViewDidEnter(){
+    
     this.loadmap();
+    
+    
   }
 
  
-  async presentAlertConfirm() {
-    const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'Message <strong>text</strong>!!!',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Okay',
-          handler: () => {
-            console.log('Confirm Okay');
-          }
-        }
-      ]
-    });
+  // async presentAlertConfirm() {
+  //   const alert = await this.alertController.create({
+  //     header: 'Confirm!',
+  //     message: 'Message <strong>text</strong>!!!',
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         role: 'cancel',
+  //         cssClass: 'secondary',
+  //         handler: (blah) => {
+  //           console.log('Confirm Cancel: blah');
+  //         }
+  //       }, {
+  //         text: 'Okay',
+  //         handler: () => {
+  //           console.log('Confirm Okay');
+  //         }
+  //       }
+  //     ]
+  //   });
 
-    await alert.present();
-  }
-
-
+  //   await alert.present();
+  // }
 
 
+
+
+ 
 
   loadmap(){
     
@@ -81,19 +99,19 @@ export class ModalmapPage {
 
     var marker: any
 
-
-
-
+    var that = this
+    
     this.map.locate({
-      setView: true,
+      setView: false
+
+
+      
     }).on('locationfound', e =>{
       var radius = e.accuracy / 2;
-
         this.map.addControl(new customControl());
-
-
         marker = leaflet.marker(e.latlng,{icon: customIcon,draggable: true,autoPan: true});
-        marker.addTo(this.map).bindPopup("You're Current Location").openPopup()  
+        marker.addTo(this.map).bindPopup("You're Current Location").openPopup() 
+       
         // marker.on("dragend",function(e){
          
         // })

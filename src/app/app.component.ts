@@ -29,6 +29,11 @@ export class AppComponent {
       title: 'Add a Place',
       url: '/placeadd',
       icon: 'beer'
+    },
+    {
+      title: 'My Place(s)',
+      url: '/owning',
+      icon: 'beer'
     }
 
 

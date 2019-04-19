@@ -37,10 +37,10 @@ export class ModeraterestoPage implements OnInit {
     this.id = this.activateRoute.snapshot.paramMap.get("id")
     this.address = this.activateRoute.snapshot.paramMap.get("address")
     this.androidFullScreen.isImmersiveModeSupported() 
-  .then(() => this.androidFullScreen.immersiveMode().then(()=>{
-    this.statusBar.backgroundColorByHexString('#888');
-  }))
-  .catch(err => alert(err)); 
+  // .then(() => this.androidFullScreen.immersiveMode().then(()=>{
+  //   this.statusBar.backgroundColorByHexString('#888');
+  // }))
+  // .catch(err => alert(err)); 
   }
   ngOnDestroy(){
     this.androidFullScreen.isImmersiveModeSupported()
@@ -58,8 +58,10 @@ export class ModeraterestoPage implements OnInit {
     this.presentModal(TitleEditPage,data)
   }
   addFood(){
-    
-    this.presentModal(AddFoodPage,null)
+    let data = {
+      id: this.id
+    }
+    this.presentModal(AddFoodPage,data)
   }
   editAddress(){
     

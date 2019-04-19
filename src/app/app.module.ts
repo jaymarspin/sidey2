@@ -23,6 +23,8 @@ import { Camera} from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { HttpClient,HttpClientModule } from '@angular/common/http'
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -35,7 +37,8 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     ModalmapPageModule,
     TitleEditPageModule,
     AddFoodPageModule,
-    EditSchedPageModule
+    EditSchedPageModule,
+    HttpClientModule
   
   ],
   providers: [ 
@@ -51,6 +54,8 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     WebView,
     AndroidFullScreen,
     Validators,
+    HttpClient,
+    HttpClientModule,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
