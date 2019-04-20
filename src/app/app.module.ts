@@ -16,6 +16,7 @@ import { TitleEditPageModule } from './moderate/title-edit/title-edit.module'
 import { AddFoodPageModule } from './moderate/add-food/add-food.module'
 import { EditSchedPageModule } from './moderate/edit-sched/edit-sched.module'
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import {AddPhotoPageModule} from './moderate/add-photo/add-photo.module'
 import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -37,6 +38,7 @@ import { HttpClient,HttpClientModule } from '@angular/common/http'
     ModalmapPageModule,
     TitleEditPageModule,
     AddFoodPageModule,
+    AddPhotoPageModule,
     EditSchedPageModule,
     HttpClientModule
   

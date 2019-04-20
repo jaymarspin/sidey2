@@ -67,3 +67,27 @@
     position: relative;
     font-size: 12px;
   }
+  .label-click{
+    font-size: 17px;
+    
+    
+    text-align: left;
+    
+    
+  }.label-click:active{
+    opacity: 0.4;
+    transition: all 0.4s;
+  }
+  .right-pick{
+    text-align: right;
+  }
+  .col-label{
+    --ion-grid-column-padding: 20px;
+  }
+ 
+  
+  .imgpicker{
+    display: block;
+    max-width: 90%;
+    margin: auto;
+  }

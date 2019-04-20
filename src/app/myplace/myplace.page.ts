@@ -27,7 +27,6 @@ export class MyplacePage implements OnInit {
     data.subscribe((res) =>{
        for(var i = 0;i < res.length;i++){
         this.result[i] = res[i];
-        console.log(this.result[i])
        }
     })
     
