@@ -21,6 +21,7 @@ export class AddFoodPage implements OnInit {
   imgsrc:any 
   former: FormGroup
   @Input('id') id
+  @Input('role') role
   constructor(private imagePicker: ImagePicker,private file: File,private camera: Camera,private webview: WebView,private validators: Validators,private formBuilder: FormBuilder,private modalCtrl: ModalController,private keyboard: Keyboard, private http: HttpClient, private toastController:ToastController) { 
     this.former = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
@@ -42,7 +43,7 @@ export class AddFoodPage implements OnInit {
 
   ngOnInit() {
     this.imgsrc = "assets/icon/eating.png"
-    
+    alert(this.role)
     
   }
   
@@ -61,11 +62,11 @@ export class AddFoodPage implements OnInit {
     let url = "http://192.168.1.16:8888/r_server/addFood.php"
     let postdata = new FormData();
     this.base64 = 'data:image/jpeg;base64,' + this.base64;
-
     postdata.append('file',this.base64);
     postdata.append('name',this.name);
     postdata.append('price',this.price);
     postdata.append('id',this.id);
+    postdata.append('role',this.role);
     let data:Observable<any> = this.http.post(url,postdata)
     data.subscribe((res) =>{
        if(res[0].message == "success"){

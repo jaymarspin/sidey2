@@ -119,34 +119,17 @@
         </ion-col>
       </ion-row>
       <div class="food-wrapper">
-      <div class="food-holder">
+      <div class="food-holder" *ngFor="let item of getMeals('meal')">
       <div class="foods">
           <ion-badge color="tertiary" class="ratings">44</ion-badge>
          
       <img src="https://media.foodnetwork.ca/uploadedimages/pages/guides/kitchen_basics/galleries/287x191-turkey-with-lemon.jpg" />
-      <ion-label class="food-name">Pancit malabon</ion-label>
+      <ion-label class="food-name">{{item.name}}</ion-label>
       
       </div>
-      <div class="foods">
-        <ion-badge color="tertiary" class="ratings">44</ion-badge>
-        
-    <img src="https://static.thespicehouse.com/images/image/4546/large_Adobo-Chicken-Marinade.jpg" />
-    <ion-label class="food-name">Pancit malabon</ion-label>
-    
-    
-    </div>
-    <div class="foods">
-      <ion-badge color="tertiary" class="ratings">44</ion-badge>
-       
-  <img src="https://www.amusingmaria.com/wp-content/uploads/2018/06/Filipino-Pancit-Bihon-Stir-Fried-Rice-Noodles-with-Pork-and-Vegetables-2.jpg" />
-  <ion-label class="food-name">Pancit malabon</ion-label>
-  </div>
-  <div class="foods">
-      <ion-badge color="tertiary" class="ratings">44</ion-badge>
       
-  <img src="https://www.amusingmaria.com/wp-content/uploads/2018/06/Filipino-Pancit-Bihon-Stir-Fried-Rice-Noodles-with-Pork-and-Vegetables-2.jpg" />
-  <ion-label class="food-name">Pancit malabon</ion-label>
-  </div>
+    
+  
   </div>
   </div>
 

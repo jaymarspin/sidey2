@@ -16,17 +16,33 @@
           
             
         
-    <div class="" *ngFor="let item of result" (click)="goToResto(item.id,item.name,item.address)">
+    <div *ngFor="let item of result" (click)="goToResto(item.id,item.name,item.address)" class="cards">
         <ion-card>
             <ion-card-header>
               <ion-card-subtitle>{{item.name}}</ion-card-subtitle>
               <ion-card-title>{{item.address}}</ion-card-title>
             </ion-card-header>
+            <ion-row class="ion-padding">
+              <ion-col><ion-label>42 Meals</ion-label></ion-col>
+              <ion-col><ion-label>44 Beverages</ion-label></ion-col>
+              <ion-col><ion-label>Date Added: Aug. 5 2019</ion-label></ion-col>
+            </ion-row>
           </ion-card>
-
-
         </div>
+          <!-- <ion-virtual-scroll [items]="result" >
+              
+              <ion-item *virtualItem="let item">
+                  {{item.name}}
+              </ion-item>
+            </ion-virtual-scroll> -->
 
+       
+        <style>
+          .cards:active{
+            opacity: 0.4;
+            transition: all 0.4s;
+          }
+        </style>
      
       
       
