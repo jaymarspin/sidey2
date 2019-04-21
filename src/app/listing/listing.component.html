@@ -1,45 +1,28 @@
 
-<div class="resto">
+
+
+<div class="resto" *ngFor="let item of list">
     <div class="food-wrapper">
     <div class="food-holder">
-    <div class="foods">
+    <div class="foods" *ngFor="let food of item.food">
         <ion-badge color="tertiary" class="ratings">44</ion-badge>
-        <ion-label class="food-name">Adobo Sinigang</ion-label>
-    <img src="https://media.foodnetwork.ca/uploadedimages/pages/guides/kitchen_basics/galleries/287x191-turkey-with-lemon.jpg" />
-    
+        <ion-label class="food-name">{{food.name}}</ion-label>
+
+    <img src="http://192.168.1.16:8888/r_server/{{food.img}}" />
     
     </div>
-    <div class="foods">
-      <ion-badge color="tertiary" class="ratings">44</ion-badge>
-      <ion-label class="food-name">Apritada</ion-label>
-  <img src="https://static.thespicehouse.com/images/image/4546/large_Adobo-Chicken-Marinade.jpg" />
-  
-  
-  </div>
-  <div class="foods">
-    <ion-badge color="tertiary" class="ratings">44</ion-badge>
-    <ion-label class="food-name">Pancit malabon</ion-label>
-<img src="https://www.amusingmaria.com/wp-content/uploads/2018/06/Filipino-Pancit-Bihon-Stir-Fried-Rice-Noodles-with-Pork-and-Vegetables-2.jpg" />
-</div>
-<div class="foods">
-    <ion-badge color="tertiary" class="ratings">44</ion-badge>
-    <ion-label class="food-name">Pancit malabon</ion-label>
-<img src="https://www.amusingmaria.com/wp-content/uploads/2018/06/Filipino-Pancit-Bihon-Stir-Fried-Rice-Noodles-with-Pork-and-Vegetables-2.jpg" />
-</div>
+    
 </div>
 </div>
 
-
-
-
-    <div class="reto-name">
+<div class="reto-name">
       <div class="more-distance">
           
           
         <ion-text class="more" color="secondary">See all<ion-icon name="arrow-round-down"></ion-icon></ion-text>
       </div>
         
-            <ion-label class="title" >Resto magnet dudeResto magnet dude</ion-label>
+            <ion-label class="title" >{{item.name}}</ion-label>
          
         
         
@@ -48,7 +31,7 @@
       <ion-button color="primary"  style="line-spacing: 10px;">
       <ion-icon name="map"></ion-icon> Map</ion-button>
         </ion-buttons>
-        <ion-label class="address" style="color: #888"><span class="near">11km</span> Opens in 30 mins</ion-label>
+        <ion-label class="address" style="color: #888"><span class="near">{{item.d}}</span> Opens in 30 mins</ion-label>
     </div>
 
 
@@ -56,7 +39,12 @@
 
 </div>
 
-
+<ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
 
 
   
@@ -104,7 +92,7 @@
 
 
 
-
+<!-- 
 <div class="resto">
   <div class="food-wrapper">
   <div class="food-holder">
@@ -162,7 +150,7 @@
 
 </div>
 
-
+ -->
 
    
     <style>
@@ -270,6 +258,7 @@
 .foods img{ 
   width: 100%;
   height: 100%;
+
   
 }
 .foods{
