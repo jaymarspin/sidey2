@@ -42,7 +42,6 @@ export class ModeraterestoPage implements OnInit {
 
    
   ngOnInit() {
-    
     this.title = this.activateRoute.snapshot.paramMap.get("title")
     this.id = this.activateRoute.snapshot.paramMap.get("id")
     this.address = this.activateRoute.snapshot.paramMap.get("address")
@@ -114,17 +113,15 @@ export class ModeraterestoPage implements OnInit {
      
       
       if(body.role == "beverage"){
-        document.getElementById('beverage').style.width = (data.length * 1.1) * 153.75+"px";
+        document.getElementById('beverage').style.width = (data.length * 1.2) * 153.75+"px";
         this.beverages = data.length
       } 
         
       else{
-        document.getElementById('meal').style.width = (data.length * 1.1) * 153.75+"px";
+        document.getElementById('meal').style.width = (data.length * 1.2) * 153.75+"px";
         this.dishes = data.length
       } 
         
-      
-      
       for(var i = 0;i < data.length; i++){
         result[i] = data[i];
       }

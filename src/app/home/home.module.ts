@@ -25,12 +25,10 @@ import { EventsComponent } from '../events/events.component';
           },
           {
             path: 'listing',
-            
             component: ListingComponent,
           },
           {
             path: 'events',
-            
             component: EventsComponent,
           }
 
@@ -40,4 +38,8 @@ import { EventsComponent } from '../events/events.component';
   ],
   declarations: [HomePage,ListingComponent,EventsComponent]
 })
-export class HomePageModule {}
+export class HomePageModule {
+
+  
+
+}

@@ -25,9 +25,10 @@ export class ModalmapPage {
   private isloading:boolean = false;
   public loading: any;
   map:any = null
-  constructor(public navController: NavController,public geo: Geolocation,public alertController: AlertController,public modalCtrl: ModalController,private loadingCtrl: LoadingController){}
   @Input('lat') r_lat: any
   @Input('long') r_long:any
+  constructor(public navController: NavController,public geo: Geolocation,public alertController: AlertController,public modalCtrl: ModalController,private loadingCtrl: LoadingController){}
+ 
 
 
 

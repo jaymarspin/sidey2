@@ -1,8 +1,7 @@
-import { Directive, Input, ElementRef ,Component,Renderer2 } from '@angular/core';
+import { Component} from '@angular/core';
 
 import { Router } from '@angular/router';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { DomController,MenuController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -16,16 +15,11 @@ export class HomePage {
   long: any;
 
 
-constructor(public router: Router, public geo: Geolocation,private domCtrl: DomController,private renderer: Renderer2,private menuCtrl: MenuController){}
+constructor(public router: Router){}
   
 
   ngOnInit(){
-    this.menuCtrl.enable(true)
-    this.geo.getCurrentPosition().then(pos =>{
-      this.lat = pos.coords.latitude
-      this.long = pos.coords.longitude
-      console.log(this.lat+" - "+this.long)
-    }).catch( err => console.log(err))
+    
     
   }
   events(){

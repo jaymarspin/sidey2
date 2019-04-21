@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
-import {ModalController,ToastController} from '@ionic/angular'
+import {ModalController,ToastController,LoadingController} from '@ionic/angular'
 import { from } from 'rxjs';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -20,9 +20,10 @@ export class AddFoodPage implements OnInit {
   price:any
   imgsrc:any 
   former: FormGroup
+  loading:any
   @Input('id') id
   @Input('role') role
-  constructor(private imagePicker: ImagePicker,private file: File,private camera: Camera,private webview: WebView,private validators: Validators,private formBuilder: FormBuilder,private modalCtrl: ModalController,private keyboard: Keyboard, private http: HttpClient, private toastController:ToastController) { 
+  constructor(private loadingController:LoadingController,private imagePicker: ImagePicker,private file: File,private camera: Camera,private webview: WebView,private validators: Validators,private formBuilder: FormBuilder,private modalCtrl: ModalController,private keyboard: Keyboard, private http: HttpClient, private toastController:ToastController) { 
     this.former = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
         Validators.required,
@@ -78,6 +79,12 @@ export class AddFoodPage implements OnInit {
 
     
   }
+  private async presentLoading(message): Promise<any> {
+    this.loading = await this.loadingController.create({
+      message: message
+    });
+    return await this.loading.present();
+  }
   async presentToast(message:any) {
     const toast = await this.toastController.create({
       message: message,
@@ -113,20 +120,20 @@ export class AddFoodPage implements OnInit {
     this.imagePicker.getPictures(options).then((results) => {
       for (var i = 0; i < results.length; i++) {
         var ext = this.webview.convertFileSrc(results[i]).substring(this.webview.convertFileSrc(results[i]).lastIndexOf(".")+1)
-        
+        this.presentLoading("Please Wait")
         if(ext == "jpeg" || ext == "JPEG"){
            alert("png or jpeg is invalid please choose other image!")
         }else{
-          
+          this.imgsrc = this.webview.convertFileSrc(results[i]);
           var imagePath = results[i].substr(0, results[i].lastIndexOf('/') + 1);
           var imageName = results[i].substr(results[i].lastIndexOf('/') + 1);
           this.file.readAsDataURL(imagePath, imageName).then((b64str) => {
           this.base64 = b64str;
-          
+          this.loading.dismiss()
         }).catch(err => {
-          console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
+          alert('readAsDataURL failed: (' + err.code + ")" + err.message);
         })
-        this.imgsrc = this.webview.convertFileSrc(results[i]);
+        
         }
         
       }

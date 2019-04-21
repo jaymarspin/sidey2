@@ -1,5 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
-import {ModalController,ToastController} from '@ionic/angular'
+import {ModalController,ToastController,LoadingController} from '@ionic/angular'
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -14,8 +14,9 @@ import { HttpClient } from '@angular/common/http'
 export class AddPhotoPage implements OnInit {
   imgsrc:string
   base64:any
+  loading:any
   @Input('id') id
-  constructor(private modalCtrl: ModalController,private imagePicker: ImagePicker,private webview:WebView,private file:File,private camera:Camera,private http:HttpClient,private toastController:ToastController) {
+  constructor(private loadingController:LoadingController,private modalCtrl: ModalController,private imagePicker: ImagePicker,private webview:WebView,private file:File,private camera:Camera,private http:HttpClient,private toastController:ToastController) {
 
     this.imgsrc = "assets/icon/eating.png"
    }
@@ -24,6 +25,13 @@ export class AddPhotoPage implements OnInit {
   }
   dismiss(){
     this.modalCtrl.dismiss()
+  }
+
+  private async presentLoading(message): Promise<any> {
+    this.loading = await this.loadingController.create({
+      message: message
+    });
+    return await this.loading.present();
   }
   pickImage(){
     let options = {
@@ -36,20 +44,20 @@ export class AddPhotoPage implements OnInit {
     this.imagePicker.getPictures(options).then((results) => {
       for (var i = 0; i < results.length; i++) {
         var ext = this.webview.convertFileSrc(results[i]).substring(this.webview.convertFileSrc(results[i]).lastIndexOf(".")+1)
-        
+        this.presentLoading("Please Wait")
         if(ext == "jpeg" || ext == "JPEG"){
            alert("png or jpeg is invalid please choose other image!")
         }else{
-          
+          this.imgsrc = this.webview.convertFileSrc(results[i]);
           var imagePath = results[i].substr(0, results[i].lastIndexOf('/') + 1);
           var imageName = results[i].substr(results[i].lastIndexOf('/') + 1);
           this.file.readAsDataURL(imagePath, imageName).then((b64str) => {
           this.base64 = b64str;
-          
+          this.loading.dismiss()
         }).catch(err => {
           console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
         })
-        this.imgsrc = this.webview.convertFileSrc(results[i]);
+        
         }
         
       }
