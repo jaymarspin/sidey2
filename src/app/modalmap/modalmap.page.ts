@@ -27,7 +27,12 @@ export class ModalmapPage {
   map:any = null
   @Input('lat') r_lat: any
   @Input('long') r_long:any
-  constructor(public navController: NavController,public geo: Geolocation,public alertController: AlertController,public modalCtrl: ModalController,private loadingCtrl: LoadingController){}
+  @Input('role') role:any
+  constructor(public navController: NavController,public geo: Geolocation,public alertController: AlertController,public modalCtrl: ModalController,private loadingCtrl: LoadingController){
+
+    
+
+  }
  
 
 
@@ -81,43 +86,45 @@ export class ModalmapPage {
     
     var customIcon = leaflet.icon({
       iconUrl: 'https://img.icons8.com/dusk/64/000000/marker.png',
-      iconSize: [48, 50]
+      iconSize: [38, 40],
+      
       });
-
-
-
-     this.lat = 6.123961;
-      this.long = 125.168949;
-    
-    
-    this.map = leaflet.map('map').setView([this.lat, this.long], 13);
+    this.map = leaflet.map('map').setView([this.lat, this.long], 16);
     leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Restaurant Mapping'
     }).addTo(this.map);
 
-
-
-
     var marker: any
 
     var that = this
-    
-    this.map.locate({
-      setView: false
-
 
       
-    }).on('locationfound', e =>{
-      var radius = e.accuracy / 2;
-        this.map.addControl(new customControl());
-        marker = leaflet.marker(e.latlng,{icon: customIcon,draggable: true,autoPan: true});
-        marker.addTo(this.map).bindPopup("You're Current Location").openPopup() 
-       
-        // marker.on("dragend",function(e){
+     
+          if(this.role == "client"){
+            marker = leaflet.marker([this.lat,this.long],{icon: customIcon,autoPan: true});
+            marker.addTo(this.map).bindPopup("Restaurant Location").openPopup() 
+          }
+            
+   
+      this.map.locate({
+        setView: false
+      }).on('locationfound', e =>{
+       // var radius = e.accuracy / 2;
+          
+          if(this.role == "admin"){
+            marker = leaflet.marker(e.latlng,{icon: customIcon,draggable: true,autoPan: true});
+            marker.addTo(this.map).bindPopup("Your Place Location, drag to desired location").openPopup() 
+          }
+          this.map.addControl(new customControl());
+          
          
-        // })
-      
-    })
+          // marker.on("dragend",function(e){
+           
+          // })
+        
+      })
+    
+    
     
     // this.map.on('click', e =>{
     //   var marker = new leaflet.marker(e.latlng,{
@@ -134,6 +141,7 @@ export class ModalmapPage {
 
 
         this.onMapReady(this.map)
+        
         var checkButton = document.createElement("ion-button")
         checkButton.innerHTML = "<ion-icon name='checkmark-circle-outline'></ion-icon>"
         var att2 = document.createAttribute("color"); 
@@ -170,8 +178,11 @@ export class ModalmapPage {
         var container = leaflet.DomUtil.create('div', );
         cancelButton.setAttributeNode(att)
         checkButton.style.height = "black";
-        container.appendChild(checkButton)
-        container.appendChild(cancelButton)
+       
+          container.appendChild(checkButton)
+      
+        
+      
         container.style.width = '30px';
         container.style.marginRight = '40px';
         return container;

@@ -124,8 +124,9 @@ export class PlaceAddPage implements OnInit {
     const modal = await this.modal.create({
       component: ModalmapPage,
        componentProps: { 
-         latt: this.lat,
-         longg: this.long
+         lat: 6.123961,
+         long: 125.168949,
+         role: "admin"
        }
     });
     modal.onDidDismiss() 

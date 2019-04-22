@@ -31,5 +31,9 @@ export class MyplacePage implements OnInit {
     })
     
   }
+  goback(){
+    this.router.navigate(['home']);
+  }
+
 
 }

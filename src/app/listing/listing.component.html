@@ -1,50 +1,66 @@
+<style>
+ion-item{
+  --inner-padding-bottom: 0;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  --inner-padding-top: 0;
+  padding-left: 0;
+  left: 0;
+  --padding-start: 0;
+}
+</style>
 
-
-
-<div class="resto" *ngFor="let item of list">
-    <div class="food-wrapper">
-    <div class="food-holder">
-    <div class="foods" *ngFor="let food of item.food">
-        <ion-badge color="tertiary" class="ratings">44</ion-badge>
-        <ion-label class="food-name">{{food.name}}</ion-label>
-
-    <img src="http://192.168.1.16:8888/r_server/{{food.img}}" />
+<ion-virtual-scroll [items]="list">
+  <ion-item *virtualItem="let item" lines="none">
+    <div class="resto" >
+        <div class="food-wrapper">
+        <div class="food-holder">
+        <div class="foods" *ngFor="let food of item.food">
+            <ion-badge color="tertiary" class="ratings">44</ion-badge>
+            <ion-label class="food-name">{{food.name}}</ion-label>
     
+        <img src="http://192.168.1.16:8888/r_server/{{food.img}}" />
+        
+        </div>
+        
+    </div>
     </div>
     
-</div>
-</div>
+    <div class="reto-name">
+          <div class="more-distance">
+              
+              
+            <ion-text class="more" color="secondary">See all<ion-icon name="arrow-round-down"></ion-icon></ion-text>
+          </div>
+            
+                <ion-label class="title" >{{item.name}}</ion-label>
+             
+            
+            
+          <ion-badge color="secondary" class="resto-rate">44</ion-badge>
+          <ion-buttons slot="primary" (click)="viewMap(item.lat,item.lng)" style="font-size: 12px;float: right;clear: right">
+          <ion-button color="primary"  style="line-spacing: 10px;">
+          <ion-icon name="map" ></ion-icon> Map</ion-button>
+            </ion-buttons>
+            <ion-label class="address" style="color: #888"><span class="near">{{item.d}} km</span><br /> Opens in 30 mins</ion-label>
+        </div>
+    
+    
+                   
+    
+    </div> 
+  </ion-item>
+    
+  </ion-virtual-scroll>
 
-<div class="reto-name">
-      <div class="more-distance">
-          
-          
-        <ion-text class="more" color="secondary">See all<ion-icon name="arrow-round-down"></ion-icon></ion-text>
-      </div>
-        
-            <ion-label class="title" >{{item.name}}</ion-label>
-         
-        
-        
-      <ion-badge color="secondary" class="resto-rate">44</ion-badge>
-      <ion-buttons slot="primary" style="font-size: 12px;float: right;clear: right">
-      <ion-button color="primary"  style="line-spacing: 10px;">
-      <ion-icon name="map"></ion-icon> Map</ion-button>
-        </ion-buttons>
-        <ion-label class="address" style="color: #888"><span class="near">{{item.d}}</span> Opens in 30 mins</ion-label>
-    </div>
 
-
-               
-
-</div>
-
+<!-- 
 <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
   <ion-infinite-scroll-content
     loadingSpinner="bubbles"
     loadingText="Loading more data...">
   </ion-infinite-scroll-content>
-</ion-infinite-scroll>
+</ion-infinite-scroll> -->
 
 
   

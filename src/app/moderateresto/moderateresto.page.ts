@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
 import { TitleEditPage } from '../moderate/title-edit/title-edit.page'
 import { AddFoodPage } from '../moderate/add-food/add-food.page'
 import { EditSchedPage } from '../moderate/edit-sched/edit-sched.page'
 import {AddPhotoPage} from '../moderate/add-photo/add-photo.page'
-import { ModalController,ToastController, NavController } from '@ionic/angular'
+import { ModalController} from '@ionic/angular'
 import {PostService} from '../post/post.service'
-import { from } from 'rxjs';
+
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalmapPage } from '../modalmap/modalmap.page'
@@ -160,11 +160,17 @@ export class ModeraterestoPage implements OnInit {
     });
     modal.onDidDismiss() 
       .then((data) => {
-
+ 
         const pos = data['data']; 
        
     });
     await modal.present();
+  }
+
+
+
+  goback(){
+    this.router.navigate(['home']);
   }
 
 
