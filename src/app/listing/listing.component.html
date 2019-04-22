@@ -33,7 +33,7 @@ ion-item{
             <ion-text class="more" color="secondary">See all<ion-icon name="arrow-round-down"></ion-icon></ion-text>
           </div>
             
-                <ion-label class="title" >{{item.name}}</ion-label>
+                <ion-label class="title" (click)="goToResto(item.id,item.name,item.string_address)">{{item.name}}</ion-label>
              
             
             
@@ -46,7 +46,7 @@ ion-item{
         </div>
     
     
-                   
+                    
     
     </div> 
   </ion-item>

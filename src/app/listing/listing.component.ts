@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import {PostService} from '../post/post.service'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {MenuController,IonInfiniteScroll, IonVirtualScroll,ModalController  } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {GlobalService } from '../global/global.service'
 import { ModalmapPage } from '../modalmap/modalmap.page'
+
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
@@ -16,7 +17,7 @@ export class ListingComponent implements OnInit {
   lat:any
   lng:any
   list:any
-  constructor(private post: PostService,private activateRoute: ActivatedRoute,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService) {
+  constructor(private post: PostService,private activateRoute: ActivatedRoute,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
     this.menuCtrl.enable(true)
     this.geo.getCurrentPosition().then(pos =>{
       this.lat = pos.coords.latitude
@@ -66,6 +67,11 @@ export class ListingComponent implements OnInit {
     }
     this.global.presentModal(ModalmapPage,data,"viewmap")
   }
+
+  goToResto(id:any,title:any,address:any){
+    this.router.navigate(["moderateresto",id,title,address]);
+    
+  }
   
 
   firstLoad(x:any,y:any,pager:any):any{
@@ -76,7 +82,7 @@ export class ListingComponent implements OnInit {
     }
     var arr:any
     this.post.postData(body,"listing.php").subscribe((res) =>{
-
+        // console.log(res)
         this.list = res
     })
     
