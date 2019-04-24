@@ -7,7 +7,6 @@ import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
-  import { from } from 'rxjs';
 @Component({
   selector: 'app-place-add',
   templateUrl: './place-add.page.html', 
@@ -94,12 +93,12 @@ export class PlaceAddPage implements OnInit {
      
      try{
       // this.router.navigate(["moderateresto",124,"Three grills and a ril","General Santos City"]);
-      this.post.postData(body,'add_resto.php').subscribe((Response)=>{
-     
+      this.post.postData(body,'add_resto.php').subscribe((res)=>{
+        let data = res.json()
         this.presentLoading("uploading... please wait").then(() =>{
-          if(Response[0].message == "success"){
+          if(data[0].message == "success"){
             this.loading.dismiss().then(() =>{
-              this.router.navigate(["moderateresto",Response[0].id,Response[0].title,Response[0].string_address]);
+              this.router.navigate(["moderateresto",data[0].id,data[0].title,data[0].string_address]);
               
             });
               }else{
@@ -145,7 +144,7 @@ export class PlaceAddPage implements OnInit {
         this.administrative = "General Santos City"
         alert(error)
       });
-    });
+    }); 
     await modal.present();
   }
 

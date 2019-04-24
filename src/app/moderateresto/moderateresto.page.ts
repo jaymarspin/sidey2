@@ -37,7 +37,7 @@ export class ModeraterestoPage implements OnInit {
   impress = []
   constructor(private androidFullScreen: AndroidFullScreen,private modal: ModalController,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) { }
    
-   
+      
    
 
    
@@ -49,8 +49,9 @@ export class ModeraterestoPage implements OnInit {
       id: this.id
     }
     this.post.postData(data,"get_impress.php").subscribe((res) =>{
-      for(var i =0;i < res.length;i++){
-        this.impress[i] = "http://192.168.1.16:8888/r_server/"+res[i].img
+      let data = res.json()
+      for(var i =0;i < data.length;i++){
+        this.impress[i] = "http://192.168.1.16:8888/r_server/"+data[i].img
       }
       if(this.impress.length == 0){
         this.impress.push("https://image.dhgate.com/0x0/f2/albu/g7/M00/09/B9/rBVaSlpqpheAGqouAAJzzx7VRgs819.jpg")
@@ -108,9 +109,9 @@ export class ModeraterestoPage implements OnInit {
       id: this.id
     } 
   
-    this.post.postData(body,"get_food.php").subscribe((data)=>{
+    this.post.postData(body,"get_food.php").subscribe((res)=>{
      
-     
+     let data = res.json();
       
       if(body.role == "beverage"){
         document.getElementById('beverage').style.width = (data.length * 1.2) * 153.75+"px";

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http'
-import 'rxjs/RX';
 
+import "rxjs"
+import "rxjs-compat"
 
+import {Observable}     from 'rxjs/Observable';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +19,8 @@ export class PostService {
     let headers = new Headers({'Content-Type': type})
     let options = new RequestOptions({headers: headers})
 
-    return this.http.post(this.server + file, JSON.stringify(body), options).map(res => res.json())
+    return this.http.post(this.server + file, JSON.stringify(body), options).map(res => res)
   }
+
+
 }

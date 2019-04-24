@@ -24,7 +24,7 @@ export class ListingComponent implements OnInit {
       this.lng = pos.coords.longitude
 
        this.firstLoad(this.lat,this.lng,1)
-    }).catch( err => console.log(err))
+    }).catch( err => alert(err))
    }
 
   //  loadData(event) {
@@ -65,7 +65,7 @@ export class ListingComponent implements OnInit {
       long: lng,
       role: "client"
     }
-    this.global.presentModal(ModalmapPage,data,"viewmap")
+    this.global.presentModal(ModalmapPage,data,"")
   }
 
   goToResto(id:any,title:any,address:any){
@@ -81,11 +81,15 @@ export class ListingComponent implements OnInit {
       page: pager
     }
     var arr:any
-    this.post.postData(body,"listing.php").subscribe((res) =>{
+    try{
+    this.post.postData(body,"listing.php").subscribe((res:any) =>{
         // console.log(res)
+        res = res.json()
         this.list = res
     })
-    
+  }catch(e){
+    alert(e)
+  }
   }
 
   toggleInfiniteScroll() {

@@ -86,8 +86,10 @@ export class ModalmapPage {
     
     var customIcon = leaflet.icon({
       iconUrl: 'https://img.icons8.com/dusk/64/000000/marker.png',
-      iconSize: [38, 40],
       
+      iconSize: [38, 40],
+      iconAnchor: [18, 37],
+      popupAnchor: [0, -32]
       });
     this.map = leaflet.map('map').setView([this.lat, this.long], 16);
     leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -107,7 +109,7 @@ export class ModalmapPage {
             
    
       this.map.locate({
-        setView: false
+        setView: true
       }).on('locationfound', e =>{
        // var radius = e.accuracy / 2;
           
