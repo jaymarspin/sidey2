@@ -5,6 +5,8 @@ import {MenuController,IonInfiniteScroll, IonVirtualScroll,ModalController  } fr
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {GlobalService } from '../global/global.service'
 import { ModalmapPage } from '../modalmap/modalmap.page'
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
 
 @Component({
   selector: 'app-listing',
@@ -17,7 +19,7 @@ export class ListingComponent implements OnInit {
   lat:any
   lng:any
   list:any
-  constructor(private post: PostService,private activateRoute: ActivatedRoute,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
+  constructor(private androidPermissions: AndroidPermissions,private post: PostService,private activateRoute: ActivatedRoute,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
     this.menuCtrl.enable(true)
     this.geo.getCurrentPosition().then(pos =>{
       this.lat = pos.coords.latitude
@@ -97,7 +99,10 @@ export class ListingComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.LOCATION).then(
+  result => console.log('Has permission?',result.hasPermission),
+  err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.LOCATION)
+);
 
   }
 

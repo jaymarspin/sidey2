@@ -25,7 +25,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { HttpClient,HttpClientModule } from '@angular/common/http'
-
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -58,6 +58,7 @@ import { HttpClient,HttpClientModule } from '@angular/common/http'
     Validators,
     HttpClient,
     HttpClientModule,
+    AndroidPermissions,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
