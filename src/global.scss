@@ -37,7 +37,47 @@
   }.margin-bot{
     margin-bottom: 20px;
   }
+  .social-icons{
+    font-size: 20px;
+    position: relative;
+    top: 6px;
+  }
 
+  .social{
+    border-radius: 10px;
+    text-align: center;
+    background-color: #333;
+    font-weight: normal;
+    font-size: 13px;
+    color: #f5f5f5;
+    padding: 3px;
+  
+
+  }
+.top-label{
+  position: relative;
+  top: -8px;
+  font-size: 20px;
+  left: 20px;
+}
+
+  .actions{
+    position: absolute;
+    z-index: 1;
+    bottom: 0px;
+    width: 100%;
+    border-radius: 0px;
+    background: none;
+    padding-bottom: 13px;
+    padding-left: 0px;
+  }
+  .actions ion-col{
+    text-align: center;
+    
+  }
+  .social ion-label{
+    line-height: 22px;
+  }
 
 
 

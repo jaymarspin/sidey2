@@ -28,7 +28,9 @@ const routes: Routes = [
   { path: 'edit-sched', loadChildren: './moderate/edit-sched/edit-sched.module#EditSchedPageModule' },
   { path: 'myplace', loadChildren: './myplace/myplace.module#MyplacePageModule' },
  
-  { path: 'add-photo', loadChildren: './moderate/add-photo/add-photo.module#AddPhotoPageModule' }
+  { path: 'add-photo', loadChildren: './moderate/add-photo/add-photo.module#AddPhotoPageModule' },
+  { path: 'viewmeal/:id/:name/:price/:img', loadChildren: './client/viewmeal/viewmeal.module#ViewmealPageModule' },
+  { path: 'reviews', loadChildren: './client/reviews/reviews.module#ReviewsPageModule' }
   
  
 

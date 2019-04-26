@@ -15,7 +15,10 @@ export class HomePage {
   long: any;
 
 
-constructor(public router: Router){}
+constructor(public router: Router){
+
+  
+}
   
 
   ngOnInit(){

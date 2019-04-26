@@ -6,7 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {GlobalService } from '../global/global.service'
 import { ModalmapPage } from '../modalmap/modalmap.page'
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-
+import {ViewmealPage} from '../client/viewmeal/viewmeal.page'
 
 @Component({
   selector: 'app-listing',
@@ -19,14 +19,34 @@ export class ListingComponent implements OnInit {
   lat:any
   lng:any
   list:any
+  
   constructor(private androidPermissions: AndroidPermissions,private post: PostService,private activateRoute: ActivatedRoute,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
     this.menuCtrl.enable(true)
-    this.geo.getCurrentPosition().then(pos =>{
-      this.lat = pos.coords.latitude
-      this.lng = pos.coords.longitude
+    
+    
+    
+ 
+          this.geo.getCurrentPosition().then(pos =>{
 
-       this.firstLoad(this.lat,this.lng,1)
-    }).catch( err => alert(err))
+      
+            this.lat = pos.coords.latitude
+            this.lng = pos.coords.longitude
+        
+            
+             this.firstLoad(this.lat,this.lng,1)
+          }).catch( err => {
+            alert("To find the nearest restaurants you must allow this app to access location")
+            this.router.navigate(['home']);
+      
+          })
+            
+        
+  
+    
+    
+    
+    
+    
    }
 
   //  loadData(event) {
@@ -99,19 +119,24 @@ export class ListingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.LOCATION).then(
-  result => console.log('Has permission?',result.hasPermission),
-  err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.LOCATION)
-);
-
-  }
-
-  ionViewDidEnter(){
-    
-    
     
     
   }
+  viewmeal(id,name,price,img){
+    let data = {
+      id: id,
+      name: name,
+      price: price,
+      img: img
+    }
+    this.global.enter()
+    this.global.presentModal(ViewmealPage,data,"")
+   
+  
+  }
+  
+
+  
 
 
 }

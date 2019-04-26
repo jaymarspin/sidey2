@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/observable'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router';
+import {PostService} from '../post/post.service'
 @Component({
   selector: 'app-myplace',
   templateUrl: './myplace.page.html',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class MyplacePage implements OnInit {
   user_id:any = 1
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private post: PostService,private http: HttpClient, private router: Router) { }
   result = []
 
   goToResto(id:any,title:any,address:any){
@@ -18,7 +19,7 @@ export class MyplacePage implements OnInit {
   }
   ngOnInit() {
 
-    let url = "http://192.168.1.16:8888/r_server/my_places.php"
+    let url = this.post.server+"my_places.php"
     let postdata = new FormData();
     
 

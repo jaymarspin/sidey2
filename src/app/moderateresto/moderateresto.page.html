@@ -44,7 +44,7 @@
   </div>
   </div>
   <div id="floating-social">
-  <ion-row id="social">
+  <ion-row class="social">
     
 
     <ion-col>
@@ -118,11 +118,10 @@
       <div class="food-wrapper">
      
         <ul class="food-align food-holder" id="meal">
-          <li class="foods" *ngFor="let item of meals">
+          <li class="foods" *ngFor="let item of meals" (click)="viewmeal(item.id,item.name,item.price,item.img)">
              
-                  <ion-badge color="tertiary" class="ratings">44</ion-badge>
-                 
-              <img src="http://192.168.1.16:8888/r_server/{{item.img}}" />
+              <ion-badge color="tertiary" class="ratings">44</ion-badge>
+              <img src="{{post.server}}{{item.img}}" />
               <ion-label class="food-name">{{item.name}}</ion-label>
 
           </li>
@@ -151,7 +150,7 @@
              
                   <ion-badge color="tertiary" class="ratings">44</ion-badge>
                  
-              <img src="http://192.168.1.16:8888/r_server/{{item.img}}" />
+              <img src="{{post.server}}{{item.img}}" />
               <ion-label class="food-name">{{item.name}}</ion-label>
 
           </li>

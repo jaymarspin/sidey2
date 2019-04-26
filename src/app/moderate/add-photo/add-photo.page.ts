@@ -6,6 +6,7 @@ import { File } from '@ionic-native/file/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Observable } from 'rxjs/observable'
 import { HttpClient } from '@angular/common/http'
+import {PostService} from '../../post/post.service'
 @Component({
   selector: 'app-add-photo',
   templateUrl: './add-photo.page.html',
@@ -16,7 +17,7 @@ export class AddPhotoPage implements OnInit {
   base64:any
   loading:any
   @Input('id') id
-  constructor(private loadingController:LoadingController,private modalCtrl: ModalController,private imagePicker: ImagePicker,private webview:WebView,private file:File,private camera:Camera,private http:HttpClient,private toastController:ToastController) {
+  constructor(private post: PostService,private loadingController:LoadingController,private modalCtrl: ModalController,private imagePicker: ImagePicker,private webview:WebView,private file:File,private camera:Camera,private http:HttpClient,private toastController:ToastController) {
 
     this.imgsrc = "assets/icon/eating.png"
    }
@@ -44,10 +45,11 @@ export class AddPhotoPage implements OnInit {
     this.imagePicker.getPictures(options).then((results) => {
       for (var i = 0; i < results.length; i++) {
         var ext = this.webview.convertFileSrc(results[i]).substring(this.webview.convertFileSrc(results[i]).lastIndexOf(".")+1)
-        this.presentLoading("Please Wait")
+        
         if(ext == "jpeg" || ext == "JPEG"){
            alert("png or jpeg is invalid please choose other image!")
-        }else{
+        }else if(ext == "jpg" || ext == "JPG" || ext == "png" || ext == "PNG"){
+          this.presentLoading("Please Wait")
           this.imgsrc = this.webview.convertFileSrc(results[i]);
           var imagePath = results[i].substr(0, results[i].lastIndexOf('/') + 1);
           var imageName = results[i].substr(results[i].lastIndexOf('/') + 1);
@@ -55,6 +57,7 @@ export class AddPhotoPage implements OnInit {
           this.base64 = b64str;
           this.loading.dismiss()
         }).catch(err => {
+          
           console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
         })
         
@@ -63,7 +66,8 @@ export class AddPhotoPage implements OnInit {
       }
       
     }, (err) => {
-      alert(err);
+      console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
+      
     });
   }
   takeAPic(){
@@ -98,7 +102,7 @@ export class AddPhotoPage implements OnInit {
   }
 
   addFood(){
-    let url = "http://192.168.1.16:8888/r_server/add_photo.php"
+    let url = this.post.server+"add_photo.php"
      if(this.imgsrc != "assets/icon/eating.png"){
       let postdata = new FormData();
       this.base64 = 'data:image/jpeg;base64,' + this.base64;

@@ -26,6 +26,10 @@ import { Validators } from '@angular/forms';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { HttpClient,HttpClientModule } from '@angular/common/http'
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import {ViewmealPageModule} from './client/viewmeal/viewmeal.module'
+import {ReviewsPageModule} from './client/reviews/reviews.module'
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -40,9 +44,11 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
     AddFoodPageModule,
     AddPhotoPageModule,
     EditSchedPageModule,
-    HttpClientModule
-  
-  ],
+    HttpClientModule,
+    ViewmealPageModule,
+    ReviewsPageModule,
+ 
+  ], 
   providers: [ 
     StatusBar,
     PostService, 
@@ -59,6 +65,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
     HttpClient,
     HttpClientModule,
     AndroidPermissions,
+    NativePageTransitions,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -1,0 +1,71 @@
+
+
+<ion-content>
+  <ion-row>
+    <ion-col class="row-col" justify-content-center>
+        <ion-icon name="arrow-round-back" class= 'back' (click)="goback()"></ion-icon>
+        <ion-label class="top-label">Ratings & Reviews</ion-label>
+       
+    </ion-col>
+    
+  </ion-row>
+  <ion-row class="ion-padding stars">
+    <ion-col><ion-label class="main-star-label">4.4/102 Reviews</ion-label>
+      <rating [rate]="rate"
+        readonly="true" 
+        size="large" 
+        (rateChange)="onRateChange($event)">
+</rating>
+    
+    </ion-col>
+  </ion-row>
+  <ion-row class="num stars">
+    <ion-col class="num-col">
+      <ion-row><ion-col class="star-label">1 star</ion-col></ion-row>
+      <ion-row><ion-col>32</ion-col></ion-row>
+    </ion-col>
+    <ion-col class="num-col">
+      <ion-row><ion-col class="star-label">2 stars</ion-col></ion-row>
+      <ion-row><ion-col>32</ion-col></ion-row>
+    </ion-col>
+    <ion-col class="num-col">
+      <ion-row><ion-col class="star-label">3 stars</ion-col></ion-row>
+      <ion-row><ion-col >32</ion-col></ion-row>
+    </ion-col>
+    <ion-col class="num-col">
+      <ion-row><ion-col class="star-label">4 stars</ion-col></ion-row>
+      <ion-row><ion-col>32</ion-col></ion-row>
+    </ion-col>
+    <ion-col class="num-col">
+      <ion-row><ion-col class="star-label">5 stars</ion-col></ion-row>
+      <ion-row><ion-col>32</ion-col></ion-row>
+    </ion-col>
+
+  </ion-row>
+  
+<style>
+.stars{
+  background-color: #f5f5f5;
+  text-align: center;
+  margin-top: 10px;
+}
+.num{
+  background-color: #fff;
+}
+.main-star-label{
+  font-size: 27px;
+}
+.num-col{
+  font-size: 13px;
+  background-color: #f5f5f5;
+  margin-right: 2px;
+}
+.num-col:first-of-type{
+  margin-left: 2px;
+}
+.star-label{
+  color: #888;
+}
+
+</style>
+</ion-content>

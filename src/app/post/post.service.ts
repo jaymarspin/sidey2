@@ -4,7 +4,6 @@ import {Http, Headers, RequestOptions} from '@angular/http'
 import "rxjs"
 import "rxjs-compat"
 
-import {Observable}     from 'rxjs/Observable';
 @Injectable({
   providedIn: 'root'
 })

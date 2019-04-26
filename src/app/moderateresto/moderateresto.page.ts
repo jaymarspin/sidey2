@@ -4,10 +4,10 @@ import { TitleEditPage } from '../moderate/title-edit/title-edit.page'
 import { AddFoodPage } from '../moderate/add-food/add-food.page'
 import { EditSchedPage } from '../moderate/edit-sched/edit-sched.page'
 import {AddPhotoPage} from '../moderate/add-photo/add-photo.page'
-import { ModalController} from '@ionic/angular'
+
 import {PostService} from '../post/post.service'
-
-
+import {GlobalService } from '../global/global.service'
+import {ViewmealPage} from '../client/viewmeal/viewmeal.page'
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalmapPage } from '../modalmap/modalmap.page'
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -21,12 +21,7 @@ export class ModeraterestoPage implements OnInit {
   slideOpts = {
     effect: 'flip'
   };
-   items:any  = [
-     {src: "https://image.dhgate.com/0x0/f2/albu/g7/M00/09/B9/rBVaSlpqpheAGqouAAJzzx7VRgs819.jpg",title:"sample"},
-     {src: "https://www.feathr.com/images/uploads/Sketch-MartinCreed.jpg",title:"sample2"},
-     {src: "https://www.wallpaperup.com/uploads/wallpapers/2015/07/24/761368/c2177ff23f862b515dd9f1517b011727-700.jpg",title:"sample2"}
    
-  ]
   public title:any
   public id:any
   public address:any
@@ -35,7 +30,7 @@ export class ModeraterestoPage implements OnInit {
   dishes:any
   beverages:any
   impress = []
-  constructor(private androidFullScreen: AndroidFullScreen,private modal: ModalController,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) { }
+  constructor(private global: GlobalService,private androidFullScreen: AndroidFullScreen,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) { }
    
       
    
@@ -51,7 +46,7 @@ export class ModeraterestoPage implements OnInit {
     this.post.postData(data,"get_impress.php").subscribe((res) =>{
       let data = res.json()
       for(var i =0;i < data.length;i++){
-        this.impress[i] = "http://192.168.1.16:8888/r_server/"+data[i].img
+        this.impress[i] = this.post.server+data[i].img
       }
       if(this.impress.length == 0){
         this.impress.push("https://image.dhgate.com/0x0/f2/albu/g7/M00/09/B9/rBVaSlpqpheAGqouAAJzzx7VRgs819.jpg")
@@ -78,11 +73,24 @@ export class ModeraterestoPage implements OnInit {
     this.router.navigate(["add-food"]);
   }
 
+  viewmeal(id,name,price,img){
+    let data = {
+      id: id,
+      name: name,
+      price: price,
+      img: img
+    }
+    this.global.presentModal(ViewmealPage,data,"")
+   
+  
+  }
+
   editTile(){
     let data = {
       title: this.title
     }
-    this.presentModal(TitleEditPage,data)
+    this.global.presentModal(TitleEditPage,data,"")
+    
   }
   
   addFood(){
@@ -90,16 +98,23 @@ export class ModeraterestoPage implements OnInit {
       role: "meal",
       id: this.id
     }
-    this.presentModal(AddFoodPage,data)
+    this.global.presentModal(AddFoodPage,data,"")
+    
   }
   editAddress(){
-    
-    this.presentModal(ModalmapPage,null).then((data) =>{
-      
-    })
+    let data = {
+      lat: 6.123961,
+         long: 125.168949,
+         role: "admin"
+    }
+    this.global.presentModal(ModalmapPage,data,"")
   }
   editSched(){
-    this.presentModal(EditSchedPage,null)
+    let data = {
+      
+    }
+    this.global.presentModal(EditSchedPage,data,"")
+    
   }
 
   getMeals(foodrole:string):any{
@@ -145,28 +160,30 @@ export class ModeraterestoPage implements OnInit {
       id: this.id,
       role: "beverage"
     }
-    this.presentModal(AddFoodPage,data)
+    this.global.presentModal(AddFoodPage,data,"")
+    
   }
   addPhoto(){
     let data = {
       id: this.id
     }
-    this.presentModal(AddPhotoPage,data)
+    this.global.presentModal(AddPhotoPage,data,"")
+    
   }
-  async presentModal(component:any,data:any) {
-    const modal = await this.modal.create({
-      component: component,
-      cssClass: 'my-custom-modal-css',
-       componentProps: data
-    });
-    modal.onDidDismiss() 
-      .then((data) => {
+  // async presentModal(component:any,data:any) {
+  //   const modal = await this.modal.create({
+  //     component: component,
+  //     cssClass: 'my-custom-modal-css',
+  //      componentProps: data
+  //   });
+  //   modal.onDidDismiss() 
+  //     .then((data) => {
  
-        const pos = data['data']; 
+  //       const pos = data['data']; 
        
-    });
-    await modal.present();
-  }
+  //   });
+  //   await modal.present();
+  // }
 
 
 
