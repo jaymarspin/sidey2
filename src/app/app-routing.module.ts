@@ -22,7 +22,7 @@ const routes: Routes = [
   },
  
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'moderateresto/:id/:title/:address', loadChildren: './moderateresto/moderateresto.module#ModeraterestoPageModule' },
+  { path: 'moderateresto/:id/:title/:address/:role', loadChildren: './moderateresto/moderateresto.module#ModeraterestoPageModule' },
   { path: 'title-edit', loadChildren: './moderate/title-edit/title-edit.module#TitleEditPageModule' },
   { path: 'add-food', loadChildren: './moderate/add-food/add-food.module#AddFoodPageModule' },
   { path: 'edit-sched', loadChildren: './moderate/edit-sched/edit-sched.module#EditSchedPageModule' },
@@ -30,7 +30,8 @@ const routes: Routes = [
  
   { path: 'add-photo', loadChildren: './moderate/add-photo/add-photo.module#AddPhotoPageModule' },
   { path: 'viewmeal/:id/:name/:price/:img', loadChildren: './client/viewmeal/viewmeal.module#ViewmealPageModule' },
-  { path: 'reviews', loadChildren: './client/reviews/reviews.module#ReviewsPageModule' }
+  { path: 'reviews', loadChildren: './client/reviews/reviews.module#ReviewsPageModule' },
+  { path: 'makereview', loadChildren: './client/makereview/makereview.module#MakereviewPageModule' }
   
  
 

@@ -100,7 +100,7 @@ ion-item{
         <div class="food-wrapper">
         <div class="food-holder">
         <div class="foods" *ngFor="let food of item.food" (click)="viewmeal(food.id,food.name,food.price,food.img)">
-            <ion-badge color="tertiary" class="ratings">44</ion-badge>
+            <ion-badge color="dark" class="ratings">44</ion-badge>
             <ion-label class="food-name">{{food.name}}</ion-label>
     
         <img src="{{post.server}}{{food.img}}" />
@@ -121,9 +121,9 @@ ion-item{
              
             
             
-          <ion-badge color="secondary" class="resto-rate">44</ion-badge>
+          <ion-badge color="warning" class="resto-rate">44</ion-badge>
           <ion-buttons slot="primary" (click)="viewMap(item.lat,item.lng)" style="font-size: 12px;float: right;clear: right">
-          <ion-button color="primary"  style="line-spacing: 10px;">
+          <ion-button color="dark"  style="line-spacing: 10px;">
           <ion-icon name="map" ></ion-icon> Map</ion-button>
             </ion-buttons>
             <ion-label class="address" style="color: #888"><span class="near">{{item.d}} km</span><br /> Opens in 30 mins</ion-label>

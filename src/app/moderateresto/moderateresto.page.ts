@@ -25,10 +25,12 @@ export class ModeraterestoPage implements OnInit {
   public title:any
   public id:any
   public address:any
+  public role:any
   meals:any
    beverage:any
   dishes:any
   beverages:any
+  edit:any = "edit"
   impress = []
   constructor(private global: GlobalService,private androidFullScreen: AndroidFullScreen,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) { }
    
@@ -37,21 +39,7 @@ export class ModeraterestoPage implements OnInit {
 
    
   ngOnInit() {
-    this.title = this.activateRoute.snapshot.paramMap.get("title")
-    this.id = this.activateRoute.snapshot.paramMap.get("id")
-    this.address = this.activateRoute.snapshot.paramMap.get("address")
-    let data = {
-      id: this.id
-    }
-    this.post.postData(data,"get_impress.php").subscribe((res) =>{
-      let data = res.json()
-      for(var i =0;i < data.length;i++){
-        this.impress[i] = this.post.server+data[i].img
-      }
-      if(this.impress.length == 0){
-        this.impress.push("https://image.dhgate.com/0x0/f2/albu/g7/M00/09/B9/rBVaSlpqpheAGqouAAJzzx7VRgs819.jpg")
-      }
-    })
+    
 
 
     // this.androidFullScreen.isImmersiveModeSupported() 
@@ -147,6 +135,28 @@ export class ModeraterestoPage implements OnInit {
   }
 
   ionViewDidEnter(){
+
+
+    this.title = this.activateRoute.snapshot.paramMap.get("title")
+    this.id = this.activateRoute.snapshot.paramMap.get("id")
+    this.address = this.activateRoute.snapshot.paramMap.get("address")
+    this.role = this.activateRoute.snapshot.paramMap.get("role")
+
+    if(this.role == "client"){
+      this.edit = "tago"
+    }
+    let data = {
+      id: this.id
+    }
+    this.post.postData(data,"get_impress.php").subscribe((res) =>{
+      let data = res.json()
+      for(var i =0;i < data.length;i++){
+        this.impress[i] = this.post.server+data[i].img
+      }
+      if(this.impress.length == 0){
+        this.impress.push("https://image.dhgate.com/0x0/f2/albu/g7/M00/09/B9/rBVaSlpqpheAGqouAAJzzx7VRgs819.jpg")
+      }
+    })
  
     this.meals = this.getMeals('meal')
   
@@ -155,6 +165,7 @@ export class ModeraterestoPage implements OnInit {
   
   
 }
+
   addBeverages(){
     let data = {
       id: this.id,

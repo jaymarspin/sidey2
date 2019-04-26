@@ -53,7 +53,6 @@ export class GlobalService {
       fixedPixelsTop: 0,
       fixedPixelsBottom: 0
      }
-  
      return this.nativePageTransitions.slide(options)
   }
 }

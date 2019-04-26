@@ -98,7 +98,7 @@ export class PlaceAddPage implements OnInit {
         this.presentLoading("uploading... please wait").then(() =>{
           if(data[0].message == "success"){
             this.loading.dismiss().then(() =>{
-              this.router.navigate(["moderateresto",data[0].id,data[0].title,data[0].string_address]);
+              this.router.navigate(["moderateresto",data[0].id,data[0].title,data[0].string_address,'admin']);
               
             });
               }else{

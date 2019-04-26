@@ -4,7 +4,7 @@ import leaflet from 'leaflet'
 import { AlertController } from '@ionic/angular';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
+import {GlobalService } from '../global/global.service'
 import { LoadingController } from '@ionic/angular';
  
 @Component({
@@ -28,15 +28,11 @@ export class ModalmapPage {
   @Input('lat') r_lat: any
   @Input('long') r_long:any
   @Input('role') role:any
-  constructor(public navController: NavController,public geo: Geolocation,public alertController: AlertController,public modalCtrl: ModalController,private loadingCtrl: LoadingController){
+  constructor(private global:GlobalService,public navController: NavController,public geo: Geolocation,public alertController: AlertController,public modalCtrl: ModalController,private loadingCtrl: LoadingController){
 
     
 
   }
- 
-
-
-
   private async presentLoading(message): Promise<any> {
     this.loading = await this.loadingCtrl.create({
       message: message
@@ -51,8 +47,9 @@ export class ModalmapPage {
     
     
   }
-
- 
+  ionViewWillLeave() {
+    this.global.leave()
+   }
   // async presentAlertConfirm() {
   //   const alert = await this.alertController.create({
   //     header: 'Confirm!',

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {PostService} from '../../post/post.service'
 import {GlobalService } from '../../global/global.service'
 import {ReviewsPage} from '../reviews/reviews.page'
-
+import {MakereviewPage} from '../makereview/makereview.page'
 
 @Component({
   selector: 'app-viewmeal',
@@ -33,6 +33,16 @@ export class ViewmealPage implements OnInit {
 
     }
     this.global.presentModal(ReviewsPage,data,"");
+  }
+
+  makereviews(id,name,price){
+    let data = {
+      id: id,
+      img: this.imgsrc,
+      name: name,
+      price: price
+    }
+    this.global.presentModal(MakereviewPage,data,"");
   }
 
 }

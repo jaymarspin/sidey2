@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ViewmealPage } from './viewmeal.page';
-import {MakereviewPageModule} from '../makereview/makereview.module'
+import { MakereviewPage } from './makereview.page';
+import { IonicRatingModule } from 'ionic4-rating';
 const routes: Routes = [
   {
     path: '',
-    component: ViewmealPage
+    component: MakereviewPage
   }
 ];
 
@@ -19,9 +19,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    MakereviewPageModule,
+    IonicRatingModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ViewmealPage]
+  declarations: [MakereviewPage]
 })
-export class ViewmealPageModule {}
+export class MakereviewPageModule {}

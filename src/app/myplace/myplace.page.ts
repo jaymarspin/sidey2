@@ -12,16 +12,16 @@ export class MyplacePage implements OnInit {
   user_id:any = 1
   constructor(private post: PostService,private http: HttpClient, private router: Router) { }
   result = []
-
+  role:any
   goToResto(id:any,title:any,address:any){
-    this.router.navigate(["moderateresto",id,title,address]);
+    this.router.navigate(["moderateresto",id,title,address,'admin']);
     
   }
   ngOnInit() {
 
     let url = this.post.server+"my_places.php"
     let postdata = new FormData();
-    
+    this.role = "admin"
 
     postdata.append('id',this.user_id);
     let data:Observable<any> = this.http.post(url,postdata)

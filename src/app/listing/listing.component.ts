@@ -91,7 +91,7 @@ export class ListingComponent implements OnInit {
   }
 
   goToResto(id:any,title:any,address:any){
-    this.router.navigate(["moderateresto",id,title,address]);
+    this.router.navigate(["moderateresto",id,title,address,'client']);
     
   }
   
@@ -129,7 +129,7 @@ export class ListingComponent implements OnInit {
       price: price,
       img: img
     }
-    this.global.enter()
+    
     this.global.presentModal(ViewmealPage,data,"")
    
   
