@@ -5,6 +5,7 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
 import {PostService} from '../../post/post.service'
+import { Base64 } from '@ionic-native/base64/ngx';
 @Component({
   selector: 'app-makereview',
   templateUrl: './makereview.page.html',
@@ -19,15 +20,28 @@ export class MakereviewPage implements OnInit {
   rate:any
   loading:any
   imgsrc:any
+  imgsrctmp:any
   base64:any
-  constructor(private post:PostService,private file:File,private loadingController:LoadingController,private webview:WebView,private imagePicker: ImagePicker,private modalCtrl:ModalController,public events: Events,private global: GlobalService) { 
+  ress:any
+  constructor(private base: Base64,private post:PostService,private file:File,private loadingController:LoadingController,private webview:WebView,private imagePicker: ImagePicker,private modalCtrl:ModalController,public events: Events,private global: GlobalService) { 
+    this.imgsrc = new Array()
+    this.imgsrctmp = new Array()
+    this.base64 = new Array()
+  
     
-
+  
   }
 
   ionViewDidEnter(){
     
-    
+  //   this.imgsrctmp.push("1111")
+  // this.imgsrc.push("2222")
+  // this.base64.push("awdawdawda")
+  // this.base64.push("222wdawdawd2")
+  // this.base64.push("22awdawdawd22")
+  // this.base64.push("22awdawdawd22")
+  // this.base64.push("22awdawdawd22")
+  // this.base64.push("22awdawdawd22")
     this.rate = 5
     
   }
@@ -61,33 +75,37 @@ export class MakereviewPage implements OnInit {
       // window.imagePicker.OutputType.BASE64_STRING (1)
    
   };
-      
+
+  
   
       this.imagePicker.getPictures(options).then((results) => {
-        for (var i = 0; i < results.length; i++) {
-          var ext = this.webview.convertFileSrc(results[i]).substring(this.webview.convertFileSrc(results[i]).lastIndexOf(".")+1)
-          
-          if(ext == "jpeg" || ext == "JPEG"){
-             alert("png or jpeg is invalid please choose other image!")
-          }else if(ext == "jpg" || ext == "JPG" || ext == "png" || ext == "PNG"){
-            this.presentLoading("Please Wait")
-            this.imgsrc = this.webview.convertFileSrc(results[i]);
-            var imagePath = results[i].substr(0, results[i].lastIndexOf('/') + 1);
-            var imageName = results[i].substr(results[i].lastIndexOf('/') + 1);
-            this.file.readAsDataURL(imagePath, imageName).then((b64str) => {
-            this.base64[i] = b64str;
+        let tmp = results.length + this.imgsrc.length
+        if(tmp > 5){
+          alert("Sobra na dodong")
+        }else{
+          // this.presentLoading("please Waits")
+          for (var i = 0; i < results.length; i++) {
+            this.imgsrctmp.push(results[i])
+            this.imgsrc.push(this.webview.convertFileSrc(results[i]))
+           // var ext = this.webview.convertFileSrc(results[i]).substring(this.webview.convertFileSrc(results[i]).lastIndexOf(".")+1)
+           this.base.encodeFile(this.imgsrctmp[i]).then((base64File: string) => {
+             let tmp = 'data:image/jpeg;base64,' + base64File;
+            this.base64.push(tmp)
             
-          }).catch(err => {
-            console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
+          }, (err) => {
+            console.log(err);
           })
-          
-          }
-          
+           
+         }
+         
         }
-        this.loading.dismiss()
+
+        
+       
+        // this.loading.dismiss()
         
       }, (err) => {
-        console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
+        alert('readAsDataURL failed: (' + err.code + ")" + err.message);
       });
     }
   
@@ -95,15 +113,22 @@ export class MakereviewPage implements OnInit {
     if(this.review == "" || this.review == null){
       alert("Dont Leave a Field Empty")
     }else{
+
+      
       let data = {
         review: this.review,
         id: this.id,
-        user_id: 1
+        user_id: 1,
+        imgs: this.base64
+        
 
       }
       this.post.postData(data,"food_review.php").subscribe((Response) =>{
+        
         let res = Response.json();
-        console.log(res[0].id)
+        this.ress = res
+        
+        alert(this.ress)
       })
 
     }

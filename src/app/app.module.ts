@@ -29,8 +29,8 @@ import { HttpClient,HttpClientModule } from '@angular/common/http'
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import {ViewmealPageModule} from './client/viewmeal/viewmeal.module'
 import {ReviewsPageModule} from './client/reviews/reviews.module'
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
-
+import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
+import { Base64 } from '@ionic-native/base64/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -67,6 +67,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
     HttpClientModule,
     AndroidPermissions,
     NativePageTransitions,
+    Base64,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
