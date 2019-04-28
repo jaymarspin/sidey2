@@ -89,11 +89,13 @@ export class MakereviewPage implements OnInit {
             this.imgsrc.push(this.webview.convertFileSrc(results[i]))
            // var ext = this.webview.convertFileSrc(results[i]).substring(this.webview.convertFileSrc(results[i]).lastIndexOf(".")+1)
            this.base.encodeFile(this.imgsrctmp[i]).then((base64File: string) => {
-             let tmp = 'data:image/jpeg;base64,' + base64File;
-            this.base64.push(tmp)
+            
+            this.base64.push(base64File)
             
           }, (err) => {
             console.log(err);
+          }).then(() =>{
+            
           })
            
          }
