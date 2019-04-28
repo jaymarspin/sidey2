@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {GlobalService } from '../../global/global.service'
-import {ModalController, Events,LoadingController} from '@ionic/angular'
+import {ModalController, Events} from '@ionic/angular'
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -23,7 +23,7 @@ export class MakereviewPage implements OnInit {
   imgsrctmp:any
   base64:any
   ress:any
-  constructor(private base: Base64,private post:PostService,private file:File,private loadingController:LoadingController,private webview:WebView,private imagePicker: ImagePicker,private modalCtrl:ModalController,public events: Events,private global: GlobalService) { 
+  constructor(private base: Base64,private post:PostService,private file:File,private webview:WebView,private imagePicker: ImagePicker,private modalCtrl:ModalController,public events: Events,private global: GlobalService) { 
     this.imgsrc = new Array()
     this.imgsrctmp = new Array()
     this.base64 = new Array()
@@ -46,14 +46,9 @@ export class MakereviewPage implements OnInit {
     
   }
 
-  private async presentLoading(message): Promise<any> {
-    this.loading = await this.loadingController.create({
-      message: message
-    });
-    return await this.loading.present();
-  }
 
     pickImage(){
+      
       const options = {
       // Android only. Max images to be selected, defaults to 15. If this is set to 1, upon
       // selection of a single image, the plugin will return it.
@@ -79,11 +74,12 @@ export class MakereviewPage implements OnInit {
   
   
       this.imagePicker.getPictures(options).then((results) => {
+        
         let tmp = results.length + this.imgsrc.length
         if(tmp > 5){
           alert("Sobra na dodong")
         }else{
-          // this.presentLoading("please Waits")
+          
           for (var i = 0; i < results.length; i++) {
             this.imgsrctmp.push(results[i])
             this.imgsrc.push(this.webview.convertFileSrc(results[i]))
@@ -94,29 +90,31 @@ export class MakereviewPage implements OnInit {
             
           }, (err) => {
             console.log(err);
-          }).then(() =>{
-            
           })
            
          }
-         
         }
-
-        
-       
         // this.loading.dismiss()
         
       }, (err) => {
         alert('readAsDataURL failed: (' + err.code + ")" + err.message);
+      }).then(()=>{
+        
       });
+    }
+
+    remove(i:any){
+      this.imgsrctmp.splice(i, 1)
+      this.imgsrc.splice(i, 1)
+      this.base64.splice(i, 1)
     }
   
   addReview(){
     if(this.review == "" || this.review == null){
       alert("Dont Leave a Field Empty")
     }else{
-
-      
+      this.global.presentLoading("Submitting")
+      // this.base64.push("sample,")
       let data = {
         review: this.review,
         id: this.id,
@@ -125,12 +123,18 @@ export class MakereviewPage implements OnInit {
         
 
       }
+      
       this.post.postData(data,"food_review.php").subscribe((Response) =>{
         
         let res = Response.json();
         this.ress = res
-        
-        alert(this.ress)
+        this.global.loading.dismiss();
+        if(this.ress.message = "success"){
+          this.modalCtrl.dismiss()
+          this.global.presentToast("Success you've earn 50 points")
+        }else{
+          this.global.presentToast("Error Occured")
+        }
       })
 
     }

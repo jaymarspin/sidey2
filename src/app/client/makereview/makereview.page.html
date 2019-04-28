@@ -37,7 +37,9 @@
         
 
       <div class="reviewpicwrapper">
-          <div class="add-pic uploaded" *ngFor="let item of imgsrc">
+          <div class="add-pic uploaded" *ngFor="let item of imgsrc; index as i" [attr.data-index]="i" >
+           
+            <ion-icon name="close-circle-outline" class="ex" (click)="remove(i)"></ion-icon>
             <ion-img src="{{item}}">
             </ion-img>
             </div>
@@ -83,6 +85,14 @@
   </div>
 
   <style>
+    .ex{
+      position: absolute;
+      z-index: 1;
+      top: 2px;
+      left: 2px;
+      font-size: 16px;
+      color: #888;
+    }
     .reviewer{
       color: #888;
       font-size: 22px;

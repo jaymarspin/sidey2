@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular'
+import { ModalController,LoadingController, ToastController } from '@ionic/angular'
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalService {
-
-  constructor(public modal: ModalController,private nativePageTransitions: NativePageTransitions) { }
+  loading:any
+  constructor(public loadingController:LoadingController,public toastController:ToastController,public modal: ModalController,private nativePageTransitions: NativePageTransitions) { }
 
 
   async presentModal(component:any,data:any,css:any) {
@@ -23,6 +23,20 @@ export class GlobalService {
        
     });
     await modal.present();
+  }
+
+  async presentToast(message:any) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 6000
+    });
+    toast.present();
+  }
+  public async presentLoading(message): Promise<any> {
+    this.loading = await this.loadingController.create({
+      message: message
+    });
+    return await this.loading.present();
   }
 
   leave(){
