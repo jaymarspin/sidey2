@@ -46,37 +46,7 @@
   ion-col{
     --ion-grid-column-padding: 0
   }
-  ul.sec-menu{
-    width: 100%;
-    position: relative;
-    margin: auto;
-    clear: both;
-    height: auto;
-    overflow: hidden;
-    list-style-type: none;
-    padding: 10px;
-    margin-bottom: 15px;
-    padding-left: 7px;
-    background-color: #f5f5f5;
-  }
-  ul.sec-menu li{
-    font-size: 17px;
-    color: #000;
-    display: inline-block;
-    text-align: left;
-    width: 27%;
-    
-    
-  }ul.sec-menu li:first-of-type{
-    width: 22%;
-  }
-  ul.sec-menu li ion-label{
-    border-bottom: 2px dotted #ffce00;
-  }
-  ul.sec-menu li:active{
-    opacity: 0.4;
-    transition: all 0.4s;
-  }
+ 
   #address{
     color: #333;
     font-size: 16px;

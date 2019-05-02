@@ -28,7 +28,8 @@ export class GlobalService {
   async presentToast(message:any) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 6000
+      
+    duration: 3000
     });
     toast.present();
   }

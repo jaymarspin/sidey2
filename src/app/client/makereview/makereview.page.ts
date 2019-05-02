@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,ErrorHandler } from '@angular/core';
 import {GlobalService } from '../../global/global.service'
 import {ModalController, Events} from '@ionic/angular'
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
@@ -31,18 +31,13 @@ export class MakereviewPage implements OnInit {
     
   
   }
+  handleError(error: any): void {
+    alert(error)
+  }
 
   ionViewDidEnter(){
-    
-  //   this.imgsrctmp.push("1111")
-  // this.imgsrc.push("2222")
-  // this.base64.push("awdawdawda")
-  // this.base64.push("222wdawdawd2")
-  // this.base64.push("22awdawdawd22")
-  // this.base64.push("22awdawdawd22")
-  // this.base64.push("22awdawdawd22")
-  // this.base64.push("22awdawdawd22")
     this.rate = 5
+    
     
   }
 
@@ -59,8 +54,6 @@ export class MakereviewPage implements OnInit {
       // will be at most 800 pixels wide and 800 pixels tall.  If the width is
       // 800 and height 0 the image will be 800 pixels wide if the source
       // is at least that wide.
-    
-      
       // quality of resized image, defaults to 100
       quality: 100,
   
@@ -71,13 +64,17 @@ export class MakereviewPage implements OnInit {
    
   };
 
+ 
+    
+   
+    //here 
   
   
       this.imagePicker.getPictures(options).then((results) => {
         
         let tmp = results.length + this.imgsrc.length
         if(tmp > 5){
-          alert("Sobra na dodong")
+          this.global.presentToast("Only 5 images allowed");
         }else{
           
           for (var i = 0; i < results.length; i++) {
@@ -98,9 +95,7 @@ export class MakereviewPage implements OnInit {
         
       }, (err) => {
         alert('readAsDataURL failed: (' + err.code + ")" + err.message);
-      }).then(()=>{
-        
-      });
+      })
     }
 
     remove(i:any){
@@ -113,29 +108,40 @@ export class MakereviewPage implements OnInit {
     if(this.review == "" || this.review == null){
       alert("Dont Leave a Field Empty")
     }else{
-      this.global.presentLoading("Submitting")
-      // this.base64.push("sample,")
-      let data = {
-        review: this.review,
-        id: this.id,
-        user_id: 1,
-        imgs: this.base64
+        this.global.presentLoading("Submitting").then(() =>{
+        if(this.base64.length == 0){
+          this.base64.push("none");
+        }
+        let data = {
+          review: this.review,
+          rate: this.rate,
+          id: this.id,
+          user_id: 1,
+          imgs: this.base64,
+          cat: "meal" 
+        }
         
-
-      }
-      
-      this.post.postData(data,"food_review.php").subscribe((Response) =>{
-        
-        let res = Response.json();
-        this.ress = res
-        this.global.loading.dismiss();
-        if(this.ress.message = "success"){
+        this.post.postData(data,"food_review.php").subscribe((Response) =>{
+          alert(Response+"response")
+          let res = Response.json();
+          this.ress = res
+          if(this.ress.message = "success"){
+            this.modalCtrl.dismiss()
+            this.global.presentToast("Success you've earn 50 points")
+          }else{
+            this.global.presentToast("Error Occured")
+          }
+       },(err)=>{
+          this.global.loading.dismiss();
           this.modalCtrl.dismiss()
           this.global.presentToast("Success you've earn 50 points")
-        }else{
-          this.global.presentToast("Error Occured")
-        }
-      })
+          },() =>{
+            this.global.loading.dismiss();
+            
+          })
+        })
+     
+      
 
     }
   }
@@ -152,6 +158,6 @@ export class MakereviewPage implements OnInit {
     this.modalCtrl.dismiss()
   }
   onRateChange(event){
-  
+    this.rate = event;
   }
 }

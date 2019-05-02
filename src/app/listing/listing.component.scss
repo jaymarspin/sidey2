@@ -7,7 +7,7 @@
   
   
   #content{
-    padding: 13px;
+ 
   }
   .food-holder{
     width: 880px;
@@ -18,11 +18,11 @@
     
   }
   .food-wrapper{
-    width: 100%;
+    width: calc(100% - 10px);
     overflow-x: scroll;
-  
+    margin-left: 5px;
     position: relative;
-    margin-bottom: 6px
+    
   
   }
   .food-wrapper::-webkit-scrollbar{
@@ -36,13 +36,15 @@
     border-radius: 3px;
   }
   .reto-name{
-    width: 100%;
+    width: calc(100% - 10px);
+    
+    margin-left: 5px;
     position: relative;
   
     clear: both;
     
     height: auto;
-    padding-top: 5px;
+    
   /* border-top: 1px dotted #888; */
     
   }
@@ -58,7 +60,7 @@
     margin-top: 0px;
   }
   .title{
-    font-size: 22px;
+    font-size: 28px;
     color: #173338;
     font-weight: bold;
   }
@@ -77,10 +79,10 @@
   }
   .resto{
     position: relative;
-    width: 98%;
+    width: 100%;
     height: auto;
     overflow: hidden;
-    padding: 5px;
+    
     margin: auto;
     padding-bottom: 12px;
     margin-bottom: 12px;
