@@ -6,10 +6,12 @@ import {ModalController,ToastController,LoadingController} from '@ionic/angular'
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { Keyboard } from '@ionic-native/keyboard/ngx';
-import { Observable } from 'rxjs/observable'
-import { HttpClient } from '@angular/common/http'
+
+
+import {GlobalService} from '../../global/global.service'
 import {PostService} from '../../post/post.service'
+import { Base64 } from '@ionic-native/base64/ngx';
+import { from } from 'rxjs';
 @Component({
   selector: 'app-add-food',
   templateUrl: './add-food.page.html',
@@ -21,9 +23,13 @@ export class AddFoodPage implements OnInit {
   imgsrc:any 
   former: FormGroup
   loading:any
+  public base64:any
   @Input('id') id
   @Input('role') role
-  constructor(private post:PostService,private loadingController:LoadingController,private imagePicker: ImagePicker,private file: File,private camera: Camera,private webview: WebView,private validators: Validators,private formBuilder: FormBuilder,private modalCtrl: ModalController,private keyboard: Keyboard, private http: HttpClient, private toastController:ToastController) { 
+  constructor(private global: GlobalService,private base:Base64,private post:PostService,private loadingController:LoadingController,private imagePicker: ImagePicker,private file: File,private camera: Camera,private webview: WebView,private validators: Validators,private formBuilder: FormBuilder,private modalCtrl: ModalController, private toastController:ToastController) { 
+    
+    this.base64 = new Array()
+    
     this.former = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
         Validators.required,
@@ -56,42 +62,32 @@ export class AddFoodPage implements OnInit {
   dismiss(){
     this.modalCtrl.dismiss()
   }
-  public base64:any
+  
 
 
   
   addFood(){
-    let url = this.post.server+"addFood.php"
-    let postdata = new FormData();
-    this.base64 = 'data:image/jpeg;base64,' + this.base64;
-    postdata.append('file',this.base64);
-    postdata.append('name',this.name);
-    postdata.append('price',this.price);
-    postdata.append('id',this.id);
-    postdata.append('role',this.role);
-    let data:Observable<any> = this.http.post(url,postdata)
-    data.subscribe((res) =>{
-       if(res[0].message == "success"){
-        this.modalCtrl.dismiss()
-        this.presentToast("success");
-       }else this.presentToast("Error Occured");
-    })
+   
 
+    let body = {
+      file: this.base64,
+      name: this.name,
+      price: this.price,
+      id: this.id,
+      role: this.role
+    }
+    this.post.postData(body,"addFood.php").subscribe((res) => {
+      let Response = res.json();
+      alert(Response[0].message)
+    },(err) =>{
+      alert(err)
+    },()=>{
+
+    })
     
   }
-  private async presentLoading(message): Promise<any> {
-    this.loading = await this.loadingController.create({
-      message: message
-    });
-    return await this.loading.present();
-  }
-  async presentToast(message:any) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 6000
-    });
-    toast.present();
-  }
+
+ 
 
   pickImage(){
     const options = {
@@ -118,37 +114,33 @@ export class AddFoodPage implements OnInit {
     
 
     this.imagePicker.getPictures(options).then((results) => {
+      this.global.presentLoading("Please Wait").then(() =>{
       for (var i = 0; i < results.length; i++) {
-        var ext = this.webview.convertFileSrc(results[i]).substring(this.webview.convertFileSrc(results[i]).lastIndexOf(".")+1)
-        
-        if(ext == "jpeg" || ext == "JPEG"){
-           alert("png or jpeg is invalid please choose other image!")
-        }else if(ext == "jpg" || ext == "JPG" || ext == "png" || ext == "PNG"){
-          this.presentLoading("Please Wait")
-          this.imgsrc = this.webview.convertFileSrc(results[i]);
-          var imagePath = results[i].substr(0, results[i].lastIndexOf('/') + 1);
-          var imageName = results[i].substr(results[i].lastIndexOf('/') + 1);
-          this.file.readAsDataURL(imagePath, imageName).then((b64str) => {
-          this.base64 = b64str;
-          this.loading.dismiss()
-        }).catch(err => {
-          console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
-        })
-        
-        }
-        
-      }
-      
-    }, (err) => {
-      console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
-    });
-  }
+        this.imgsrc = this.webview.convertFileSrc(results[i]);
 
+        
+          this.base.encodeFile(results[i]).then((base64File: string) => {
+            
+            this.base64.push(base64File)
+            this.global.loading.dismiss()
+            
+            
+          }, (err) => {
+            console.log(err);
+          })
+        }
+      })
+        
+      },(err)=>{
+        console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
+      })
+      
+ 
+    }
 
   takeAPic(){
     const options: CameraOptions = {
       quality: 100,
-      
       saveToPhotoAlbum: true,
       correctOrientation: true,
       encodingType: this.camera.EncodingType.JPEG,

@@ -16,6 +16,8 @@ export class MakereviewPage implements OnInit {
   @Input('name') name:any
   @Input('price') price:any
   @Input('img') img:any
+  @Input('img') cat:any
+
   review:any
   rate:any
   loading:any
@@ -118,11 +120,11 @@ export class MakereviewPage implements OnInit {
           id: this.id,
           user_id: 1,
           imgs: this.base64,
-          cat: "meal" 
+          cat: this.cat
         }
         
         this.post.postData(data,"food_review.php").subscribe((Response) =>{
-          alert(Response+"response")
+          
           let res = Response.json();
           this.ress = res
           if(this.ress.message = "success"){
@@ -133,8 +135,8 @@ export class MakereviewPage implements OnInit {
           }
        },(err)=>{
           this.global.loading.dismiss();
-          this.modalCtrl.dismiss()
-          this.global.presentToast("Success you've earn 50 points")
+          
+          this.global.presentToast(err)
           },() =>{
             this.global.loading.dismiss();
             

@@ -120,11 +120,11 @@ ion-item{
           </div>
         <div class="food-wrapper">
         <div class="food-holder">
-        <div class="foods meal-overlay" *ngFor="let food of item.food" (click)="viewmeal(food.id,food.name,food.price,food.img,i)">
+        <div class="foods meal-overlay" *ngFor="let food of item.food" (click)="viewmeal(food.id,food.name,food.price,food.img,i,food.cat)">
             <ion-badge color="dark" class="ratings">44</ion-badge>
             <ion-label class="food-name">{{food.name}}</ion-label>
     
-        <img src="{{post.server}}{{food.img}}" />
+        <ion-img src="{{post.server}}{{food.img}}" ></ion-img>
         
         </div>
 
@@ -133,16 +133,10 @@ ion-item{
     </div>
     </div>
     <ul class="sec-menu sec-menu-listing">
-      <li (click)="category('meal',item.id,i)"><ion-label>Meals <ion-icon name="pizza"></ion-icon></ion-label></li>
-      <li (click)="category('beverages',item.id,i)"><ion-label>Beverages <ion-icon name="wine"></ion-icon></ion-label></li>
-      <li><ion-label>Desserts <ion-icon name="timer"></ion-icon></ion-label></li>
+      <li (click)="category('meal',item.id,i,item.meal_count)"><ion-label>Meals {{item.meal_count}}<ion-icon name="pizza"></ion-icon></ion-label></li>
+      <li (click)="category('beverages',item.id,i,item.beverages_count)"><ion-label>Beverages {{item.beverages_count}}<ion-icon name="wine"></ion-icon></ion-label></li>
+      <li (click)="category('desserts',item.id,i,item.dessert_count)"><ion-label>Desserts {{item.dessert_count}}<ion-icon name="timer"></ion-icon></ion-label></li>
     </ul>
-    
-    
-    
-    
-                    
-    
     </div> 
   </ion-item>
     

@@ -14,6 +14,7 @@ export class ViewmealPage implements OnInit {
   @Input('name') name:any
   @Input('price') price:any
   @Input('img') img:any
+  @Input('cat') cat:any
   imgsrc:any
 
   constructor(private post:PostService,private global: GlobalService) {
@@ -23,9 +24,12 @@ export class ViewmealPage implements OnInit {
    ionViewWillLeave() {
     this.global.leave()
    }
-   
+   ionDidViewEnter(){
+     
+   }
 
   ngOnInit() {
+    
     this.imgsrc = this.post.server+this.img
   }
   viewreviews(id){
@@ -40,7 +44,8 @@ export class ViewmealPage implements OnInit {
       id: id,
       img: this.imgsrc,
       name: name,
-      price: price
+      price: price,
+      cat: this.cat
     }
     this.global.presentModal(MakereviewPage,data,"");
   }

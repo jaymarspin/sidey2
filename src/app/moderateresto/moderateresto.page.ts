@@ -81,14 +81,7 @@ export class ModeraterestoPage implements OnInit {
     
   }
   
-  addFood(){
-    let data = {
-      role: "meal",
-      id: this.id
-    }
-    this.global.presentModal(AddFoodPage,data,"")
-    
-  }
+  
   editAddress(){
     let data = {
       lat: 6.123961,
@@ -164,6 +157,21 @@ export class ModeraterestoPage implements OnInit {
     
   
   
+}
+addFood(){
+  let data = {
+    role: "meal",
+    id: this.id
+  }
+  this.global.presentModal(AddFoodPage,data,"")
+  
+}
+addDesserts(){
+  let data = {
+    role: "dessert",
+    id: this.id
+  }
+  this.global.presentModal(AddFoodPage,data,"")
 }
 
   addBeverages(){

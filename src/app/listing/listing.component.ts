@@ -19,14 +19,15 @@ export class ListingComponent implements OnInit {
   lat:any
   lng:any
   list:any
-  tlist:any
+  mealsList:any
+  beverages:any
+  desserts:any
   
   constructor(private androidPermissions: AndroidPermissions,private post: PostService,private activateRoute: ActivatedRoute,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
     this.menuCtrl.enable(true)
     
     
-    
- 
+   
           this.geo.getCurrentPosition().then(pos =>{
 
       
@@ -40,47 +41,12 @@ export class ListingComponent implements OnInit {
             this.router.navigate(['home']);
       
           })
+
             
         
-  
-    
-    
-    
-    
-    
    }
 
-  //  loadData(event) {
-  //   setTimeout(() => {
-      
-  //     let body = {
-  //       lat: this.lat,
-  //       lng: this.lng,
-  //       page: 2
-  //     }
-
-  //     this.post.postData(body,"listing.php").subscribe((res) =>{
-  //       for(var i =0;i < res.length;i++){
-  //         this.list.push({
-  //           "name": res[i].name,
-  //           "resto_contact": res[i].name,
-  //           "d": res[i].d,
-  //           "food": res[i].food
-  //         }
-  //         );
-  //       }
-  //   })
-
-
-
-  //     event.target.complete();
-      
-
-  //     // App logic to determine if all data is loaded
-  //     // and disable the infinite scroll
-      
-  //   }, 0);
-  // }
+  
 
   viewMap(lat:any,lng:any){
     let data = {
@@ -104,16 +70,17 @@ export class ListingComponent implements OnInit {
       page: pager
     }
     var arr:any
+    
     try{
     this.post.postData(body,"listing.php").subscribe((res:any) =>{
-        // console.log(res)
+        
+        console.log(res)
         res = res.json()
         this.list = res
-        this.tlist = Object.assign({}, res);
-        this.tlist =JSON.parse(JSON.stringify(res))
-
+        this.mealsList = new Array(this.list.length);
+        this.beverages = new Array(this.list.length);
+        this.desserts = new Array(this.list.length);
       
-        
     })
   }catch(e){
     this.global.presentToast(e)
@@ -121,94 +88,94 @@ export class ListingComponent implements OnInit {
   }
 
 
-  category(category,i,index){
+  category(category,i,index,count){
     let pass:any = false
+    
     let body = {
       role: category,
       id: i
       
     }
-    let tmp:any
+    let tmplist = new Array()
     
-    switch(category){
-      
-      case "meal":
-      
-      if(this.tlist[index].fetch_food == false){
-        pass = true
-      }else{
-        this.list[index].food.splice(0)
-        tmp = [0,parseInt(this.tlist[index].meal_count) - 1]
-
+    if(count > 0){
+      switch(category){
+        case "meal":
+        if(this.list[index].fetch_food == true){
+       
+            this.list[index].food = this.mealsList[index]
+       
+        }else pass = true;
+          break;
+        case "beverages":
+        if(this.list[index].fetch_beverages == true){
+         
+            this.list[index].food = this.beverages[index]
+          
+        }else pass = true;
+          break;
+        case "desserts":
+        if(this.list[index].fetch_desert == true){
+          
+            this.list[index].food = this.desserts[index]
+         
+        }else pass = true;
         
-          for(var z = 0;z < this.tlist[index].food.length;z++){
-            
-            if(z < tmp[1] + 1){
-              
-              this.list[index].food.push(this.tlist[index].food[z])
-            }
-          }
+        
+          break;
       }
-        break;
-      case "beverages":
-      if(this.tlist[index].fetch_beverages == false){
-        pass = true
-      }else{
-        
-
-        this.list[index].food.splice(0)
-        
-        tmp = [parseInt(this.tlist[index].meal_count) - 1,(parseInt(this.tlist[index].meal_count) - 1)+parseInt(this.tlist[index].beverages_count)]
-        
-          for(var z = 0;z < this.tlist[index].food.length;z++){
+      if(pass == true){
+        this.post.postData(body,"get_food.php").subscribe((Response) => {
+          let data = Response.json();
+      
+          for(var i = 0;i < data.length; i++){
+             tmplist.push(data[i]);
+            } 
             
-            if(z > tmp[0]){
-              
-              this.list[index].food.push(this.tlist[index].food[z])
-            }
-          }
-      }
-        break;
-     }
+        },(err) => {
+          this.global.presentToast(err)
+         },()=>{
+          
+          switch(category){
+            case "meal":
+            this.mealsList[index] = tmplist
+            
+            this.list[index].fetch_food = true
+           
+            
+         
+              this.list[index].food = this.mealsList[index]
+         
+            
+              break;
+            case "beverages":
+            this.beverages[index] = tmplist
+            this.list[index].fetch_beverages = true
+            
+            
+              this.list[index].food = this.beverages[index]
+        
+            
+              break;
+            case "desserts":
+            
+            this.desserts[index] = tmplist
+            
+            this.list[index].fetch_desert = true
+           
+              this.list[index].food = this.desserts[index]
      
-    if(pass == true){
-      this.post.postData(body,"get_food.php").subscribe((Response) => {
-        let data = Response.json();
-    
-        for(var i = 0;i < data.length; i++){
-            this.tlist[index].food.push(data[i]);
-          } 
+            
+              break;
+          }
+     
           
          
-       },(err) => {
-        this.global.presentToast(err)
-       },()=>{
-        this.list[index].food.splice(0)
-         switch(category){
-          case "meal":
-          
-          this.tlist[index].fetch_food = true;
-          
-            break;
-          case "beverages":
-          
-          
-          
-          for(var z = 0;z < this.tlist[index].food.length;z++){
-            if(z > parseInt(this.tlist[index].meal_count) - 1){
-              
-              this.list[index].food.push(this.tlist[index].food[z])
-            }
-            
-            
-          }
-          this.tlist[index].fetch_beverages = true;
-            break;
-         }
-       
-       }) 
-    }
-   
+         }) 
+      }
+      
+     
+       }
    
   }
   
@@ -221,15 +188,16 @@ export class ListingComponent implements OnInit {
     
     
   }
-  viewmeal(id,name,price,img,i){
+  viewmeal(id,name,price,img,i,cat){
     let data = {
       id: id,
       name: name,
       price: price,
-      img: img
+      img: img,
+      cat: cat
     }
 
-    
+
     this.global.presentModal(ViewmealPage,data,"")
   }
   
