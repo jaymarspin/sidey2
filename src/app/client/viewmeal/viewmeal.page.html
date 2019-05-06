@@ -1,6 +1,19 @@
 
 <ion-content id="container">
-  
+  <ion-row class="viewmeal">
+    <ion-col class="row-col" justify-content-center>
+        <ion-icon name="arrow-round-back" class= 'back' (click)="goback()"></ion-icon>
+        <!-- <ion-label class="top-label">Adding Review/Ratings</ion-label> -->
+       
+    </ion-col>
+    
+  </ion-row>
+  <ion-row class="viewmeal name">
+    <ion-col>
+        <ion-text>{{name}} 	&#x20B1;{{price}}</ion-text>
+    </ion-col>
+    
+  </ion-row>
   <ion-row class="social actions">
       <div class="backdrop"></div>
     <ion-col>
@@ -38,7 +51,8 @@
                 </ion-row>
               </ion-col>
   </ion-row>
-      <ion-img id="img" [src] ="imgsrc"></ion-img>
+  
+  <ion-img id="img" [src] ="imgsrc"></ion-img>
 
 
 </ion-content>
@@ -62,6 +76,18 @@
   position: absolute;
   background-color: #000;
   opacity: 0.4;
+}
+.viewmeal{
+  position: absolute;
+  z-index: 1;
+  color: #f5f5f5;
+
+}
+.name{
+  bottom: 90px;
+  font-weight: bold;
+  font-size: 26px;
+  width: 100%;
 }
 
 

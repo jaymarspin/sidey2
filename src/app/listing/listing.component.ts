@@ -73,7 +73,6 @@ export class ListingComponent implements OnInit {
     
     try{
     this.post.postData(body,"listing.php").subscribe((res:any) =>{
-        
         console.log(res)
         res = res.json()
         this.list = res

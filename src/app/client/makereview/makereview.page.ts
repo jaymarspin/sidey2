@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,ErrorHandler } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {GlobalService } from '../../global/global.service'
 import {ModalController, Events} from '@ionic/angular'
 import { ImagePicker } from '@ionic-native/image-picker/ngx';

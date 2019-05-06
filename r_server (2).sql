@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2019 at 06:11 PM
+-- Generation Time: May 06, 2019 at 12:12 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -72,7 +72,10 @@ INSERT INTO `beveragesreviews` (`id`, `beverages_id`, `user_id`, `review`, `rate
 (2, 2, 1, 'drink 1', 5, '2019-05-03 15:37:37'),
 (3, 2, 1, 'dring with pics', 5, '2019-05-03 15:38:04'),
 (4, 2, 1, 'floating', 5, '2019-05-03 15:47:13'),
-(5, 2, 1, 'floating 2', 5, '2019-05-03 15:48:22');
+(5, 2, 1, 'floating 2', 5, '2019-05-03 15:48:22'),
+(6, 2, 1, 'yepey', 3, '2019-05-04 04:34:14'),
+(7, 23, 1, 'yehey', 5, '2019-05-04 04:35:16'),
+(8, 23, 1, 'yehey2', 2, '2019-05-04 04:35:45');
 
 -- --------------------------------------------------------
 
@@ -97,7 +100,11 @@ INSERT INTO `beveragesreviews_img` (`id`, `beveragesreviews_id`, `img`, `date_cr
 (3, 4, 'review/5ccc62814557815568984330.jpg', '2019-05-03 15:47:13'),
 (4, 4, 'review/5ccc62815b17d15568984331.jpg', '2019-05-03 15:47:13'),
 (5, 5, 'review/5ccc62c66a6e415568985020.jpg', '2019-05-03 15:48:22'),
-(6, 5, 'review/5ccc62c682fe915568985021.jpg', '2019-05-03 15:48:22');
+(6, 5, 'review/5ccc62c682fe915568985021.jpg', '2019-05-03 15:48:22'),
+(7, 6, 'review/5ccd16467fe5f15569444540.jpg', '2019-05-04 04:34:14'),
+(8, 7, 'review/5ccd1684b42b615569445160.jpg', '2019-05-04 04:35:16'),
+(9, 8, 'review/5ccd16a1a3c5315569445450.jpg', '2019-05-04 04:35:45'),
+(10, 8, 'review/5ccd16a1c3b5a15569445451.jpg', '2019-05-04 04:35:45');
 
 -- --------------------------------------------------------
 
@@ -199,7 +206,15 @@ INSERT INTO `food` (`id`, `resto_id`, `name`, `price`, `img_name`, `date_created
 (18, 353, 'kenneth specialy', 50, '1556632685.jpg', '2019-04-30 07:58:05'),
 (19, 346, '500', 250, 'awdawd', '2019-05-03 07:54:54'),
 (20, 346, '500', 250, 'awdawd', '2019-05-03 07:58:05'),
-(33, 351, 'ghhh', 250, '5ccc3b6a9594015568884260.jpg', '2019-05-03 13:00:26');
+(33, 351, 'ghhh', 250, '5ccc3b6a9594015568884260.jpg', '2019-05-03 13:00:26'),
+(34, 348, 'taki taki', 250, '5ccd975adf96715569774982.jpg', '2019-05-04 13:44:58'),
+(35, 348, 'taki taki', 250, '5ccd975e3559f15569775022.jpg', '2019-05-04 13:45:02'),
+(36, 348, 'taki taki', 250, '5ccd9764c95ee15569775082.jpg', '2019-05-04 13:45:08'),
+(37, 348, 'taki taki', 250, '5ccd9765be7d615569775092.jpg', '2019-05-04 13:45:09'),
+(38, 348, 'taki taki', 250, '5ccd9765d54c315569775092.jpg', '2019-05-04 13:45:09'),
+(39, 348, 'taki taki', 250, '5ccd976603bf115569775102.jpg', '2019-05-04 13:45:10'),
+(40, 348, 'taki taki', 250, '5ccd9766313e615569775102.jpg', '2019-05-04 13:45:10'),
+(41, 348, 'taki taki', 250, '5ccd97665ed2515569775102.jpg', '2019-05-04 13:45:10');
 
 -- --------------------------------------------------------
 
@@ -247,25 +262,8 @@ CREATE TABLE `mealreviews` (
 --
 
 INSERT INTO `mealreviews` (`id`, `meal_id`, `user_id`, `review`, `rate`, `date_created`) VALUES
-(213, 12, 1, 'hsjaja', 5, '2019-04-29 05:49:38'),
-(214, 12, 1, 'hsjaja', 5, '2019-04-29 06:06:30'),
-(215, 13, 1, 'death', 5, '2019-04-29 06:39:49'),
-(216, 12, 1, 'udjd', 5, '2019-04-29 06:59:34'),
-(217, 12, 1, 'hssj', 5, '2019-04-29 07:15:04'),
-(218, 12, 1, 'jjdjs', 5, '2019-04-29 07:15:51'),
-(219, 12, 1, 'bbjkzks', 5, '2019-04-29 07:27:58'),
-(220, 12, 1, 'hzzhhshs', 3, '2019-04-29 08:40:48'),
-(221, 13, 1, 'tingnan nyu po ito sir', 5, '2019-04-29 08:42:49'),
-(222, 12, 1, 'hsjsjkwwk', 3, '2019-04-29 08:51:34'),
-(223, 12, 1, 'ggjn', 5, '2019-04-29 12:16:36'),
-(224, 2, 1, 'i like this one ', 4, '2019-04-30 13:56:55'),
-(225, 12, 1, 'the food is very goodhdj', 1, '2019-04-30 14:24:50'),
-(226, 12, 1, 'adawdwa', 5, '2019-05-03 15:22:44'),
-(227, 12, 1, 'sample', 5, '2019-05-03 15:36:17'),
-(228, 12, 1, 'with pics', 5, '2019-05-03 15:36:56'),
-(229, 12, 1, 'sample', 5, '2019-05-03 15:46:21'),
-(230, 12, 1, 'sefe', 5, '2019-05-03 15:52:55'),
-(231, 12, 1, '123', 5, '2019-05-03 15:53:17');
+(232, 12, 1, 'sample', 5, '2019-05-04 04:17:21'),
+(233, 12, 1, 'shit super', 5, '2019-05-04 04:31:26');
 
 -- --------------------------------------------------------
 
@@ -285,33 +283,12 @@ CREATE TABLE `mealreviews_img` (
 --
 
 INSERT INTO `mealreviews_img` (`id`, `mealreview_id`, `img`, `date_created`) VALUES
-(1, 12, 'review/5cc6a77dd631015565228770.jpg', '2019-04-29 07:27:57'),
-(2, 12, 'review/5cc6a77dee14215565228771.jpg', '2019-04-29 07:27:57'),
-(3, 12, 'review/5cc6a77e1094915565228782.jpg', '2019-04-29 07:27:58'),
-(4, 12, 'review/5cc6a77e2996d15565228783.jpg', '2019-04-29 07:27:58'),
-(5, 13, 'review/5cc6b90856b6415565273680.jpg', '2019-04-29 08:42:48'),
-(6, 13, 'review/5cc6b9088051a15565273681.jpg', '2019-04-29 08:42:48'),
-(7, 13, 'review/5cc6b9089b7d115565273682.jpg', '2019-04-29 08:42:48'),
-(8, 13, 'review/5cc6b908c406615565273683.jpg', '2019-04-29 08:42:49'),
-(9, 12, 'review/5cc6bb12cab2715565278900.jpg', '2019-04-29 08:51:30'),
-(10, 12, 'review/5cc6bb138050d15565278911.jpg', '2019-04-29 08:51:31'),
-(11, 12, 'review/5cc6bb145366a15565278922.jpg', '2019-04-29 08:51:32'),
-(12, 12, 'review/5cc6bb153a5d315565278933.jpg', '2019-04-29 08:51:33'),
-(13, 12, 'review/5cc6bb15dc85a15565278934.jpg', '2019-04-29 08:51:33'),
-(14, 12, 'review/5cc6eb238571d15565401950.jpg', '2019-04-29 12:16:35'),
-(15, 12, 'review/5cc6eb23ae43215565401951.jpg', '2019-04-29 12:16:35'),
-(16, 12, 'review/5cc6eb23c78ef15565401952.jpg', '2019-04-29 12:16:35'),
-(17, 12, 'review/5cc6eb240572e15565401963.jpg', '2019-04-29 12:16:36'),
-(18, 2, 'review/5cc85425d231715566326130.jpg', '2019-04-30 13:56:54'),
-(19, 2, 'review/5cc8542682ea315566326141.jpg', '2019-04-30 13:56:54'),
-(20, 2, 'review/5cc8542698c8115566326142.jpg', '2019-04-30 13:56:54'),
-(21, 2, 'review/5cc85426b169415566326143.jpg', '2019-04-30 13:56:54'),
-(22, 2, 'review/5cc85426d1c5815566326144.jpg', '2019-04-30 13:56:54'),
-(23, 12, 'review/5cc85ab2690ad15566342900.jpg', '2019-04-30 14:24:50'),
-(24, 12, 'review/5ccc6018536a115568978160.jpg', '2019-05-03 15:36:56'),
-(25, 12, 'review/5ccc6018716d315568978161.jpg', '2019-05-03 15:36:56'),
-(26, 229, 'review/5ccc624d487eb15568983810.jpg', '2019-05-03 15:46:21'),
-(27, 229, 'review/5ccc624d6ea9415568983811.jpg', '2019-05-03 15:46:21');
+(44, 232, 'review/5ccd12514ab4d15569434410.jpg', '2019-05-04 04:17:21'),
+(45, 232, 'review/5ccd1251663bc15569434411.jpg', '2019-05-04 04:17:21'),
+(46, 232, 'review/5ccd12518216015569434412.jpg', '2019-05-04 04:17:21'),
+(47, 233, 'review/5ccd159f1829615569442870.jpg', '2019-05-04 04:31:27'),
+(48, 233, 'review/5ccd159f2d68615569442871.jpg', '2019-05-04 04:31:27'),
+(49, 233, 'review/5ccd159f4660915569442872.jpg', '2019-05-04 04:31:27');
 
 -- --------------------------------------------------------
 
@@ -428,13 +405,13 @@ ALTER TABLE `beverages`
 -- AUTO_INCREMENT for table `beveragesreviews`
 --
 ALTER TABLE `beveragesreviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `beveragesreviews_img`
 --
 ALTER TABLE `beveragesreviews_img`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `desserts`
@@ -458,7 +435,7 @@ ALTER TABLE `dessertsreviews_img`
 -- AUTO_INCREMENT for table `food`
 --
 ALTER TABLE `food`
-  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` double NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `impress`
@@ -470,13 +447,13 @@ ALTER TABLE `impress`
 -- AUTO_INCREMENT for table `mealreviews`
 --
 ALTER TABLE `mealreviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
 
 --
 -- AUTO_INCREMENT for table `mealreviews_img`
 --
 ALTER TABLE `mealreviews_img`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `restos`

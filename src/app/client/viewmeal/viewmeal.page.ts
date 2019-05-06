@@ -3,7 +3,7 @@ import {PostService} from '../../post/post.service'
 import {GlobalService } from '../../global/global.service'
 import {ReviewsPage} from '../reviews/reviews.page'
 import {MakereviewPage} from '../makereview/makereview.page'
-
+import {ModalController} from '@ionic/angular'
 @Component({
   selector: 'app-viewmeal',
   templateUrl: './viewmeal.page.html',
@@ -17,7 +17,7 @@ export class ViewmealPage implements OnInit {
   @Input('cat') cat:any
   imgsrc:any
 
-  constructor(private post:PostService,private global: GlobalService) {
+  constructor(private modalCtrl: ModalController,private post:PostService,private global: GlobalService) {
     
 
    }
@@ -34,7 +34,11 @@ export class ViewmealPage implements OnInit {
   }
   viewreviews(id){
     let data = {
-
+      id: this.id,
+      img: this.imgsrc,
+      name: this.name,
+      price: this.price,
+      cat: this.cat
     }
     this.global.presentModal(ReviewsPage,data,"");
   }
@@ -48,6 +52,9 @@ export class ViewmealPage implements OnInit {
       cat: this.cat
     }
     this.global.presentModal(MakereviewPage,data,"");
+  }
+  goback(){
+    this.modalCtrl.dismiss()
   }
 
 }

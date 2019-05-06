@@ -121,7 +121,7 @@ ion-item{
         <div class="food-wrapper">
         <div class="food-holder">
         <div class="foods meal-overlay" *ngFor="let food of item.food" (click)="viewmeal(food.id,food.name,food.price,food.img,i,food.cat)">
-            <ion-badge color="dark" class="ratings">44</ion-badge>
+            <ion-badge color="dark" class="ratings">{{food.rate}}</ion-badge>
             <ion-label class="food-name">{{food.name}}</ion-label>
     
         <ion-img src="{{post.server}}{{food.img}}" ></ion-img>

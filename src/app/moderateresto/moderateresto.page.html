@@ -115,20 +115,24 @@
           <ion-label>{{dishes}} Meals</ion-label>
         </ion-col>
       </ion-row>
-      <div class="food-wrapper">
-     
-        <ul class="food-align food-holder" id="meal">
-          <li class="foods" *ngFor="let item of meals" (click)="viewmeal(item.id,item.name,item.price,item.img)">
-             
-              <ion-badge color="dark" class="ratings">44</ion-badge>
-              <img src="{{post.server}}{{item.img}}" />
-              <ion-label class="food-name">{{item.name}}</ion-label>
 
-          </li>
-        </ul>
+     
+        <div class="food-wrapper">
+          <div class="food-holder">
+          <div class="foods meal-overlay" *ngFor="let food of meals" (click)="viewmeal(food.id,food.name,food.price,food.img,i,food.cat)">
+              <ion-badge color="dark" class="ratings">{{food.rate}}</ion-badge>
+              <ion-label class="food-name">{{food.name}}</ion-label>
       
+          <ion-img src="{{post.server}}{{food.img}}" ></ion-img>
+          
+          </div>
+  
+          
+          
+      </div>
+      </div>
       
-  </div>
+ 
 
   <ion-row style="padding: 10px;">
     <ion-col>
@@ -145,16 +149,18 @@
     </ion-col>
   </ion-row>
   <div class="food-wrapper">
-      <ul class="food-align food-holder" id="beverage">
-          <li class="foods" *ngFor="let item of beverage">
-             
-                  <ion-badge color="dark" class="ratings">44</ion-badge>
-                 
-              <img src="{{post.server}}{{item.img}}" />
-              <ion-label class="food-name">{{item.name}}</ion-label>
+    <div class="food-holder">
+    <div class="foods meal-overlay" *ngFor="let food of beverage" (click)="viewmeal(food.id,food.name,food.price,food.img,i,food.cat)">
+        <ion-badge color="dark" class="ratings">{{food.rate}}</ion-badge>
+        <ion-label class="food-name">{{food.name}}</ion-label>
 
-          </li>
-        </ul>
+    <ion-img src="{{post.server}}{{food.img}}" ></ion-img>
+    
+    </div>
+
+    
+    
+</div>
 </div>
 
 <ion-row style="padding: 10px;">
@@ -168,20 +174,22 @@
     </ion-row>
   </ion-col>
   <ion-col class="food-label-num">
-    <ion-label>{{beverages}} Deserts</ion-label>
+    <ion-label>{{desserts}} Deserts</ion-label>
   </ion-col>
 </ion-row>
 <div class="food-wrapper">
-    <ul class="food-align food-holder" id="beverage">
-        <li class="foods" *ngFor="let item of beverage">
-           
-                <ion-badge color="dark" class="ratings">44</ion-badge>
-               
-            <img src="{{post.server}}{{item.img}}" />
-            <ion-label class="food-name">{{item.name}}</ion-label>
+  <div class="food-holder">
+  <div class="foods meal-overlay" *ngFor="let food of dessert" (click)="viewmeal(food.id,food.name,food.price,food.img,i,food.cat)">
+      <ion-badge color="dark" class="ratings">{{food.rate}}</ion-badge>
+      <ion-label class="food-name">{{food.name}}</ion-label>
 
-        </li>
-      </ul>
+  <ion-img src="{{post.server}}{{food.img}}" ></ion-img>
+  
+  </div>
+
+  
+  
+</div>
 </div>
   <style>
     .food-align{
