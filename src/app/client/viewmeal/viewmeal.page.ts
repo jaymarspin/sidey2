@@ -14,7 +14,7 @@ export class ViewmealPage implements OnInit {
   @Input('name') name:any
   @Input('price') price:any
   @Input('img') img:any
-  @Input('cat') cat:any
+
   imgsrc:any
 
   constructor(private modalCtrl: ModalController,private post:PostService,private global: GlobalService) {
@@ -38,7 +38,7 @@ export class ViewmealPage implements OnInit {
       img: this.imgsrc,
       name: this.name,
       price: this.price,
-      cat: this.cat
+    
     }
     this.global.presentModal(ReviewsPage,data,"");
   }
@@ -49,7 +49,7 @@ export class ViewmealPage implements OnInit {
       img: this.imgsrc,
       name: name,
       price: price,
-      cat: this.cat
+      
     }
     this.global.presentModal(MakereviewPage,data,"");
   }

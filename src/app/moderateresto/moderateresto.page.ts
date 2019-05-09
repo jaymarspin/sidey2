@@ -26,12 +26,7 @@ export class ModeraterestoPage implements OnInit {
   public id:any
   public address:any
   public role:any
-  meals:any
-  beverage:any
-  dessert:any
-  dishes:any
-  beverages:any
-  desserts:any
+  food:any
   edit:any = "edit"
   impress = []
   constructor(private global: GlobalService,private androidFullScreen: AndroidFullScreen,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) { }
@@ -63,13 +58,13 @@ export class ModeraterestoPage implements OnInit {
     this.router.navigate(["add-food"]);
   }
 
-  viewmeal(id,name,price,img,i,cat){
+  viewmeal(id,name,price,img,i){
     let data = {
       id: id,
       name: name,
       price: price,
       img: img,
-      cat: cat
+
     }
     this.global.presentModal(ViewmealPage,data,"")
    
@@ -101,32 +96,18 @@ export class ModeraterestoPage implements OnInit {
     
   }
 
-  getMeals(foodrole:string):any{
+  getMeals():any{
     var result = []
     let body = {
-      role: foodrole,
+      
       id: this.id
     } 
   
     this.post.postData(body,"get_food.php").subscribe((res)=>{
-     
+    
      let data = res.json();
-      
-      if(body.role == "beverages"){
-        
-        this.beverages = data.length
-      } 
-        
-      else if(body.role == "meal"){
-  
-        this.dishes = data.length
-      } else if(body.role == "desserts"){
-          this.desserts = data.length
-      }
-        
-      for(var i = 0;i < data.length; i++){
-        result[i] = data[i];
-      }
+     console.log(data)
+     this.food = data
     })
     
     return result
@@ -156,11 +137,9 @@ export class ModeraterestoPage implements OnInit {
       }
     })
  
-    this.meals = this.getMeals('meal')
+    this.food = this.getMeals()
   
-    this.beverage = this.getMeals('beverages')
-    this.dessert = this.getMeals('desserts')
-    
+   
   
   
 }
