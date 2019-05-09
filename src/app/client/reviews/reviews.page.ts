@@ -13,7 +13,7 @@ export class ReviewsPage implements OnInit {
   @Input('name') name:any
   @Input('price') price:any
   @Input('img') img:any
-  @Input('img') cat:any
+
   list:any
   samplepic:any = "https://www.advocate.com/sites/advocate.com/files/2018/01/31/im-fine-750x_1.jpg"
   constructor(private post: PostService,private modalCtrl:ModalController,public events: Events,private global: GlobalService) { 
@@ -26,7 +26,7 @@ export class ReviewsPage implements OnInit {
     this.rate = (4.5)
     let body = {
       id: this.id,
-      cat: this.cat
+      
     }
     this.post.postData(body,"get_review.php").subscribe((Response) => {
       console.log(Response)

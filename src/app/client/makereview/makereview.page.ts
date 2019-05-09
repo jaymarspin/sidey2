@@ -16,7 +16,7 @@ export class MakereviewPage implements OnInit {
   @Input('name') name:any
   @Input('price') price:any
   @Input('img') img:any
-  @Input('img') cat:any
+
 
   review:any
   rate:any
@@ -120,11 +120,11 @@ export class MakereviewPage implements OnInit {
           id: this.id,
           user_id: 1,
           imgs: this.base64,
-          cat: this.cat
+         
         }
         
         this.post.postData(data,"food_review.php").subscribe((Response) =>{
-          
+          console.log(Response)
           let res = Response.json();
           this.ress = res
           if(this.ress.message = "success"){

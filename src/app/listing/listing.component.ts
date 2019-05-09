@@ -19,9 +19,7 @@ export class ListingComponent implements OnInit {
   lat:any
   lng:any
   list:any
-  mealsList:any
-  beverages:any
-  desserts:any
+  
   
   constructor(private androidPermissions: AndroidPermissions,private post: PostService,private activateRoute: ActivatedRoute,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
     this.menuCtrl.enable(true)
@@ -76,9 +74,7 @@ export class ListingComponent implements OnInit {
         console.log(res)
         res = res.json()
         this.list = res
-        this.mealsList = new Array(this.list.length);
-        this.beverages = new Array(this.list.length);
-        this.desserts = new Array(this.list.length);
+        
       
     })
   }catch(e){
@@ -87,97 +83,6 @@ export class ListingComponent implements OnInit {
   }
 
 
-  category(category,i,index,count){
-    let pass:any = false
-    
-    let body = {
-      role: category,
-      id: i
-      
-    }
-    let tmplist = new Array()
-    
-    if(count > 0){
-      switch(category){
-        case "meal":
-        if(this.list[index].fetch_food == true){
-       
-            this.list[index].food = this.mealsList[index]
-       
-        }else pass = true;
-          break;
-        case "beverages":
-        if(this.list[index].fetch_beverages == true){
-         
-            this.list[index].food = this.beverages[index]
-          
-        }else pass = true;
-          break;
-        case "desserts":
-        if(this.list[index].fetch_desert == true){
-          
-            this.list[index].food = this.desserts[index]
-         
-        }else pass = true;
-        
-        
-          break;
-      }
-      if(pass == true){
-        this.post.postData(body,"get_food.php").subscribe((Response) => {
-          let data = Response.json();
-      
-          for(var i = 0;i < data.length; i++){
-             tmplist.push(data[i]);
-            } 
-            
-        },(err) => {
-          this.global.presentToast(err)
-         },()=>{
-          
-          switch(category){
-            case "meal":
-            this.mealsList[index] = tmplist
-            
-            this.list[index].fetch_food = true
-           
-            
-         
-              this.list[index].food = this.mealsList[index]
-         
-            
-              break;
-            case "beverages":
-            this.beverages[index] = tmplist
-            this.list[index].fetch_beverages = true
-            
-            
-              this.list[index].food = this.beverages[index]
-        
-            
-              break;
-            case "desserts":
-            
-            this.desserts[index] = tmplist
-            
-            this.list[index].fetch_desert = true
-           
-              this.list[index].food = this.desserts[index]
-     
-            
-              break;
-          }
-     
-          
-         
-         }) 
-      }
-      
-     
-       }
-   
-  }
-  
 
   toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
