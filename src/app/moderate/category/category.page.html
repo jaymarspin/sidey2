@@ -1,15 +1,14 @@
-
+<ion-header no-border >
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start" class= 'back'>
+      <ion-button (click)="goback()"><ion-icon name="arrow-round-back" class= 'back'></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-text class="back-label">Category</ion-text>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content overflow-scroll="true">
-    <ion-row>
-        <ion-col class="row-col" justify-content-center>
-            <ion-icon name="arrow-round-back" class= 'back' (click)="dismiss()"></ion-icon>
-            <ion-label class="top-label">Category</ion-label>
-            <ion-text class="submit" (click)="dismiss()">NEXT</ion-text>
-           
-        </ion-col>
-        
-      </ion-row>
+     
       <ion-row class="cat-row distance-top">
         <ion-col>
 

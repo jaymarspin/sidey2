@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
 import { TitleEditPage } from '../moderate/title-edit/title-edit.page'
-import { AddFoodPage } from '../moderate/add-food/add-food.page'
+ 
 import { EditSchedPage } from '../moderate/edit-sched/edit-sched.page'
 import {AddPhotoPage} from '../moderate/add-photo/add-photo.page'
 
@@ -145,11 +145,9 @@ export class ModeraterestoPage implements OnInit {
   
 }
 addFood(){
-  let data = {
-    role: "meal",
-    id: this.id
-  }
-  this.global.presentModal(AddFoodPage,data,"")
+  
+
+  this.router.navigate(["add-food",this.id,name]);
   
 }
 addDesserts(){
@@ -157,7 +155,7 @@ addDesserts(){
     role: "dessert",
     id: this.id
   }
-  this.global.presentModal(AddFoodPage,data,"")
+ 
 }
 
   addBeverages(){
@@ -165,7 +163,7 @@ addDesserts(){
       id: this.id,
       role: "beverage"
     }
-    this.global.presentModal(AddFoodPage,data,"")
+     
     
   }
   addPhoto(){

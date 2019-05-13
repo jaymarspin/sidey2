@@ -37,7 +37,7 @@ export class CategoryPage implements OnInit {
   splice(i){
     this.selected.splice(i,1)
   }
-  dismiss(){
+  goback(){
     let data = {
       selected: this.selected
     }

@@ -32,6 +32,7 @@ import {ViewmealPageModule} from './client/viewmeal/viewmeal.module'
 import {ReviewsPageModule} from './client/reviews/reviews.module'
 import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 import { Base64 } from '@ionic-native/base64/ngx';
+import {MakereviewPageModule} from './client/makereview/makereview.module'
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -49,7 +50,8 @@ import { Base64 } from '@ionic-native/base64/ngx';
     HttpClientModule,
     ViewmealPageModule,
     ReviewsPageModule,
-    CategoryPageModule
+    CategoryPageModule,
+    MakereviewPageModule
  
   ], 
   providers: [ 

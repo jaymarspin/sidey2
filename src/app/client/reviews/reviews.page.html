@@ -1,14 +1,14 @@
 
-
+<ion-header no-border >
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start" class= 'back'>
+      <ion-button (click)="goback()"><ion-icon name="arrow-round-back" class= 'back'></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-text class="back-label">Back</ion-text>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-row>
-    <ion-col class="row-col" justify-content-center>
-        <ion-icon name="arrow-round-back" class= 'back' (click)="goback()"></ion-icon>
-        <ion-label class="top-label">Ratings & Reviews</ion-label>
-       
-    </ion-col>
-    
-  </ion-row>
+  
   <ion-row class="ion-padding stars">
     <ion-col><ion-label class="main-star-label">4.4/102 Reviews</ion-label>
       <rating [rate]="rate"

@@ -3,10 +3,10 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 import {ModalController} from '@ionic/angular'
 
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-
+import { ActivatedRoute } from '@angular/router';
 
 import {GlobalService} from '../../global/global.service'
 import {PostService} from '../../post/post.service'
@@ -29,26 +29,15 @@ export class AddFoodPage implements OnInit {
   pass:any = false
   @Input('id') id
   
-  constructor(private global: GlobalService,private base:Base64,private post:PostService,private imagePicker: ImagePicker,private webview: WebView,private formBuilder: FormBuilder,private modalCtrl: ModalController) { 
+  constructor(private activateRoute:ActivatedRoute,private global: GlobalService,private base:Base64,private post:PostService,private imagePicker: ImagePicker,private webview: WebView,private formBuilder: FormBuilder,private modalCtrl: ModalController) { 
     
     this.base64 = new Array()
     this.cat = new Array()
+  
+    this.id = this.activateRoute.snapshot.paramMap.get("id")
     
-    this.former = this.formBuilder.group({
-      name: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-        
-      ])),
-      price: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(0),
-        Validators.maxLength(50),
-        
-      ]))
-     
-    });
+    
+    
 
   }
 
@@ -56,10 +45,7 @@ export class AddFoodPage implements OnInit {
     
   }
   
-  ionViewDidEnter(){
-    
-    
-  }
+ 
   ionViewWillLeave() {
     this.global.leave()
    }
@@ -101,7 +87,7 @@ export class AddFoodPage implements OnInit {
   
   addFood(){
    
-   
+     
     let body = {
       file: this.base64,
       name: this.name,

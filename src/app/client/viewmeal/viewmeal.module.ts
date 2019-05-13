@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ViewmealPage } from './viewmeal.page';
-import {MakereviewPageModule} from '../makereview/makereview.module'
 const routes: Routes = [
   {
     path: '',
@@ -14,14 +13,14 @@ const routes: Routes = [
   }
 ];
 
+
 @NgModule({
+  declarations: [ViewmealPage],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MakereviewPageModule,
     RouterModule.forChild(routes)
-  ],
-  declarations: [ViewmealPage]
+  ] 
 })
 export class ViewmealPageModule {}

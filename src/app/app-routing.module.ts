@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'moderateresto/:id/:title/:address/:role', loadChildren: './moderateresto/moderateresto.module#ModeraterestoPageModule' },
   { path: 'title-edit', loadChildren: './moderate/title-edit/title-edit.module#TitleEditPageModule' },
-  { path: 'add-food', loadChildren: './moderate/add-food/add-food.module#AddFoodPageModule' },
+  { path: 'add-food/:id/:name', loadChildren: './moderate/add-food/add-food.module#AddFoodPageModule' },
   { path: 'edit-sched', loadChildren: './moderate/edit-sched/edit-sched.module#EditSchedPageModule' },
   { path: 'myplace', loadChildren: './myplace/myplace.module#MyplacePageModule' },
  

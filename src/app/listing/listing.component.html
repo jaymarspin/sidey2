@@ -1,13 +1,5 @@
 <style>
-ion-item{
-  --inner-padding-bottom: 0;
-  --inner-padding-end: 0;
-  --inner-padding-start: 0;
-  --inner-padding-top: 0;
-  padding-left: 0;
-  left: 0;
-  --padding-start: 0;
-}
+
 </style>
 
 <div *ngIf="!list">
@@ -27,9 +19,8 @@ ion-item{
  
         <div class="food-wrapper">
           <div class="food-holder">
-          <div class="foods">
+          <div class="foods sk">
             <ion-skeleton-text style="width: 100%;height: 100%;"></ion-skeleton-text>
-          
           </div>
           <div class="foods">
             <ion-skeleton-text style="width: 100%;height: 100%;"></ion-skeleton-text>
@@ -93,9 +84,14 @@ ion-item{
     
   </ion-list>
 </div>
-<div style="width: 100%;height: 50px;">
+<ion-row class="cat-row">
+  <ion-col>
+    <div class="cat-badge options" (click)="category()">
+      Category <span *ngIf="length">{{length}}</span>
+    </div>
 
-</div>
+  </ion-col>
+</ion-row>
 <ion-virtual-scroll [items]="list">
   <ion-item *virtualItem="let item; index as i" [attr.data-index]="i" lines="none">
     <div class="resto" >

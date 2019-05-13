@@ -22,6 +22,7 @@ const routes: Routes = [
     IonicRatingModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MakereviewPage]
+  declarations: [MakereviewPage] 
+  
 })
 export class MakereviewPageModule {}

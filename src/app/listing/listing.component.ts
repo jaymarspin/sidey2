@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import {PostService} from '../post/post.service'
-import { ActivatedRoute, Router } from '@angular/router';
-import {MenuController,IonInfiniteScroll, IonVirtualScroll,ModalController  } from '@ionic/angular';
+import { Router } from '@angular/router';
+import {MenuController,IonInfiniteScroll, IonVirtualScroll,ModalController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {GlobalService } from '../global/global.service'
-import { ModalmapPage } from '../modalmap/modalmap.page'
-import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import {ViewmealPage} from '../client/viewmeal/viewmeal.page'
+ import {CategoryPage} from '../moderate/category/category.page'
 
 @Component({
   selector: 'app-listing',
@@ -20,11 +18,14 @@ export class ListingComponent implements OnInit {
   lng:any
   list:any
   
+  cat:any
+  length:any
   
-  constructor(private androidPermissions: AndroidPermissions,private post: PostService,private activateRoute: ActivatedRoute,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
+  pass:any = false
+  constructor(private modalCtrl:ModalController,private post: PostService,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
     this.menuCtrl.enable(true)
     
-    
+    this.cat = new Array()
    
           this.geo.getCurrentPosition().then(pos =>{
 
@@ -33,7 +34,7 @@ export class ListingComponent implements OnInit {
             this.lng = pos.coords.longitude
         
             
-             this.firstLoad(this.lat,this.lng,1)
+             this.firstLoad(this.lat,this.lng,1,this.cat)
           }).catch( err => {
             alert("To find the nearest restaurants you must allow this app to access location")
             this.router.navigate(['home']);
@@ -43,16 +44,45 @@ export class ListingComponent implements OnInit {
             
         
    }
-
+   async category() {
+    
+    let data = {
+      
+    }
+    if(this.pass == true && this.cat.length > 0){
+      data = {
+        selected: this.cat
+      }
+    }
+    const modal = await this.modalCtrl.create({
+      component: CategoryPage,
+       componentProps: data
+    });
+    modal.onDidDismiss() 
+      .then((data) => {
+        const x = data['data'];
+        if(x != null)this.cat = x.selected
+          
+    }).then(() =>{
+      this.pass = true
+      if(this.cat.length > 0){
+        this.length = this.cat.length
+        this.firstLoad(this.lat,this.lng,1,this.cat)
+      }else{
+        this.length = null
+      }
+    }); 
+    await modal.present();
+  }
   
-
+  
   viewMap(lat:any,lng:any){
     let data = {
       lat: lat,
       long: lng,
       role: "client"
     }
-    this.global.presentModal(ModalmapPage,data,"")
+    // this.global.presentModal(ModalmapPage,data,"")
   }
 
   goToResto(id:any,title:any,address:any){
@@ -61,14 +91,14 @@ export class ListingComponent implements OnInit {
   }
  
 
-  firstLoad(x:any,y:any,pager:any):any{
+  firstLoad(x:any,y:any,pager:any,cat):any{
     let body = {
       lat: x,
       lng: y,
+      category: cat,
       page: pager
     }
-    var arr:any
-    
+   
     try{
     this.post.postData(body,"listing.php").subscribe((res:any) =>{
         console.log(res)
@@ -93,16 +123,10 @@ export class ListingComponent implements OnInit {
     
   }
   viewmeal(id,name,price,img,i,cat){
-    let data = {
-      id: id,
-      name: name,
-      price: price,
-      img: img,
-      cat: cat
-    }
+    
 
-
-    this.global.presentModal(ViewmealPage,data,"")
+    this.router.navigate(["viewmeal",id,name,price,img]);
+   
   }
   
 

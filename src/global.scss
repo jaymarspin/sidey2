@@ -15,22 +15,22 @@
     
  }
  
- .row-col{
-    padding: 15px;
-    background-color: #333;
-    color: #f5f5f5;
-    position: fixed;
-    z-index: 1;
-  }
+ .back-label{
+   position: relative;
+   top: 3px;
+   font-size: 20px;
+   font-weight: bold;
+ }
+ .head-button{
+   position: relative;
+   float: right;
+   top: 5px;
+   right: 6px;
+ }
   .distance-top{
-    margin-top: 80px;
+    margin-top: 20px;
   }
-  .back{
-    font-size: 30px;
-  }.back:active{
-    opacity: 0.4;
-    transition: all 0.4s;
-  }.moderate-input{
+  .moderate-input{
       padding: 20px;
       padding-bottom: 0px;
       
@@ -275,6 +275,10 @@
     border-radius: 10px;
     background-color: #ccc;
     margin-bottom: 10px;
+  }
+  .options{
+    background-color: #333;
+    color: #dedede;
   }
   .cat-badge ion-icon{
     position: absolute;

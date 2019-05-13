@@ -1,4 +1,12 @@
-
+ion-item{
+  --inner-padding-bottom: 0;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  --inner-padding-top: 0;
+  padding-left: 0;
+  left: 0;
+  --padding-start: 0;
+}
   .near{
     position: relative;
     padding: 2px;
@@ -120,4 +128,21 @@
             margin-top: 5px;
             
           }
-     
+     .sk{
+       width: 49%;
+     }
+     .cat-row{
+       border-bottom: 1px solid #dedede;
+       margin-bottom: 10px;
+       z-index: 1;
+       margin-top: 5px;
+
+     }
+     .options span{
+       position: absolute;
+       right: -5px;
+       top: -10px;
+       padding: 3px;
+       border-radius: 5px;
+       background: #21211f;
+     }
