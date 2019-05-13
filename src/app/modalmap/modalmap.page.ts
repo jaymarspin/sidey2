@@ -22,7 +22,6 @@ export class ModalmapPage {
   @ViewChild('map') mapContainer: ElementRef
   
 
-  private isloading:boolean = false;
   public loading: any;
   map:any = null
   @Input('lat') r_lat: any
@@ -33,12 +32,7 @@ export class ModalmapPage {
     
 
   }
-  private async presentLoading(message): Promise<any> {
-    this.loading = await this.loadingCtrl.create({
-      message: message
-    });
-    return await this.loading.present().then(()=> this.isloading = true);
-  }
+  
 
 
   ionViewDidEnter(){
@@ -95,7 +89,7 @@ export class ModalmapPage {
 
     var marker: any
 
-    var that = this
+
 
       
      

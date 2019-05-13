@@ -1,20 +1,6 @@
 
 <ion-content>
-    <style>
-      .edit{
-        color: #888;
-        font-size: 14px;
-        text-decoration: underline;
-        font-weight: normal;
-      }.edit:active{
-        opacity: 0.4;
-        transition: all 0.4s;
-        
-      }
-  
-  
-
-      </style>
+    
 
   <ion-row >
     <ion-col>
@@ -112,51 +98,28 @@
               </ion-row>
             </ion-col>
         <ion-col class="food-label-num">
-          <ion-label>Meals</ion-label>
+          
         </ion-col>
       </ion-row>
 
      
-        <div class="food-wrapper">
+      
+
+      <div class="food-wrapper">
           <div class="food-holder">
-          <div class="foods meal-overlay" *ngFor="let item of food" (click)="viewmeal(item.id,item.name,item.price,item.img,i)">
+              <ion-card class="foods meal-overlay" *ngFor="let item of food" (click)="viewmeal(item.id,item.name,item.price,item.img,i)">
+          
               <ion-badge color="dark" class="ratings">{{item.rate}}</ion-badge>
               <ion-label class="food-name">{{item.name}}</ion-label>
       
-          <ion-img src="{{post.server}}{{item.img}}" ></ion-img>
+          <ion-img src="{{post.server}}{{item.img}}"></ion-img>
           
-          </div>
-  
+        
+        </ion-card>
           
           
       </div>
       </div>
-      
  
-
-
-  <style>
-    .food-align{
-      padding: 0px;
-      position: relative;
-      clear: both;
-      list-style-type: none;
-
-    }
-    .food-align li{
-      display: inline-block;
-      width: 153.75px;
-      height: auto;
-      overflow: hidden;
-      position: relative;
-      margin-right: 7px;
-      float: left;
-    }
-    .tago{
-      display: none;
-    }
-  
-  </style>
-
 </ion-content>
 

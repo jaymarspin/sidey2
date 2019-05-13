@@ -27,7 +27,7 @@ export class ModeraterestoPage implements OnInit {
   public address:any
   public role:any
   food:any
-  edit:any = "edit"
+  edit:any = "editor"
   impress = []
   constructor(private global: GlobalService,private androidFullScreen: AndroidFullScreen,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) { }
    
@@ -106,7 +106,7 @@ export class ModeraterestoPage implements OnInit {
     this.post.postData(body,"get_food.php").subscribe((res)=>{
     
      let data = res.json();
-     console.log(data)
+
      this.food = data
     })
     
@@ -121,8 +121,9 @@ export class ModeraterestoPage implements OnInit {
     this.address = this.activateRoute.snapshot.paramMap.get("address")
     this.role = this.activateRoute.snapshot.paramMap.get("role")
 
-    if(this.role == "client"){
-      this.edit = "tago"
+    if(this.role == "admin"){
+      this.edit = "hide sc-ion-label-md-h sc-ion-label-md-s hydrated"
+      
     }
     let data = {
       id: this.id

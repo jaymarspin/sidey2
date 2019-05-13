@@ -1,42 +1,78 @@
 
 <ion-content>
-  <ion-row>
-    <ion-col class="row-col">
-        <ion-icon name="arrow-round-down" class= 'back' (click)="dismiss()"></ion-icon>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-        <ion-col class="row-col">
-            <ion-label class="place-label">Meals</ion-label>
-        </ion-col>
-      </ion-row>
+
     <ion-row>
+        <ion-col class="row-col" justify-content-center>
+            <ion-icon name="arrow-round-back" class= 'back' (click)="dismiss()"></ion-icon>
+            <ion-label class="top-label">Meals</ion-label>
+            <ion-text class="submit" (click)="addFood()">SUBMIT</ion-text>
+        </ion-col>
+        
+      </ion-row>
+ 
+    <!-- <ion-row>
       <ion-col>
         
         <ion-img class="imgpicker" src = "{{imgsrc}}"></ion-img>
      
       </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="col-label">
-          <ion-label class="label-click" (click)="takeAPic()">Take Picture <ion-icon name="camera"></ion-icon></ion-label>
+    </ion-row> -->
+   
+    <ion-row class="distance-top">
+      <ion-col>
+          <ion-label class="restaurant-label">Three Grills and a row</ion-label>
       </ion-col>
-      <ion-col class="col-label right-pick">
-        <ion-label class="label-click" (click)="pickImage()">gallery <ion-icon name="image"></ion-icon></ion-label>
-    </ion-col>
     </ion-row>
     <form [formGroup]="former">
-    <ion-row> 
+
+        <ion-row class="moderate picker" (click)="pickImage()">
+            <ion-col>
+                <div class="imgadd">
+                    <div class="photo-adder-label" *ngIf="!imgsrc"><ion-icon name="image" ></ion-icon> <span>Add Photo</span></div>
+                    <div class="showing" *ngIf="imgsrc">
+                        <img [src]="imgsrc" />
+                    </div>
+                </div>
+                
+                <ion-text color="medium">You can only add one photo</ion-text>
+            </ion-col>
+          </ion-row>
+        <ion-row class="moderate">
+          <ion-col>
+            <input type="text" placeholder="Food Name" class="moderation-input" [(ngModel)] = "name" ctl="ngModel" formControlName="name"/>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="moderate">
+            <ion-col>
+              <input type="number" step="1" placeholder="Price" class="moderation-input" [(ngModel)] = "price" ctl="ngModel" formControlName="price"/>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="moderate">
+              <ion-col>
+                <div class="moderation-input category-input" (click)="category()">
+                  <span *ngIf="!length" color="medium">Category</span>
+                  <div class="cat-badge" *ngFor="let item of cat; index as i" [attr.data-index]="i" class="cat-badge">
+                      <ion-icon name="close-circle"></ion-icon>
+                    {{item}}
+                  </div>
+                  <ion-icon color="medium" name="arrow-dropdown"></ion-icon>
+                </div>
+                
+              </ion-col>
+            </ion-row>
+    <!-- <ion-row> 
           <ion-col class="moderate-input">
               <ion-item>
                   <ion-label position="floating">Meal Name</ion-label>
-                  <ion-input  value="" [(ngModel)] = "name" ctl="ngModel" formControlName="name" ></ion-input>
+                  <ion-input value="" [(ngModel)] = "name" ctl="ngModel" formControlName="name" ></ion-input>
               </ion-item>
           </ion-col>
       
     </ion-row>
     
-    <ion-row>
+    <ion-row style="margin-bottom: 10px">
         
         <ion-col class="moderate-input">
             <ion-item>
@@ -46,17 +82,123 @@
         </ion-col>
     
   </ion-row>
+  <ion-row style="margin-bottom: 10px">
+        
+      <ion-col class="moderate-input">
+          <ion-badge (click)="category()" color="medium" class="cat-select">CATEGORY</ion-badge>
+      </ion-col>
+  
+</ion-row>
 
-    <ion-row class="margin-bot"> 
-        <ion-col class="moderate-input">
-                <ion-button color="secondary" [disabled]="!former.valid" expand="block" (click)="addFood()"  type='submit'>Submit</ion-button>
-        </ion-col>
-    </ion-row>
+    
+  
+        <ion-row class="icon-button-wrapper">
+          <ion-col>
+              <ion-icon name="camera" class="icon-button" (click)="takeAPic()" ></ion-icon>
+              <ion-icon name="image" class="icon-button" (click)="pickImage()"></ion-icon>
+              
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+              <ion-img [src]="imgsrc" *ngIf="imgsrc" class="img-wrapper"></ion-img>
+            </ion-col>
+          </ion-row>
+
+        <ion-row class="margin-bot"> 
+            <ion-col class="moderate-input">
+                    <ion-button color="warning" [disabled]="!former.valid" expand="block" (click)="addFood()"  type='submit'>Submit</ion-button>
+            </ion-col>
+        </ion-row> -->
+        
   </form>
     
 <style>
   
+  .showing{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    clear: both;
+    background-color: #000;
+  }
+  .showing img{
+    position: relative;
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .icon-button-wrapper{
+    padding-left: 20px;
+  }
+  .icon-button{
+    font-size: 30px;
+  }
+  .cat-select{
+    --padding-bottom: 5px;
+    --padding-end: 5px;
+    --padding-start: 5px;
+    --padding-top: 5px;
+    top: -3px;
+    position: relative;
+  }
+  .cat-select:active{
+    opacity: 0.4;
+    transition: all 1s;
+   
+  }
+  .img-wrapper{
+    width: 60px;
+    height: 64px;
+    float: left;
+    clear: both;
+    position: relative;
+  }
   
+  .imgadd{
+    width: 100%;
+    height: 185px;
+    position: relative;
+    clear: both;
+    border: 1px solid #dedede;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+  .photo-adder-label{
+    width: 100%;
+    position: relative;
+    text-align: center;
+    top: 50%;
+    
+
+  }
+  .photo-adder-label span{
+    position: relative;
+    top: -5px;
+  }
+  .photo-adder-label ion-icon{
+    font-size: 25px;
+  }
+  .picker{
+    margin-bottom: 10px;
+  }
   
+  .picker:active{
+    background-color: #ccc;
+    transition: all 1s;
+  }.restaurant-label{
+    font-weight: bold;
+    padding-left: 5px;
+    font-size: 22px;
+  }
+  .category-input{
+    height: auto;
+    overflow: hidden;
+    
+  }
 </style>
   </ion-content>

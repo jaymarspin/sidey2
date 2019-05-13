@@ -14,6 +14,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {ModalmapPageModule} from './modalmap/modalmap.module';
 import { TitleEditPageModule } from './moderate/title-edit/title-edit.module'
 import { AddFoodPageModule } from './moderate/add-food/add-food.module'
+import { CategoryPageModule } from './moderate/category/category.module'
 import { EditSchedPageModule } from './moderate/edit-sched/edit-sched.module'
 import {AddPhotoPageModule} from './moderate/add-photo/add-photo.module'
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
@@ -48,6 +49,7 @@ import { Base64 } from '@ionic-native/base64/ngx';
     HttpClientModule,
     ViewmealPageModule,
     ReviewsPageModule,
+    CategoryPageModule
  
   ], 
   providers: [ 

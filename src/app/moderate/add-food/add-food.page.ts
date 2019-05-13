@@ -1,17 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
-import { File } from '@ionic-native/file/ngx';
-import {ModalController,ToastController,LoadingController} from '@ionic/angular'
+
+import {ModalController} from '@ionic/angular'
 
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 
 import {GlobalService} from '../../global/global.service'
 import {PostService} from '../../post/post.service'
 import { Base64 } from '@ionic-native/base64/ngx';
-import { from } from 'rxjs';
+import {CategoryPage} from '../category/category.page'
 @Component({
   selector: 'app-add-food',
   templateUrl: './add-food.page.html',
@@ -23,12 +23,16 @@ export class AddFoodPage implements OnInit {
   imgsrc:any 
   former: FormGroup
   loading:any
+  cat:any
+  length:any
   public base64:any
+  pass:any = false
   @Input('id') id
-  @Input('role') role
-  constructor(private global: GlobalService,private base:Base64,private post:PostService,private loadingController:LoadingController,private imagePicker: ImagePicker,private file: File,private camera: Camera,private webview: WebView,private validators: Validators,private formBuilder: FormBuilder,private modalCtrl: ModalController, private toastController:ToastController) { 
+  
+  constructor(private global: GlobalService,private base:Base64,private post:PostService,private imagePicker: ImagePicker,private webview: WebView,private formBuilder: FormBuilder,private modalCtrl: ModalController) { 
     
     this.base64 = new Array()
+    this.cat = new Array()
     
     this.former = this.formBuilder.group({
       name: new FormControl('', Validators.compose([
@@ -49,41 +53,78 @@ export class AddFoodPage implements OnInit {
   }
 
   ngOnInit() {
-    this.imgsrc = "assets/icon/eating.png"
-  
-  
     
   }
   
-  onViewDidEnter(){
-   
+  ionViewDidEnter(){
+    
+    
   }
+  ionViewWillLeave() {
+    this.global.leave()
+   }
 
   dismiss(){
     this.modalCtrl.dismiss()
   }
-  
-
+ 
+  async category() {
+    
+    let data = {
+      
+    }
+    if(this.pass == true && this.cat.length > 0){
+      data = {
+        selected: this.cat
+      }
+    }
+    const modal = await this.modalCtrl.create({
+      component: CategoryPage,
+       componentProps: data
+    });
+    modal.onDidDismiss() 
+      .then((data) => {
+        const x = data['data'];
+        if(x != null)this.cat = x.selected
+          
+    }).then(() =>{
+      this.pass = true
+      if(this.cat.length > 0){
+        this.length = this.cat.length
+      }else{
+        this.length = null
+      }
+    }); 
+    await modal.present();
+  }
 
   
   addFood(){
    
-
+   
     let body = {
       file: this.base64,
       name: this.name,
       price: this.price,
       id: this.id,
-      role: this.role
+      role: this.cat
     }
-    this.post.postData(body,"addFood.php").subscribe((res) => {
-      let Response = res.json();
-      alert(Response[0].message)
-    },(err) =>{
-      alert(err)
-    },()=>{
-
+    
+    this.global.presentLoading("Submitting").then(() => {
+      this.post.postData(body,"addFood.php").subscribe((res) => {
+        
+        let Response = res.json();
+        if(Response[0].message == "success"){
+          this.global.presentToast("Success!")
+        }
+        
+      },(err) =>{
+        alert(err)
+      },()=>{
+        this.global.loading.dismiss()
+      })
     })
+    
     
   }
 
@@ -114,22 +155,25 @@ export class AddFoodPage implements OnInit {
     
 
     this.imagePicker.getPictures(options).then((results) => {
-      this.global.presentLoading("Please Wait").then(() =>{
-      for (var i = 0; i < results.length; i++) {
-        this.imgsrc = this.webview.convertFileSrc(results[i]);
-
-        
-          this.base.encodeFile(results[i]).then((base64File: string) => {
+      if(results.length > 0){
+        this.global.presentLoading("Please Wait").then(() =>{
+          for (var i = 0; i < results.length; i++) {
+            this.imgsrc = this.webview.convertFileSrc(results[i]);
+    
             
-            this.base64.push(base64File)
-            this.global.loading.dismiss()
-            
-            
-          }, (err) => {
-            console.log(err);
+              this.base.encodeFile(results[i]).then((base64File: string) => {
+                
+                this.base64.push(base64File)
+                this.global.loading.dismiss()
+                
+                
+              }, (err) => {
+                console.log(err);
+              })
+            }
           })
-        }
-      })
+      }
+      
         
       },(err)=>{
         console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
@@ -138,27 +182,6 @@ export class AddFoodPage implements OnInit {
  
     }
 
-  takeAPic(){
-    const options: CameraOptions = {
-      quality: 100,
-      saveToPhotoAlbum: true,
-      correctOrientation: true,
-      encodingType: this.camera.EncodingType.JPEG,
-      destinationType: this.camera.DestinationType.FILE_URI
-      }
-      this.camera.getPicture(options).then((imageData) => {
-        
-        let filename = imageData.substring(imageData.lastIndexOf('/')+1);
-        let path =  imageData.substring(0,imageData.lastIndexOf('/')+1);
-        
-             this.file.readAsDataURL(path, filename).then(res=> {
-              this.imgsrc = res
-              this.base64 = res
-           
-             });
-    }).catch((err)=>{alert(err)})
-    
-    
-  }
+  
 
 }

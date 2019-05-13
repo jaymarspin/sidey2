@@ -118,16 +118,18 @@ ion-item{
               </ion-buttons>
               <ion-label class="address" style="color: #888"><span class="near">{{item.d}} km</span><br /> Opens in 30 mins</ion-label>
           </div>
+          
         <div class="food-wrapper">
         <div class="food-holder">
-        <div class="foods meal-overlay" *ngFor="let food of item.food" (click)="viewmeal(food.id,food.name,food.price,food.img,i,food.cat)">
+            <ion-card class="foods meal-overlay" *ngFor="let food of item.food" (click)="viewmeal(food.id,food.name,food.price,food.img,i,food.cat)">
+        
             <ion-badge color="dark" class="ratings">{{food.rate}}</ion-badge>
             <ion-label class="food-name">{{food.name}}</ion-label>
     
         <ion-img src="{{post.server}}{{food.img}}"></ion-img>
         
-        </div>
-
+              
+      </ion-card>
         
         
     </div>
@@ -138,7 +140,9 @@ ion-item{
     
   </ion-virtual-scroll>
 
+<style>
 
+</style>
 <!-- 
 <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
   <ion-infinite-scroll-content

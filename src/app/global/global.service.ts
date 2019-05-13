@@ -7,22 +7,18 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 })
 export class GlobalService {
   loading:any
+  modals:any
   constructor(public loadingController:LoadingController,public toastController:ToastController,public modal: ModalController,private nativePageTransitions: NativePageTransitions) { }
 
 
   async presentModal(component:any,data:any,css:any) {
-    const modal = await this.modal.create({
+     this.modals = await this.modal.create({
       component: component,
       cssClass: css,
        componentProps: data
     });
-    modal.onDidDismiss() 
-      .then((data) => {
- 
-        const pos = data['data']; 
-       
-    });
-    await modal.present();
+    
+    await this.modals.present();
   }
 
   async presentToast(message:any) {

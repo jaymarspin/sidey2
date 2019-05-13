@@ -31,7 +31,8 @@ const routes: Routes = [
   { path: 'add-photo', loadChildren: './moderate/add-photo/add-photo.module#AddPhotoPageModule' },
   { path: 'viewmeal/:id/:name/:price/:img', loadChildren: './client/viewmeal/viewmeal.module#ViewmealPageModule' },
   { path: 'reviews', loadChildren: './client/reviews/reviews.module#ReviewsPageModule' },
-  { path: 'makereview', loadChildren: './client/makereview/makereview.module#MakereviewPageModule' }
+  { path: 'makereview', loadChildren: './client/makereview/makereview.module#MakereviewPageModule' },
+  { path: 'category', loadChildren: './moderate/category/category.module#CategoryPageModule' }
   
  
 

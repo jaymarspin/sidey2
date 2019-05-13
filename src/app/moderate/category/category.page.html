@@ -1,0 +1,59 @@
+
+
+<ion-content overflow-scroll="true">
+    <ion-row>
+        <ion-col class="row-col" justify-content-center>
+            <ion-icon name="arrow-round-back" class= 'back' (click)="dismiss()"></ion-icon>
+            <ion-label class="top-label">Category</ion-label>
+            <ion-text class="submit" (click)="dismiss()">NEXT</ion-text>
+           
+        </ion-col>
+        
+      </ion-row>
+      <ion-row class="cat-row distance-top">
+        <ion-col>
+
+          <div *ngFor="let item of selected; index as i" [attr.data-index]="i" class="cat-badge" (click)="splice(i)">
+              <ion-icon name="close-circle"></ion-icon>
+            {{item}}
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="cat-row">
+        <ion-col>
+          <ion-text class="counter" color="medium">
+            {{selected.length}} selected of 3
+          </ion-text>
+        </ion-col>
+        
+      </ion-row>
+      <ion-row class="cat-row ">
+        <ion-col>
+            <div class="cat-badge options" *ngFor="let item of category; index as i" [attr.data-index]="i" (click)="select(i)">
+              {{item}}
+            </div>
+        </ion-col>
+      </ion-row>
+    <style>
+      .cat-row{
+        width: 100%;
+        height: auto;
+        overflow-y: hidden;
+
+      }
+      
+      .cat-badge:active{
+        opacity: 0.4;
+        transition: all 1s;
+      }
+      .options{
+        background-color: #333;
+        color: #dedede;
+      }
+      .counter{
+        padding-left:10px;
+      }
+    </style>
+   
+  </ion-content>
+  
