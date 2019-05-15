@@ -27,6 +27,7 @@ export class ModalmapPage {
   @Input('lat') r_lat: any
   @Input('long') r_long:any
   @Input('role') role:any
+  custom:any
   constructor(private global:GlobalService,public navController: NavController,public geo: Geolocation,public alertController: AlertController,public modalCtrl: ModalController,private loadingCtrl: LoadingController){
 
     
@@ -95,27 +96,32 @@ export class ModalmapPage {
      
           if(this.role == "client"){
             marker = leaflet.marker([this.lat,this.long],{icon: customIcon,autoPan: true});
-            marker.addTo(this.map).bindPopup("Restaurant Location").openPopup() 
+            marker.addTo(this.map).bindPopup("Restaurant Location").openPopup()
+            
+          }else{
+            this.global.presentLoading("please Wait We're locating you").then(() => {
+              this.map.locate({
+                setView: true
+              }).on('locationfound', e =>{
+               // var radius = e.accuracy / 2;
+                  this.global.loading.dismiss()
+                  if(this.role == "admin"){
+                    marker = leaflet.marker(e.latlng,{icon: customIcon,draggable: true,autoPan: true});
+                    marker.addTo(this.map).bindPopup("Your Place Location, drag to desired location").openPopup() 
+                  }
+                  this.map.addControl(new customControl());
+                  
+                 
+                  // marker.on("dragend",function(e){
+                   
+                  // })
+                
+              })
+            })
           }
             
-   
-      this.map.locate({
-        setView: true
-      }).on('locationfound', e =>{
-       // var radius = e.accuracy / 2;
-          
-          if(this.role == "admin"){
-            marker = leaflet.marker(e.latlng,{icon: customIcon,draggable: true,autoPan: true});
-            marker.addTo(this.map).bindPopup("Your Place Location, drag to desired location").openPopup() 
-          }
-          this.map.addControl(new customControl());
-          
-         
-          // marker.on("dragend",function(e){
-           
-          // })
-        
-      })
+      
+      
     
     
     
@@ -133,7 +139,7 @@ export class ModalmapPage {
 
 
 
-        this.onMapReady(this.map)
+        
         
         var checkButton = document.createElement("ion-button")
         checkButton.innerHTML = "<ion-icon name='checkmark-circle-outline'></ion-icon>"
@@ -159,7 +165,7 @@ export class ModalmapPage {
 
 
 
-
+        
 
 
 
@@ -181,6 +187,8 @@ export class ModalmapPage {
         return container;
       }
     });
+    
+    this.onMapReady(this.map,new customControl())
 
   } 
   
@@ -189,8 +197,12 @@ export class ModalmapPage {
 
 
 
-  onMapReady(map: leaflet.Map) {
+  onMapReady(map: leaflet.Map,customer) {
     setTimeout(() => {
+      if(this.role == "client"){
+        this.map.addControl(customer);
+      }
+      
       map.invalidateSize();
     }, 150);
  }

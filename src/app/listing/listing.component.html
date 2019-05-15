@@ -17,15 +17,18 @@
       
       <div class="resto" >
  
-        <div class="food-wrapper">
+        <div class="food-wrapper" >
           <div class="food-holder">
           <div class="foods sk">
-            <ion-skeleton-text style="width: 100%;height: 100%;"></ion-skeleton-text>
+            <ion-skeleton-text style="width: 185px;height: 197px; margin-right: 10px;"></ion-skeleton-text>
           </div>
           <div class="foods">
-            <ion-skeleton-text style="width: 100%;height: 100%;"></ion-skeleton-text>
-          
+            <ion-skeleton-text style="width: 185px;height: 197px; margin-right: 10px;"></ion-skeleton-text>
           </div>
+          <div class="foods">
+            <ion-skeleton-text style="width: 185px;height: 197px; margin-right: 10px;"></ion-skeleton-text>
+          </div>
+          
          
           
           
@@ -42,19 +45,23 @@
         
       
     </ion-item>
+
     <ion-item>
       
       <div class="resto" >
-        <div class="food-wrapper">
+ 
+        <div class="food-wrapper" >
           <div class="food-holder">
-          <div class="foods">
-            <ion-skeleton-text style="width: 100%;height: 100%;"></ion-skeleton-text>
-          
+          <div class="foods sk">
+            <ion-skeleton-text style="width: 185px;height: 197px; margin-right: 10px;"></ion-skeleton-text>
           </div>
           <div class="foods">
-            <ion-skeleton-text style="width: 100%;height: 100%;"></ion-skeleton-text>
-          
+            <ion-skeleton-text style="width: 185px;height: 197px; margin-right: 10px;"></ion-skeleton-text>
           </div>
+          <div class="foods">
+            <ion-skeleton-text style="width: 185px;height: 197px; margin-right: 10px;"></ion-skeleton-text>
+          </div>
+          
          
           
           
@@ -62,11 +69,6 @@
       </div>
 
       <div class="reto-name">
-        
-          
-     
-           
-          
               <ion-skeleton-text  style="width: 20%"></ion-skeleton-text>
               <ion-skeleton-text  style="width: 20%"></ion-skeleton-text>
               <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
@@ -76,7 +78,6 @@
         
       
     </ion-item>
-
   
 
 
@@ -84,7 +85,7 @@
     
   </ion-list>
 </div>
-<ion-row class="cat-row">
+<ion-row *ngIf="list" class="cat-row">
   <ion-col>
     <div class="cat-badge options" (click)="category()">
       Category <span *ngIf="length">{{length}}</span>
@@ -110,7 +111,7 @@
             <ion-badge color="warning" class="resto-rate">44</ion-badge>
             <ion-buttons slot="primary" (click)="viewMap(item.lat,item.lng)" style="font-size: 12px;float: right;clear: right">
             <ion-button color="dark"  style="line-spacing: 10px;">
-            <ion-icon name="map" ></ion-icon> Map</ion-button>
+            <ion-icon name="map" (click)="viewMap(item.lat,item.lng)"></ion-icon> Map</ion-button>
               </ion-buttons>
               <ion-label class="address" style="color: #888"><span class="near">{{item.d}} km</span><br /> Opens in 30 mins</ion-label>
           </div>

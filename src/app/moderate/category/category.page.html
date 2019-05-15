@@ -3,7 +3,8 @@
     <ion-buttons slot="start" class= 'back'>
       <ion-button (click)="goback()"><ion-icon name="arrow-round-back" class= 'back'></ion-icon></ion-button>
     </ion-buttons>
-    <ion-text class="back-label">Category</ion-text>
+    <ion-text class="back-label">{{label}}</ion-text>
+    <ion-text class="head-button" (click)="goback()">NEXT</ion-text>
   </ion-toolbar>
 </ion-header>
 

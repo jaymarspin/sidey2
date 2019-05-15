@@ -5,7 +5,9 @@ import {MenuController,IonInfiniteScroll, IonVirtualScroll,ModalController } fro
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {GlobalService } from '../global/global.service'
  import {CategoryPage} from '../moderate/category/category.page'
-
+ import { ModalmapPage } from '../modalmap/modalmap.page'
+ import {ViewmealPage} from '../client/viewmeal/viewmeal.page'
+ import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
@@ -22,7 +24,7 @@ export class ListingComponent implements OnInit {
   length:any
   
   pass:any = false
-  constructor(private modalCtrl:ModalController,private post: PostService,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
+  constructor(private modalCtrl:ModalController,private androidFullScreen: AndroidFullScreen,private post: PostService,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
     this.menuCtrl.enable(true)
     
     this.cat = new Array()
@@ -82,10 +84,11 @@ export class ListingComponent implements OnInit {
       long: lng,
       role: "client"
     }
-    // this.global.presentModal(ModalmapPage,data,"")
+   this.global.presentModal(ModalmapPage,data,"")
   }
 
   goToResto(id:any,title:any,address:any){
+    
     this.router.navigate(["moderateresto",id,title,address,'client']);
     
   }
@@ -101,7 +104,7 @@ export class ListingComponent implements OnInit {
    
     try{
     this.post.postData(body,"listing.php").subscribe((res:any) =>{
-        console.log(res)
+         
         res = res.json()
         this.list = res
         
@@ -119,13 +122,22 @@ export class ListingComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.androidFullScreen.isImmersiveModeSupported()
+    .then(() => {
+      this.androidFullScreen.showSystemUI()
+    })
     
   }
   viewmeal(id,name,price,img,i,cat){
     
+    let data = {
+      id: id,
+      name: name,
+      price: price,
+      img: img,
 
-    this.router.navigate(["viewmeal",id,name,price,img]);
+    }
+    this.global.presentModal(ViewmealPage,data,"")
    
   }
   

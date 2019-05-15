@@ -28,7 +28,7 @@ export class AddFoodPage implements OnInit {
   public base64:any
   pass:any = false
   @Input('id') id
-  
+  @Input('title') title:any
   constructor(private activateRoute:ActivatedRoute,private global: GlobalService,private base:Base64,private post:PostService,private imagePicker: ImagePicker,private webview: WebView,private formBuilder: FormBuilder,private modalCtrl: ModalController) { 
     
     this.base64 = new Array()
@@ -166,6 +166,9 @@ export class AddFoodPage implements OnInit {
       })
       
  
+    }
+    goback(){
+      this.modalCtrl.dismiss()
     }
 
   

@@ -1,22 +1,53 @@
 <ion-header no-border >
-  <ion-toolbar color="dark">
-    <ion-buttons slot="start" class= 'back'>
-      <ion-button (click)="goback()"><ion-icon name="arrow-round-back" class= 'back'></ion-icon></ion-button>
-    </ion-buttons>
-    <ion-text class="back-label">Back</ion-text>
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start" class= 'back'>
+        <ion-button (click)="goback()"><ion-icon name="arrow-round-back" class= 'back'></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-text class="back-label">Back</ion-text>
+      <ion-text class="head-button" (click)="placeadd()">SAVE</ion-text>
+    </ion-toolbar>
+  </ion-header>
 
-  </ion-toolbar>
-</ion-header>
+ 
 <ion-content>
   
       
-      <ion-row class="distance-top">
-          <ion-col class="row-col">
-              <ion-label class="place-label">Add a place</ion-label>
-          </ion-col>
-        </ion-row>
-        <div class="main">
-            <form [formGroup]="former">
+        
+        <div class="main distance-top">
+
+
+            <ion-row class="moderate">
+                <ion-col>
+                  <input type="text" placeholder="Restaurant Name" class="moderation-input" [(ngModel)] = "restaurant" ctl="ngModel" />
+                </ion-col>
+              </ion-row>
+            <ion-row class="moderate">
+                  <ion-col (click)="presentModal()">
+                    <input type="text" placeholder="Address" class="moderation-input" [(ngModel)] = "address" ctl="ngModel" />
+                  </ion-col>
+            </ion-row>
+
+
+            <ion-row class="moderate">
+                <ion-col>
+                  <input type="text" placeholder="Contact Info" class="moderation-input" [(ngModel)] = "contact" ctl="ngModel" />
+                </ion-col>
+          </ion-row>
+
+          <ion-row class="moderate">
+              <ion-col>
+                <div class="moderation-input category-input" (click)="category()">
+                  <span *ngIf="!length" color="medium">Cuisines</span>
+                  <div class="cat-badge" *ngFor="let item of cat; index as i" [attr.data-index]="i" class="cat-badge">
+                      <ion-icon name="close-circle"></ion-icon>
+                    {{item}}
+                  </div>
+                  <ion-icon color="medium" name="arrow-dropdown"></ion-icon>
+                </div>
+                
+              </ion-col>
+            </ion-row>
+            <!-- <form [formGroup]="former">
             <ion-list>
                 <ion-item class="item-divider">
                     <ion-label position="floating">Restaurant Name</ion-label>
@@ -41,6 +72,6 @@
                       
                   </ion-list>
                   <ion-button [disabled]="!former.valid" color="warning" expand="block" style="margin-top: 20px;" type='submit' (click)="placeadd()">Submit</ion-button>
-                </form>
+                </form> -->
     </div>
 </ion-content>

@@ -10,16 +10,25 @@ export class CategoryPage implements OnInit {
   category:any 
   selected:any
   l:any
+  label:any
   @Input('selected') cat
+  @Input('role') role
   constructor(private global: GlobalService,private modalCtrl: ModalController) {
     this.selected = new Array()
     
     this.category = new Array()
     this.category = ["meal","drinks","halo halo","beverage","ramen","noodles","dessert","others"]
+    this.label = "Category"
    
    }
 
   ngOnInit() {
+    
+    if(this.role == "admin"){
+      
+      this.category = ["filipino","korean","jav"]
+      this.label = "Cuisines"
+    }
   }
   select(i){
     let pass = true;

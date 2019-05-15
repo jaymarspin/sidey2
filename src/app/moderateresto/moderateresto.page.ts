@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
 import { TitleEditPage } from '../moderate/title-edit/title-edit.page'
- 
+import { AddFoodPage } from '../moderate/add-food/add-food.page'
 import { EditSchedPage } from '../moderate/edit-sched/edit-sched.page'
 import {AddPhotoPage} from '../moderate/add-photo/add-photo.page'
 
@@ -11,13 +11,16 @@ import {ViewmealPage} from '../client/viewmeal/viewmeal.page'
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalmapPage } from '../modalmap/modalmap.page'
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {IonContent} from "@ionic/angular"
+import * as $ from "jquery";
+
 @Component({
   selector: 'app-moderateresto',
   templateUrl: './moderateresto.page.html',
   styleUrls: ['./moderateresto.page.scss'],
 })
 export class ModeraterestoPage implements OnInit {
- 
+  @ViewChild(IonContent) content: IonContent;
   slideOpts = {
     effect: 'flip'
   };
@@ -29,34 +32,60 @@ export class ModeraterestoPage implements OnInit {
   food:any
   edit:any = "editor"
   impress = []
-  constructor(private global: GlobalService,private androidFullScreen: AndroidFullScreen,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) { }
+  scrollnd:any = false;
+  constructor(private global: GlobalService,private androidFullScreen: AndroidFullScreen,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) {
+    
+    
+   }
    
+   
+   
+   logScrollStart(){
+     
+   }
+   logScrolling(e){
+     var that = this
+    var x = parseInt(e.detail.scrollTop)
+    if(parseInt(e.detail.scrollTop) >= 80){
       
-   
+      $(".showScroll").fadeIn(150)
+    }
+    
+    
+    if(x <= 0){
+      $(".showScroll").fadeOut(150)
+       
+    }
+    
+   }
+   logScrollEnd(){
+      
+   }
 
+   ngAfterViewInit(){
+    var content = document.querySelector('ion-content');
+content.scrollEvents = true;
+content.addEventListener('ionScrollStart', () => console.log('scroll start'));
+content.addEventListener('ionScroll', (ev) => console.log('scroll', ev));
+content.addEventListener('ionScrollEnd', () => console.log('scroll end'));
+   }
    
   ngOnInit() {
     
-
-
-    // this.androidFullScreen.isImmersiveModeSupported() 
+    // this.androidFullScreen.isImmersiveModeSupported()
+    // .then(() => {
+    //   this.androidFullScreen.showUnderStatusBar()
+    // })
+    // .catch(err => console.log(err)); 
     
-    
-    
-  // .then(() => this.androidFullScreen.immersiveMode().then(()=>{
-  //   this.statusBar.backgroundColorByHexString('#888');
-  // }))
-  // .catch(err => alert(err)); 
+ 
   }
   
   // ngOnDestroy(){
   //   this.androidFullScreen.isImmersiveModeSupported()
   // .then(() => this.androidFullScreen.showUnderSystemUI())
   // .catch(err => console.log(err));
-  // }
-  try(){
-    this.router.navigate(["add-food"]);
-  }
+
 
   viewmeal(id,name,price,img,i){
     let data = {
@@ -68,7 +97,6 @@ export class ModeraterestoPage implements OnInit {
     }
     this.global.presentModal(ViewmealPage,data,"")
    
-  
   }
 
   editTile(){
@@ -112,10 +140,10 @@ export class ModeraterestoPage implements OnInit {
     
     return result
   }
-
+ 
   ionViewDidEnter(){
-
-
+    
+    
     this.title = this.activateRoute.snapshot.paramMap.get("title")
     this.id = this.activateRoute.snapshot.paramMap.get("id")
     this.address = this.activateRoute.snapshot.paramMap.get("address")
@@ -144,10 +172,20 @@ export class ModeraterestoPage implements OnInit {
   
   
 }
-addFood(){
-  
 
-  this.router.navigate(["add-food",this.id,name]);
+ionViewWillLeave() {
+  // this.androidFullScreen.isImmersiveModeSupported()
+  // .then(() => this.androidFullScreen.showSystemUI())
+  // .catch(err => console.log(err)); 
+  this.global.leave()
+ }
+addFood(){
+  let data = {
+    role: "meal",
+    id: this.id,
+    title: this.title
+  }
+  this.global.presentModal(AddFoodPage,data,"")
   
 }
 addDesserts(){
@@ -155,7 +193,7 @@ addDesserts(){
     role: "dessert",
     id: this.id
   }
- 
+  this.global.presentModal(AddFoodPage,data,"")
 }
 
   addBeverages(){
@@ -163,7 +201,7 @@ addDesserts(){
       id: this.id,
       role: "beverage"
     }
-     
+    this.global.presentModal(AddFoodPage,data,"")
     
   }
   addPhoto(){

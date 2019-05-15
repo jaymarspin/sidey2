@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ModeraterestoPage } from './moderateresto.page';
-
+import { IonicRatingModule } from 'ionic4-rating';
 const routes: Routes = [
   {
     path: '',
@@ -20,7 +20,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    
+    IonicRatingModule,
     RouterModule.forChild(routes),
 
   ],

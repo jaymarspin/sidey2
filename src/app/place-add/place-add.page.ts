@@ -6,7 +6,7 @@ import { NativeGeocoder, NativeGeocoderOptions } from '@ionic-native/native-geoc
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-
+import {CategoryPage} from '../moderate/category/category.page'
 @Component({
   selector: 'app-place-add',
   templateUrl: './place-add.page.html', 
@@ -19,6 +19,10 @@ export class PlaceAddPage implements OnInit {
   address: any;
   contact: any;
   former: FormGroup
+  cat:any
+  length:any
+  public base64:any
+  pass:any = false
   error_message = {
     restaurant: [
       {type: 'required', message: 'This Field is Required'},
@@ -34,27 +38,8 @@ export class PlaceAddPage implements OnInit {
     ]
   }
   constructor(public post: PostService,public modal: ModalController,public navCtrl: NavController, public nativeCoder: NativeGeocoder,private toastController: ToastController,private router: Router,public loadingController: LoadingController,private validators: Validators,private formBuilder: FormBuilder) {
-
-    this.former = this.formBuilder.group({
-      restaurant: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-        
-      ])),
-      address: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(0),
-        Validators.maxLength(50),
-        
-      ])),
-      contact: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(30),
-        
-      ]))
-    });
+    this.cat = new Array()
+    
 
    }
   lat: any;
@@ -72,6 +57,39 @@ export class PlaceAddPage implements OnInit {
   ngOnInit() {
     
         
+  }
+
+  async category() {
+    
+    let data = {
+      selected: this.cat,
+        role: "admin"
+    }
+    
+    if(this.pass == true && this.cat.length > 0){
+      data = {
+        selected: this.cat,
+        role: "admin"
+      }
+    }
+    const modal = await this.modal.create({
+      component: CategoryPage,
+       componentProps: data
+    });
+    modal.onDidDismiss() 
+      .then((data) => {
+        const x = data['data'];
+        if(x != null)this.cat = x.selected
+          
+    }).then(() =>{
+      this.pass = true
+      if(this.cat.length > 0){
+        this.length = this.cat.length
+      }else{
+        this.length = null
+      }
+    }); 
+    await modal.present();
   }
   async presentToast(message:any) {
     const toast = await this.toastController.create({

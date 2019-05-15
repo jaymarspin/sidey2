@@ -1,7 +1,10 @@
+ 
+
+
 <ion-header no-border >
   <ion-toolbar color="dark">
     <ion-buttons slot="start" class= 'back'>
-      <ion-back-button icon="arrow-round-back"></ion-back-button>
+      <ion-button (click)="goback()"><ion-icon name="arrow-round-back" class= 'back'></ion-icon></ion-button>
     </ion-buttons>
     <ion-text class="back-label">Back</ion-text>
     <ion-text class="head-button" (click)="addFood()">SAVE</ion-text>
@@ -21,7 +24,7 @@
    
     <ion-row class="distance-top">
       <ion-col>
-          <ion-label class="restaurant-label">Three Grills and a row</ion-label>
+          <ion-label class="restaurant-label">{{title}}</ion-label>
       </ion-col>
     </ion-row>
 
@@ -120,21 +123,7 @@
     border-radius: 10px;
     background-color: #f5f5f5;
   }
-  .photo-adder-label{
-    width: 100%;
-    position: relative;
-    text-align: center;
-    top: 50%;
-    
-
-  }
-  .photo-adder-label span{
-    position: relative;
-    top: -5px;
-  }
-  .photo-adder-label ion-icon{
-    font-size: 25px;
-  }
+  
   .picker{
     margin-bottom: 10px;
   }
@@ -147,10 +136,6 @@
     padding-left: 5px;
     font-size: 22px;
   }
-  .category-input{
-    height: auto;
-    overflow: hidden;
-    
-  }
+  
 </style>
   </ion-content>

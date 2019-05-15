@@ -1,26 +1,40 @@
 
-<ion-content>
+<ion-content overflow-scroll="true" class="moderate-content" [scrollEvents]="true"
+(ionScrollStart)="logScrollStart()"
+(ionScroll)="logScrolling($event)"
+(ionScrollEnd)="logScrollEnd()" >
+
     
 
-  <ion-row >
+  <ion-row id="wrap-slider">
     <ion-col>
-  <ion-slides pager="true" [options]="slideOpts" class="slide-holder">
+  <ion-slides pager="true" [options]="slideOpts" class="slide-holder" id="slider">
     <ion-slide *ngFor="let item of impress">
-      <img [src] ='item' />
+      <img [src] ='item' id="img-col"/>
     </ion-slide>
     
   </ion-slides>
-  <ion-label id="back">
-  <ion-icon name="arrow-round-back" (click)="goback()"></ion-icon>
-</ion-label>
+  
   <ion-label id="photos"><ion-label class="{{edit}}" style="color: #fff" (click)="addPhoto()"><ion-icon name="create"></ion-icon> Add Photo</ion-label><ion-icon name="images"></ion-icon> 50 photos</ion-label>
 </ion-col>
 </ion-row>
+<ion-label id="back">
+  <ion-icon name="arrow-round-back" (click)="goback()"></ion-icon>
+</ion-label>
+<ion-row class="showScroll showScroll-label">
+    <ion-col>
+        <ion-label>{{title}}</ion-label>
+      </ion-col>
+  </ion-row>
+<ion-row class="showScroll showScroll-back">
+  
+</ion-row>
+
   <div id="title-holder">
     <div id="title-left">
   <ion-label id='title'>{{title}} <ion-label class="{{edit}}" (click)="editTile()"><ion-icon name="create"></ion-icon> Edit</ion-label></ion-label>
   <ion-row>
-    <ion-col id="col-left"><ion-label>Opens in 30 mins </ion-label> <ion-label class="{{edit}}" (click)="editSched()"><ion-icon name="create"></ion-icon> Edit</ion-label></ion-col>
+    <ion-col id="col-left"><ion-label color="medium">Opens in 30 mins </ion-label> <ion-label class="{{edit}}" (click)="editSched()"><ion-icon name="create"></ion-icon> Edit</ion-label></ion-col>
     
   </ion-row>
   </div> 
@@ -29,6 +43,7 @@
       <ion-label id="resto-review-sum">42 reviews</ion-label>
   </div>
   </div>
+
   <div id="floating-social">
   <ion-row class="social">
     
@@ -73,41 +88,30 @@
       <ion-label>{{address}} <ion-label class="{{edit}}" (click)="editAddress()"><ion-icon name="create"></ion-icon> Edit</ion-label></ion-label>
     </ion-col>
     <ion-col id="near-col">
-        <span class="near">11km</span>
+        <span class="near" color="dark">11km</span>
       </ion-col>
   </ion-row>
 
 
       <ul class="sec-menu">
-        <li><ion-label>Menu <ion-icon name="list-box"></ion-icon></ion-label></li>
-        <li><ion-label>Reviews <ion-icon name="contacts"></ion-icon></ion-label></li>
-        <li><ion-label>Map <ion-icon name="map"></ion-icon></ion-label></li>
+        <li><ion-label color="dark">Menu <ion-icon name="list-box" color="success"></ion-icon></ion-label></li>
+        <li><ion-label color="dark">Reviews <ion-icon name="contacts" color="success"></ion-icon></ion-label></li>
+        <li><ion-label color="dark">Map <ion-icon name="map" color="success"></ion-icon></ion-label></li>
       </ul>
        
-       <!-- <ion-label> <ion-icon name="call" color="secondary"></ion-icon>Menu</ion-label> -->
+      
 
 
-       <ion-row style="padding: 10px;">
-          <ion-col>
-              <ion-row><ion-col>
-              <ion-label class="food-label">Meals</ion-label>
-            </ion-col>
-            </ion-row>
-              <ion-row>
-                <ion-col><ion-label class="{{edit}}" (click)="addFood()"><ion-icon name="pizza"></ion-icon> Add Meals</ion-label></ion-col>
-              </ion-row>
-            </ion-col>
-        <ion-col class="food-label-num">
-          
-        </ion-col>
-      </ion-row>
+      
 
      
       
-
+      <ion-row>
+          <ion-col><ion-label class="{{edit}}" (click)="addFood()"><ion-icon name="pizza"></ion-icon> Add Meals</ion-label></ion-col>
+        </ion-row>
       <div class="food-wrapper">
           <div class="food-holder">
-              <ion-card class="foods meal-overlay" *ngFor="let item of food" (click)="viewmeal(item.id,item.name,item.price,item.img,i)">
+              <ion-card class="foods meal-overlay" *ngFor="let item of food" tappable (click)="viewmeal(item.id,item.name,item.price,item.img,i)">
           
               <ion-badge color="dark" class="ratings">{{item.rate}}</ion-badge>
               <ion-label class="food-name">{{item.name}}</ion-label>
@@ -120,6 +124,72 @@
           
       </div>
       </div>
+      <ion-row>
+          <ion-col><ion-label class="{{edit}}" (click)="addFood()"><ion-icon name="list-box"></ion-icon> Add Menu</ion-label></ion-col>
+        </ion-row>
+        <ion-row class="rower rower-label"> 
+          <ion-col><ion-label>
+              Menu
+            </ion-label></ion-col>
+        </ion-row>
+        
+        <ion-row class="rower rower-menu">
+          <ion-col class="food-holder">
+              <div class="menu-wrap">
+                  <ion-img src ="http://www.mattthemillers.com/fck_userfiles/image/food-menus/lunch-585-x-420-wide.jpg"></ion-img>
+                </div>
+                <div class="menu-wrap">
+                    <ion-img src ="http://www.mattthemillers.com/fck_userfiles/image/food-menus/lunch-585-x-420-wide.jpg"></ion-img>
+                  </div>
+                  
+          </ion-col>
+        </ion-row>
+        <ion-row class="rower rower-label"> 
+            <ion-col><ion-label>
+                Albums
+              </ion-label></ion-col>
+          </ion-row>
+          
+          <ion-row class="rower rower-menu">
+              <ion-col>
+                  <div class="albums img-foods">
+
+                      <ion-img src ="https://i.ytimg.com/vi/XElF5UFmKwU/maxresdefault.jpg"></ion-img>
+                  </div>
+                  <div class="albums img-ambience">
+
+                      <ion-img src ="https://i.ytimg.com/vi/Sq1o76DaOCE/maxresdefault.jpg"></ion-img>
+                  </div>
+                  <div class="albums img-all img-all-first">
+
+                      <ion-img src ="https://i.ytimg.com/vi/2Vhfc78XI9Q/maxresdefault.jpg"></ion-img>
+                  </div>
+                  <div class="albums img-all">
+                      <div class="photo-adder-label" ><ion-icon name="image" ></ion-icon><br><span>Add Photo</span></div>
+
+                    </div>
+                  
+                      
+              </ion-col>
+            </ion-row>
+      <!-- <ion-item lines="none">
+        <ion-row>
+          <ion-col>
+            <rating [rate]="rate"
+            readonly="false" 
+            size="large" 
+            (rateChange)="onRateChange($event)">
+            </rating>
+          </ion-col>
+          <ion-col>
+            <ion-text>42 people</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-item> -->
+      <ion-item lines="none"></ion-item>
+      <ion-item lines="none"></ion-item>
+      <ion-item lines="none"></ion-item>
+      
  
 </ion-content>
 
