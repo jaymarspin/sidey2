@@ -104,21 +104,21 @@
               <ion-text class="more" color="secondary">See all<ion-icon name="arrow-round-down"></ion-icon></ion-text>
             </div>
               
-                  <ion-label class="title" (click)="goToResto(item.id,item.name,item.string_address)">{{item.name}}</ion-label>
+                  <ion-label class="title" tappable (click)="goToResto(item.id,item.name,item.string_address,item.d)">{{item.name}}</ion-label>
                
               
               
             <ion-badge color="warning" class="resto-rate">44</ion-badge>
-            <ion-buttons slot="primary" (click)="viewMap(item.lat,item.lng)" style="font-size: 12px;float: right;clear: right">
+            <ion-buttons slot="primary" tappable (click)="viewMap(item.lat,item.lng)" style="font-size: 12px;float: right;clear: right">
             <ion-button color="dark"  style="line-spacing: 10px;">
-            <ion-icon name="map" (click)="viewMap(item.lat,item.lng)"></ion-icon> Map</ion-button>
+            <ion-icon name="map" tappable (click)="viewMap(item.lat,item.lng)"></ion-icon> Map</ion-button>
               </ion-buttons>
               <ion-label class="address" style="color: #888"><span class="near">{{item.d}} km</span><br /> Opens in 30 mins</ion-label>
           </div>
           
         <div class="food-wrapper">
         <div class="food-holder">
-            <ion-card class="foods meal-overlay" *ngFor="let food of item.food" (click)="viewmeal(food.id,food.name,food.price,food.img,i,food.cat)">
+            <ion-card class="foods meal-overlay" *ngFor="let food of item.food" tappable (click)="viewmeal(food.id,food.name,food.price,food.img,i,food.cat)">
         
             <ion-badge color="dark" class="ratings">{{food.rate}}</ion-badge>
             <ion-label class="food-name">{{food.name}}</ion-label>

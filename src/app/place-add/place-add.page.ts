@@ -7,6 +7,7 @@ import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import {CategoryPage} from '../moderate/category/category.page'
+import {GlobalService} from '../global/global.service'
 @Component({
   selector: 'app-place-add',
   templateUrl: './place-add.page.html', 
@@ -37,7 +38,7 @@ export class PlaceAddPage implements OnInit {
       {type: 'pattern', message: 'invalid email'},
     ]
   }
-  constructor(public post: PostService,public modal: ModalController,public navCtrl: NavController, public nativeCoder: NativeGeocoder,private toastController: ToastController,private router: Router,public loadingController: LoadingController,private validators: Validators,private formBuilder: FormBuilder) {
+  constructor(private global: GlobalService,public post: PostService,public modal: ModalController,public navCtrl: NavController, public nativeCoder: NativeGeocoder,private toastController: ToastController,private router: Router,public loadingController: LoadingController,private validators: Validators,private formBuilder: FormBuilder) {
     this.cat = new Array()
     
 
@@ -104,34 +105,44 @@ export class PlaceAddPage implements OnInit {
       restaurant: this.restaurant,
       address: this.address,
       contact: this.contact,
+      cuisines: this.cat,
       lat: this.lat,
       lng: this.long,
       string_address: this.administrative
     } 
-     
-     try{
-      // this.router.navigate(["moderateresto",124,"Three grills and a ril","General Santos City"]);
-      this.post.postData(body,'add_resto.php').subscribe((res)=>{
-        let data = res.json()
-        this.presentLoading("uploading... please wait").then(() =>{
-          if(data[0].message == "success"){
-            this.loading.dismiss().then(() =>{
-              this.router.navigate(["moderateresto",data[0].id,data[0].title,data[0].string_address,'admin']);
-              
-            });
-              }else{
-            this.loading.dismiss().then(() =>{
-              this.presentToast('Error Occured! Try again later');
-            });
+    
+    if(this.restaurant != null && this.contact != null && this.cat.length > 0){
+      if(this.restaurant.toString().trim() && this.contact.toString().trim()){
+        try{
+          // this.router.navigate(["moderateresto",124,"Three grills and a ril","General Santos City"]);
+          this.post.postData(body,'add_resto.php').subscribe((res)=>{
+            let data = res.json()
+            this.presentLoading("uploading... please wait").then(() =>{
+              if(data[0].message == "success"){
+                this.loading.dismiss().then(() =>{
+                  this.router.navigate(["moderateresto",data[0].id,data[0].title,data[0].string_address,'admin']);
+                  
+                });
+                  }else{
+                this.loading.dismiss().then(() =>{
+                  this.presentToast('Error Occured! Try again later');
+                });
+                
+              }  
+            })
             
-          }  
-        })
-        
-              
-      })
-     }catch(e){
-      this.presentToast('Server Error! Try again later');
-     }
+                  
+          })
+         }catch(e){
+          this.presentToast('Server Error! Try again later');
+         }
+      }
+    }else{
+      this.global.presentToast("Please Complete the form before proceeding")
+    }
+    
+     
+     
     
   }
   goback(){

@@ -1,12 +1,15 @@
 
 <ion-content overflow-scroll="true" class="moderate-content" [scrollEvents]="true"
-(ionScrollStart)="logScrollStart()"
+
 (ionScroll)="logScrolling($event)"
-(ionScrollEnd)="logScrollEnd()" >
+ >
 
     
+<ion-row id="wrap-slider" *ngIf="!impress" style="top: 0px;margin-top: -8px;position: relative;">
+  <ion-skeleton-text animated style="width: 100%;height: 250px;"></ion-skeleton-text>
+</ion-row>
 
-  <ion-row id="wrap-slider">
+  <ion-row id="wrap-slider" *ngIf="impress">
     <ion-col>
   <ion-slides pager="true" [options]="slideOpts" class="slide-holder" id="slider">
     <ion-slide *ngFor="let item of impress">
@@ -15,11 +18,11 @@
     
   </ion-slides>
   
-  <ion-label id="photos"><ion-label class="{{edit}}" style="color: #fff" (click)="addPhoto()"><ion-icon name="create"></ion-icon> Add Photo</ion-label><ion-icon name="images"></ion-icon> 50 photos</ion-label>
+  <ion-label id="photos"><ion-label class="{{edit}}" style="color: #fff" (click)="addPhoto()"><ion-icon name="create"></ion-icon> Add Photo</ion-label><ion-icon name="images"></ion-icon> {{impress.length}} photos</ion-label>
 </ion-col>
 </ion-row>
 <ion-label id="back">
-  <ion-icon name="arrow-round-back" (click)="goback()"></ion-icon>
+  <ion-icon name="arrow-round-back" tappable (click)="goback()"></ion-icon>
 </ion-label>
 <ion-row class="showScroll showScroll-label">
     <ion-col>
@@ -88,7 +91,7 @@
       <ion-label>{{address}} <ion-label class="{{edit}}" (click)="editAddress()"><ion-icon name="create"></ion-icon> Edit</ion-label></ion-label>
     </ion-col>
     <ion-col id="near-col">
-        <span class="near" color="dark">11km</span>
+        <span class="near" color="dark">{{distance}}km</span>
       </ion-col>
   </ion-row>
 
@@ -104,16 +107,44 @@
 
       
 
-     
+      <ion-row class="rower"> 
+        <ion-col><ion-label>
+            Foods
+          </ion-label></ion-col>
+
+      </ion-row>
+      <ion-row class="rower">
+        <ion-col>
+          <div class="foods-cat">
+            Steak,
+          </div>
+          <div class="foods-cat">
+            Steak,
+          </div>
+          <div class="foods-cat">
+            Steak,
+          </div>
+          
+        </ion-col>
+      </ion-row>
       
       <ion-row>
           <ion-col><ion-label class="{{edit}}" (click)="addFood()"><ion-icon name="pizza"></ion-icon> Add Meals</ion-label></ion-col>
         </ion-row>
+        
       <div class="food-wrapper">
-          <div class="food-holder">
+
+          <div class="food-holder" *ngIf="!food">
+              <ion-skeleton-text animated class="foods meal-overlay"></ion-skeleton-text>
+              <ion-skeleton-text animated class="foods meal-overlay"></ion-skeleton-text>
+              <ion-skeleton-text animated class="foods meal-overlay"></ion-skeleton-text>
+          
+          
+      </div>
+          <div class="food-holder" *ngIf="food">
               <ion-card class="foods meal-overlay" *ngFor="let item of food" tappable (click)="viewmeal(item.id,item.name,item.price,item.img,i)">
           
-              <ion-badge color="dark" class="ratings">{{item.rate}}</ion-badge>
+              <ion-badge color="dark" class="ratings" >{{item.rate}}</ion-badge>
               <ion-label class="food-name">{{item.name}}</ion-label>
       
           <ion-img src="{{post.server}}{{item.img}}"></ion-img>
@@ -124,6 +155,19 @@
           
       </div>
       </div>
+
+      <ion-row class="rower rower-menu" style="margin-top: 10px;border-top: 1px solid #dedede;padding-top: 10px;"> 
+        <ion-col><ion-label>
+            Cuisines 
+          </ion-label></ion-col>
+          </ion-row>
+          <ion-row class="rower">
+              <div class="cat-badge options" *ngFor="let item of cuisines; index as i" [attr.data-index]="i" >
+                  {{item}}
+                </div>
+          </ion-row>
+          
+     
       <ion-row>
           <ion-col><ion-label class="{{edit}}" (click)="addFood()"><ion-icon name="list-box"></ion-icon> Add Menu</ion-label></ion-col>
         </ion-row>
@@ -132,6 +176,7 @@
               Menu
             </ion-label></ion-col>
         </ion-row>
+        
         
         <ion-row class="rower rower-menu">
           <ion-col class="food-holder">
@@ -144,6 +189,18 @@
                   
           </ion-col>
         </ion-row>
+        <ion-row class="rower rower-label"> 
+          <ion-col><ion-label>
+              More Information
+            </ion-label></ion-col>
+        </ion-row>
+        <ion-row class="rower">
+          <ion-col>
+            <ion-text color="medium">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
+            </ion-text>
+          </ion-col>
+      </ion-row>
         <ion-row class="rower rower-label"> 
             <ion-col><ion-label>
                 Albums
@@ -172,24 +229,194 @@
                       
               </ion-col>
             </ion-row>
-      <!-- <ion-item lines="none">
-        <ion-row>
-          <ion-col>
-            <rating [rate]="rate"
-            readonly="false" 
-            size="large" 
-            (rateChange)="onRateChange($event)">
-            </rating>
-          </ion-col>
-          <ion-col>
-            <ion-text>42 people</ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-item> -->
-      <ion-item lines="none"></ion-item>
-      <ion-item lines="none"></ion-item>
-      <ion-item lines="none"></ion-item>
+
+            <ion-row class="rower rower-label" > 
+              <ion-col><ion-label>
+                  Ratings and Reviews
+                </ion-label></ion-col>
       
+            </ion-row>
+            <ion-row class="rower score-wrapper">
+              <ion-col>
+                <div id="review-bar">
+                 <div id="rating-score">
+                    3.5<span id="ratings-over">/5</span>
+                  </div>
+                  
+                </div>
+                
+                <rating class="stars" [(ngModel)]="rate" 
+              readOnly="false" 
+              max="5" 
+              emptyStarIconName="star-outline" 
+              halfStarIconName="star-half" 
+              starIconName="star"
+              nullable="false"
+              (ngModelChange)="onModelChange($event)"></rating>
+              
+              </ion-col>
+              <ion-col id="star-layer">
+                 <ion-row class="progress" > 
+                   <ion-col>
+                   <ion-progress-bar value="0.5" color="warning"></ion-progress-bar> 
+                   <span>54</span>
+                  </ion-col>
+                 </ion-row>
+                 <ion-row class="progress" color="warning"> 
+                    <ion-col>
+                    <ion-progress-bar value="0.5" color="warning"></ion-progress-bar> 
+                    <span>54</span>
+                   </ion-col>
+                  </ion-row>
+                  <ion-row class="progress" > 
+                      <ion-col>
+                      <ion-progress-bar value="0.5" color="warning"></ion-progress-bar> 
+                      <span>54</span>
+                     </ion-col>
+                    </ion-row>
+                    <ion-row class="progress" > 
+                        <ion-col>
+                        <ion-progress-bar value="0.5" color="warning"></ion-progress-bar> 
+                        <span>54</span>
+                       </ion-col>
+                      </ion-row>
+                      <ion-row class="progress" > 
+                          <ion-col>
+                          <ion-progress-bar value="0.5" color="warning"></ion-progress-bar> 
+                          <span>54</span>
+                         </ion-col>
+                        </ion-row>
+                
+                
+                
+                  
+                   
+    
+                 
+              </ion-col>
+              
+            </ion-row>
+            <ion-row class="rower review-label review-wrapper"> 
+              <ion-col><ion-label>
+                  Ratings and Reviews(447)
+                </ion-label></ion-col>
+                <ion-col class="review-filter-wrapper" >
+                  <ion-label id="filter-label" tappable (click)="presentPopover($event)">Filter</ion-label> <ion-icon name="flask"></ion-icon>
+                </ion-col>
+            </ion-row>
+            <ion-row class="rower review-label review-wrapper"> 
+             
+            </ion-row>
+            <ion-row class="rower review-label review-wrapper"> 
+             
+            </ion-row>
+            <ion-row class="rower review-label review-wrapper"> 
+             
+            </ion-row>
+            <ion-row class="rower review-label review-wrapper"> 
+             
+            </ion-row>
+            
+            
+<style>
+  .cat-badge:active{
+  background-color: #f44242;
+  color: #f5f5ff;
+  transition: all 0.7s ;
+}
+.review-label{
+  
+  padding: 10px;
+  margin-bottom: 0px;
+
+
+}.review-wrapper{
+  background-color: #e8ecf2;
+}.score-wrapper{
+  background-color: #fff;
+}
+
+#review-bar{
+  width: 140px;
+  height: auto;
+  overflow: hidden;
+  
+  color: #323335;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-top: 10px;
+  position: relative;
+  float: left;
+  clear: left;
+}
+#rating-score{
+  position: relative;
+  display: block;
+  font-size: 50px;
  
+  text-align: center;
+  
+}
+#ratings-over{
+  position: relative;
+  display: block;
+  font-size: 24px;
+  color: #888;
+}
+.stars{
+  float: left;
+  clear: left;
+  position: relative;
+  margin-top: -10px;
+}
+#star-layer{
+  float: left;
+
+  
+  position: relative;
+  width: 50%;
+  height: auto;
+  overflow: hidden;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+ 
+.progress{
+  position: relative;
+  margin-bottom: 10px;
+  
+  
+}
+.progress ion-progress-bar{
+  width: calc(100% - 20px);
+  float: left;
+  clear: left;
+  position: relative;
+}
+.progress span{
+ display: block;
+ float: left;
+ position: relative;
+ width: 20px;
+ font-size: 13px;
+ color: #333;
+ top: -5px;
+
+}
+.review-wrapper ion-label{
+  position: relative;
+  font-size: 15px;
+}
+.review-filter-wrapper{
+  text-align: right;
+  position: relative;
+}.review-filter-wrapper ion-icon{
+  position: relative;
+  top: 3px;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+</style> 
 </ion-content>
+
 

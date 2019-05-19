@@ -4,7 +4,7 @@ import { TitleEditPage } from '../moderate/title-edit/title-edit.page'
 import { AddFoodPage } from '../moderate/add-food/add-food.page'
 import { EditSchedPage } from '../moderate/edit-sched/edit-sched.page'
 import {AddPhotoPage} from '../moderate/add-photo/add-photo.page'
-
+import { PopoverController } from '@ionic/angular';
 import {PostService} from '../post/post.service'
 import {GlobalService } from '../global/global.service'
 import {ViewmealPage} from '../client/viewmeal/viewmeal.page'
@@ -13,7 +13,7 @@ import { ModalmapPage } from '../modalmap/modalmap.page'
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {IonContent} from "@ionic/angular"
 import * as $ from "jquery";
-
+import {EditorComponent} from "../moderate/editor/editor.component"
 @Component({
   selector: 'app-moderateresto',
   templateUrl: './moderateresto.page.html',
@@ -31,18 +31,30 @@ export class ModeraterestoPage implements OnInit {
   public role:any
   food:any
   edit:any = "editor"
-  impress = []
+  impress:any
   scrollnd:any = false;
-  constructor(private global: GlobalService,private androidFullScreen: AndroidFullScreen,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) {
-    
+  category:any 
+  cuisines:any
+  distance:any
+  rate:any
+  
+  constructor(public popoverController: PopoverController,private global: GlobalService,private androidFullScreen: AndroidFullScreen,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) {
+    this.category = ["meal","drinks","halo halo","beverage","ramen","noodles","dessert","others"]
+    this.rate = 2.5
     
    }
+  
+   async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: EditorComponent,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
+  }
    
-   
-   
-   logScrollStart(){
-     
-   }
+
+    
    logScrolling(e){
      var that = this
     var x = parseInt(e.detail.scrollTop)
@@ -58,9 +70,7 @@ export class ModeraterestoPage implements OnInit {
     }
     
    }
-   logScrollEnd(){
-      
-   }
+  
 
    ngAfterViewInit(){
     var content = document.querySelector('ion-content');
@@ -124,22 +134,7 @@ content.addEventListener('ionScrollEnd', () => console.log('scroll end'));
     
   }
 
-  getMeals():any{
-    var result = []
-    let body = {
-      
-      id: this.id
-    } 
   
-    this.post.postData(body,"get_food.php").subscribe((res)=>{
-    
-     let data = res.json();
-
-     this.food = data
-    })
-    
-    return result
-  }
  
   ionViewDidEnter(){
     
@@ -148,6 +143,7 @@ content.addEventListener('ionScrollEnd', () => console.log('scroll end'));
     this.id = this.activateRoute.snapshot.paramMap.get("id")
     this.address = this.activateRoute.snapshot.paramMap.get("address")
     this.role = this.activateRoute.snapshot.paramMap.get("role")
+    this.distance = this.activateRoute.snapshot.paramMap.get("distance")
 
     if(this.role == "admin"){
       this.edit = "hide sc-ion-label-md-h sc-ion-label-md-s hydrated"
@@ -156,21 +152,65 @@ content.addEventListener('ionScrollEnd', () => console.log('scroll end'));
     let data = {
       id: this.id
     }
+    
+    
     this.post.postData(data,"get_impress.php").subscribe((res) =>{
-      let data = res.json()
-      for(var i =0;i < data.length;i++){
-        this.impress[i] = this.post.server+data[i].img
-      }
-      if(this.impress.length == 0){
-        this.impress.push("https://image.dhgate.com/0x0/f2/albu/g7/M00/09/B9/rBVaSlpqpheAGqouAAJzzx7VRgs819.jpg")
-      }
-    })
+        this.impress = new Array()
+        let data = res.json()
+        for(var i =0;i < data.length;i++){
+          this.impress[i] = this.post.server+data[i].img
+        }
+        if(this.impress.length == 0){
+          this.impress.push("https://image.dhgate.com/0x0/f2/albu/g7/M00/09/B9/rBVaSlpqpheAGqouAAJzzx7VRgs819.jpg")
+        }
+      })
+    
+    
  
-    this.food = this.getMeals()
-  
+    this.getMeals()
+    this.getCuisines()
    
   
   
+}
+onModelChange(e){
+  console.log(e)
+}
+getMeals():any{
+  var result = []
+  let body = {
+    
+    id: this.id
+  } 
+ 
+ 
+  this.post.postData(body,"get_food.php").subscribe((res)=>{
+  
+      let data = res.json();
+   
+      this.food = data
+     })
+ 
+  
+  
+  return result
+}
+getCuisines():any{
+  var result = []
+  let body = {
+    
+    id: this.id
+  } 
+
+  this.post.postData(body,"get_cuisines.php").subscribe((res)=>{
+    
+   let data = res.json();
+  
+   this.cuisines = data[0].cuisine
+ 
+  })
+  
+  return result
 }
 
 ionViewWillLeave() {

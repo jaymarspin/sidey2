@@ -27,7 +27,7 @@
         </ion-col>
         
       </ion-row>
-      <ion-row class="cat-row ">
+      <ion-row class="cat-row">
         <ion-col>
             <div class="cat-badge options" *ngFor="let item of category; index as i" [attr.data-index]="i" (click)="select(i)">
               {{item}}
@@ -42,14 +42,7 @@
 
       }
       
-      .cat-badge:active{
-        opacity: 0.4;
-        transition: all 1s;
-      }
-      .options{
-        background-color: #333;
-        color: #dedede;
-      }
+      
       .counter{
         padding-left:10px;
       }

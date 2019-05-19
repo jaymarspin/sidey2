@@ -280,15 +280,17 @@ ul.sec-menu li ion-label{
     padding-right: 10px;
     margin-bottom: 10px;
     overflow-x: hidden;
+  
   }
   .rower-label{
     margin-top: 10px;
-    border-top: 1px solid #e6e8ed;
+    border-top: 1px solid #dedede;
     padding-top: 10px;
   }
   .rower ion-label{
-    color: #000;
-    font-size: 20px;
+    color: #323335;
+    font-size: 18px;
+  
     
   }
   .rower-menu{
@@ -310,7 +312,7 @@ ul.sec-menu li ion-label{
     height: 100%;
     
   }.albums ion-img{
-    filter: brightness(50%);
+    filter: brightness(70%);
   }
   .albums{
     
@@ -333,6 +335,7 @@ ul.sec-menu li ion-label{
     width: calc(50% + 5px);
     margin-bottom: 5px;
   }
+  
   .img-all{
     width: calc(25%);
     float: left;
@@ -353,6 +356,20 @@ ul.sec-menu li ion-label{
   .photo-adder-label span{
     font-size: 10px;
   }
+  .foods-cat{
+    float: left;
+    position: relative;
+    color: #f44242;
+    font-size: 14px;
+    margin-right: 2px;
+  }
+.cat-badge{
+  background: none;
+  border:1px solid #f44242;
+  color: #f44242;
+}
+
+
 
 
 

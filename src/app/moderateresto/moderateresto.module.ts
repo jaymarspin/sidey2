@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-
+import {EditorComponent} from "../moderate/editor/editor.component"
 import { ModeraterestoPage } from './moderateresto.page';
-import { IonicRatingModule } from 'ionic4-rating';
+ 
+import { Ionic2RatingModule } from 'ionic2-rating';
 const routes: Routes = [
   {
     path: '',
@@ -15,15 +16,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [ModeraterestoPage,EditorComponent],
   imports: [
     
     CommonModule,
     FormsModule,
     IonicModule,
-    IonicRatingModule,
+     
+    Ionic2RatingModule,
     RouterModule.forChild(routes),
 
   ],
-  declarations: [ModeraterestoPage]
+  declarations: [ModeraterestoPage,EditorComponent]
 })
 export class ModeraterestoPageModule {}

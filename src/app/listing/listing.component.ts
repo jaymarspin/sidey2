@@ -87,9 +87,9 @@ export class ListingComponent implements OnInit {
    this.global.presentModal(ModalmapPage,data,"")
   }
 
-  goToResto(id:any,title:any,address:any){
+  goToResto(id:any,title:any,address:any,distance:any){
     
-    this.router.navigate(["moderateresto",id,title,address,'client']);
+    this.router.navigate(["moderateresto",id,title,address,'client',distance]);
     
   }
  
