@@ -18,15 +18,21 @@
     
   </ion-slides>
   
-  <ion-label id="photos"><ion-label class="{{edit}}" style="color: #fff" (click)="addPhoto()"><ion-icon name="create"></ion-icon> Add Photo</ion-label><ion-icon name="images"></ion-icon> {{impress.length}} photos</ion-label>
+  <ion-label id="photos"><ion-icon name="images"></ion-icon> {{impress.length}} photos</ion-label>
 </ion-col>
 </ion-row>
 <ion-label id="back">
   <ion-icon name="arrow-round-back" tappable (click)="goback()"></ion-icon>
 </ion-label>
+<ion-button *ngIf="manage"  id="adminControl" tappable (click)="presentPopover($event)">
+  Manage
+</ion-button>
 <ion-row class="showScroll showScroll-label">
     <ion-col>
         <ion-label>{{title}}</ion-label>
+      </ion-col>
+      <ion-col>
+        
       </ion-col>
   </ion-row>
 <ion-row class="showScroll showScroll-back">
@@ -35,9 +41,9 @@
 
   <div id="title-holder">
     <div id="title-left">
-  <ion-label id='title'>{{title}} <ion-label class="{{edit}}" (click)="editTile()"><ion-icon name="create"></ion-icon> Edit</ion-label></ion-label>
+  <ion-label id='title'>{{title}}</ion-label>
   <ion-row>
-    <ion-col id="col-left"><ion-label color="medium">Opens in 30 mins </ion-label> <ion-label class="{{edit}}" (click)="editSched()"><ion-icon name="create"></ion-icon> Edit</ion-label></ion-col>
+    <ion-col id="col-left"><ion-label color="medium">Opens in 30 mins </ion-label></ion-col>
     
   </ion-row>
   </div> 
@@ -128,9 +134,7 @@
         </ion-col>
       </ion-row>
       
-      <ion-row>
-          <ion-col><ion-label class="{{edit}}" (click)="addFood()"><ion-icon name="pizza"></ion-icon> Add Meals</ion-label></ion-col>
-        </ion-row>
+      
         
       <div class="food-wrapper">
 
@@ -168,9 +172,7 @@
           </ion-row>
           
      
-      <ion-row>
-          <ion-col><ion-label class="{{edit}}" (click)="addFood()"><ion-icon name="list-box"></ion-icon> Add Menu</ion-label></ion-col>
-        </ion-row>
+    
         <ion-row class="rower rower-label"> 
           <ion-col><ion-label>
               Menu
@@ -301,7 +303,7 @@
                   Ratings and Reviews(447)
                 </ion-label></ion-col>
                 <ion-col class="review-filter-wrapper" >
-                  <ion-label id="filter-label" tappable (click)="presentPopover($event)">Filter</ion-label> <ion-icon name="flask"></ion-icon>
+                  <ion-label id="filter-label" >Filter</ion-label> <ion-icon name="flask"></ion-icon>
                 </ion-col>
             </ion-row>
             <ion-row class="rower review-label review-wrapper"> 
@@ -331,9 +333,9 @@
 
 
 }.review-wrapper{
-  background-color: #e8ecf2;
+  background-color: #e8ecf2 !important;
 }.score-wrapper{
-  background-color: #fff;
+  background-color: #fff !important;
 }
 
 #review-bar{

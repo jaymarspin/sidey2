@@ -122,4 +122,8 @@ export class AddPhotoPage implements OnInit {
 
     
   }
+
+  goback(){
+    this.modalCtrl.dismiss()
+  }
 }

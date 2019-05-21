@@ -1,9 +1,8 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
-import { TitleEditPage } from '../moderate/title-edit/title-edit.page'
-import { AddFoodPage } from '../moderate/add-food/add-food.page'
-import { EditSchedPage } from '../moderate/edit-sched/edit-sched.page'
-import {AddPhotoPage} from '../moderate/add-photo/add-photo.page'
+
+
+
 import { PopoverController } from '@ionic/angular';
 import {PostService} from '../post/post.service'
 import {GlobalService } from '../global/global.service'
@@ -30,7 +29,7 @@ export class ModeraterestoPage implements OnInit {
   public address:any
   public role:any
   food:any
-  edit:any = "editor"
+  manage:any
   impress:any
   scrollnd:any = false;
   category:any 
@@ -45,8 +44,13 @@ export class ModeraterestoPage implements OnInit {
    }
   
    async presentPopover(ev: any) {
+     let data = {
+       id: this.id,
+       title: this.title
+     }
     const popover = await this.popoverController.create({
       component: EditorComponent,
+      componentProps: data,
       event: ev,
       translucent: true
     });
@@ -56,7 +60,7 @@ export class ModeraterestoPage implements OnInit {
 
     
    logScrolling(e){
-     var that = this
+      
     var x = parseInt(e.detail.scrollTop)
     if(parseInt(e.detail.scrollTop) >= 80){
       
@@ -109,14 +113,8 @@ content.addEventListener('ionScrollEnd', () => console.log('scroll end'));
    
   }
 
-  editTile(){
-    let data = {
-      title: this.title
-    }
-    this.global.presentModal(TitleEditPage,data,"")
-    
-  }
-  
+ 
+
   
   editAddress(){
     let data = {
@@ -126,13 +124,7 @@ content.addEventListener('ionScrollEnd', () => console.log('scroll end'));
     }
     this.global.presentModal(ModalmapPage,data,"")
   }
-  editSched(){
-    let data = {
-      
-    }
-    this.global.presentModal(EditSchedPage,data,"")
-    
-  }
+ 
 
   
  
@@ -144,11 +136,10 @@ content.addEventListener('ionScrollEnd', () => console.log('scroll end'));
     this.address = this.activateRoute.snapshot.paramMap.get("address")
     this.role = this.activateRoute.snapshot.paramMap.get("role")
     this.distance = this.activateRoute.snapshot.paramMap.get("distance")
-
     if(this.role == "admin"){
-      this.edit = "hide sc-ion-label-md-h sc-ion-label-md-s hydrated"
-      
+      this.manage = 1
     }
+    
     let data = {
       id: this.id
     }
@@ -219,38 +210,9 @@ ionViewWillLeave() {
   // .catch(err => console.log(err)); 
   this.global.leave()
  }
-addFood(){
-  let data = {
-    role: "meal",
-    id: this.id,
-    title: this.title
-  }
-  this.global.presentModal(AddFoodPage,data,"")
-  
-}
-addDesserts(){
-  let data = {
-    role: "dessert",
-    id: this.id
-  }
-  this.global.presentModal(AddFoodPage,data,"")
-}
-
-  addBeverages(){
-    let data = {
-      id: this.id,
-      role: "beverage"
-    }
-    this.global.presentModal(AddFoodPage,data,"")
-    
-  }
-  addPhoto(){
-    let data = {
-      id: this.id
-    }
-    this.global.presentModal(AddPhotoPage,data,"")
-    
-  }
+ 
+ 
+ 
   // async presentModal(component:any,data:any) {
   //   const modal = await this.modal.create({
   //     component: component,

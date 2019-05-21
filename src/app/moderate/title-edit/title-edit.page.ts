@@ -25,6 +25,9 @@ export class TitleEditPage implements OnInit {
   dismiss(){
     this.modalCtrl.dismiss()
   }
+  goback(){
+    this.modalCtrl.dismiss()
+  }
   
   ngOnInit() {
   }

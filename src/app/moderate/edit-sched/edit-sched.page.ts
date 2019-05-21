@@ -11,7 +11,8 @@ export class EditSchedPage implements OnInit {
 
   ngOnInit() {
   }
-  dismiss(){
+   
+  goback(){
     this.modalCtrl.dismiss()
   }
 }

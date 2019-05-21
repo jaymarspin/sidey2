@@ -1,3 +1,19 @@
-<p>
-  editor works!
-</p>
+<ion-list>
+  <ion-item (click)="addPhoto()">
+    <ion-icon name="photos" slot="start"></ion-icon>
+    Slider
+  </ion-item>
+  <ion-item (click)="editTile()">
+    <ion-icon name="flask" slot="start"></ion-icon>
+    Restaurant Name
+  </ion-item>
+  <ion-item (click)="editSched()">
+    <ion-icon name="calendar" slot="start"></ion-icon>
+    Service Schedule
+  </ion-item>
+  <ion-item (click)="addFood()">
+    <ion-icon name="pizza" slot="start"></ion-icon>
+    Add Food
+  </ion-item>
+  
+</ion-list>
