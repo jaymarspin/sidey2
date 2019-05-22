@@ -66,4 +66,12 @@ export class GlobalService {
      }
      return this.nativePageTransitions.slide(options)
   }
+  numbercheck(rate:any){
+    var x = parseInt(rate)
+    if(isNaN(x)){
+      return false;
+    }else return true
+     
+    
+  }
 }

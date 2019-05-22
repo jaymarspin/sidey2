@@ -144,7 +144,7 @@ export class ModalmapPage {
         var checkButton = document.createElement("ion-button")
         checkButton.innerHTML = "<ion-icon name='checkmark-circle-outline'></ion-icon>"
         var att2 = document.createAttribute("color"); 
-        att2.value = "success"
+        att2.value = "warning"
         checkButton.setAttributeNode(att2)
         var cancelButton = document.createElement("ion-button")
         cancelButton.innerHTML = "<ion-icon name='close-circle-outline'></ion-icon>"

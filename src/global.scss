@@ -179,7 +179,7 @@
   }
 
 
-  .foods ion-img{ 
+  .foods-card ion-img{ 
     object-fit:cover;
     width: 100%;
     height: 100%;
@@ -189,18 +189,26 @@
   .foods{
     display: block;
     float: left;
-    width: 185px;
-    height: 197px;
+    width: 200px;
+    height: auto;
     overflow: hidden;
     position: relative;
-    margin-right: 6px;
+    margin-right: 4px;
     padding-top: 0px;
     padding-bottom: 0px;
     
+    padding-left: 0px;
   
    
   }
-  .foods:active{
+  .foods-card{
+    height: 197px;
+    float: left;
+    clear: both;
+    position: relative;
+    width: 93%;
+  }
+  .foods-card:active{
     opacity: 0.6;
     transition: all 0.3s;
   }
@@ -337,4 +345,13 @@
         font-size: 35px;
       }
     }
+  }
+  .price{
+    position: relative;
+    width: 100%;
+    padding-left: 10px;
+    color: #888;
+    font-size: 20px;
+    float: left;
+    clear: both;
   }

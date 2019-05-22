@@ -107,7 +107,7 @@
                   <ion-label class="title" tappable (click)="goToResto(item.id,item.name,item.string_address,item.d)">{{item.name}}</ion-label>
                
               
-              
+                   
             <ion-badge color="warning" class="resto-rate">44</ion-badge>
             <ion-buttons slot="primary" tappable (click)="viewMap(item.lat,item.lng)" style="font-size: 12px;float: right;clear: right">
             <ion-button color="dark"  style="line-spacing: 10px;">
@@ -118,15 +118,20 @@
           
         <div class="food-wrapper">
         <div class="food-holder">
-            <ion-card class="foods meal-overlay" *ngFor="let food of item.food" tappable (click)="viewmeal(food.id,food.name,food.price,food.img,i,food.cat)">
+          <div class="foods" *ngFor="let food of item.food">
+            <ion-card class="foods-card meal-overlay" tappable (click)="viewmeal(food.id,food.name,food.price,food.img,i,food.cat)">
         
-            <ion-badge color="dark" class="ratings">{{food.rate}}</ion-badge>
+            <ion-badge color="dark" class="ratings" *ngIf="global.numbercheck(food.rate)">{{food.rate}}</ion-badge>
             <ion-label class="food-name">{{food.name}}</ion-label>
     
         <ion-img src="{{post.server}}{{food.img}}"></ion-img>
         
               
       </ion-card>
+       <div class="price">
+        &#x20B1; {{food.price}} 
+       </div>
+    </div>
         
         
     </div>
@@ -138,7 +143,10 @@
   </ion-virtual-scroll>
 
 <style>
-
+ 
+  .rating li ion-icon.hydrated{
+    font-size: 15px !important;
+  }
 </style>
 <!-- 
 <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">

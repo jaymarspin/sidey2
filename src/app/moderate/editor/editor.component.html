@@ -7,6 +7,10 @@
     <ion-icon name="flask" slot="start"></ion-icon>
     Restaurant Name
   </ion-item>
+  <ion-item (click)="editAddress()">
+    <ion-icon name="map" slot="start"></ion-icon>
+    Change Address
+  </ion-item>
   <ion-item (click)="editSched()">
     <ion-icon name="calendar" slot="start"></ion-icon>
     Service Schedule
@@ -14,6 +18,18 @@
   <ion-item (click)="addFood()">
     <ion-icon name="pizza" slot="start"></ion-icon>
     Add Food
+  </ion-item>
+  <ion-item (click)="menu()">
+    <ion-icon name="list" slot="start"></ion-icon>
+    Menu
+  </ion-item>
+  <ion-item (click)="album()">
+    <ion-icon name="pizza" slot="start"></ion-icon>
+    Albums
+  </ion-item>
+  <ion-item (click)="minfo()">
+    <ion-icon name="book" slot="start"></ion-icon>
+    More Information
   </ion-item>
   
 </ion-list>

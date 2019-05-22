@@ -32,7 +32,10 @@ const routes: Routes = [
   { path: 'viewmeal/:id/:name/:price/:img', loadChildren: './client/viewmeal/viewmeal.module#ViewmealPageModule' },
   { path: 'reviews', loadChildren: './client/reviews/reviews.module#ReviewsPageModule' },
   { path: 'makereview', loadChildren: './client/makereview/makereview.module#MakereviewPageModule' },
-  { path: 'category', loadChildren: './moderate/category/category.module#CategoryPageModule' }
+  { path: 'category', loadChildren: './moderate/category/category.module#CategoryPageModule' },
+  { path: 'menu', loadChildren: './moderate/menu/menu.module#MenuPageModule' },
+  { path: 'albums', loadChildren: './moderate/albums/albums.module#AlbumsPageModule' },
+  { path: 'minfo', loadChildren: './moderate/minfo/minfo.module#MinfoPageModule' }
   
  
 

@@ -116,16 +116,6 @@ content.addEventListener('ionScrollEnd', () => console.log('scroll end'));
  
 
   
-  editAddress(){
-    let data = {
-      lat: 6.123961,
-         long: 125.168949,
-         role: "admin"
-    }
-    this.global.presentModal(ModalmapPage,data,"")
-  }
- 
-
   
  
   ionViewDidEnter(){
@@ -186,6 +176,7 @@ getMeals():any{
   
   return result
 }
+
 getCuisines():any{
   var result = []
   let body = {

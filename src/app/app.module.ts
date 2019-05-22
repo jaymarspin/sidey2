@@ -18,6 +18,10 @@ import { CategoryPageModule } from './moderate/category/category.module'
 import { EditSchedPageModule } from './moderate/edit-sched/edit-sched.module'
 import {AddPhotoPageModule} from './moderate/add-photo/add-photo.module'
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import {AlbumsPageModule} from './moderate/albums/albums.module'
+import {MinfoPageModule} from './moderate/minfo/minfo.module'
+import {MenuPageModule} from './moderate/menu/menu.module'
+
 
 import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
@@ -33,7 +37,7 @@ import {ReviewsPageModule} from './client/reviews/reviews.module'
 import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 import { Base64 } from '@ionic-native/base64/ngx';
 import {MakereviewPageModule} from './client/makereview/makereview.module'
- 
+import { Ionic2RatingModule } from 'ionic2-rating'
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -52,8 +56,11 @@ import {MakereviewPageModule} from './client/makereview/makereview.module'
     ViewmealPageModule,
     ReviewsPageModule,
     CategoryPageModule,
-    MakereviewPageModule
- 
+    MakereviewPageModule,
+    AlbumsPageModule,
+    MinfoPageModule,
+    MenuPageModule,
+    Ionic2RatingModule
   ], 
   providers: [ 
     StatusBar,

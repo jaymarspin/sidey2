@@ -7,12 +7,13 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { ListingComponent } from '../listing/listing.component';
 import { EventsComponent } from '../events/events.component';
-
+import { Ionic2RatingModule } from 'ionic2-rating';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    Ionic2RatingModule,
     RouterModule.forChild([
       {
         path: '',

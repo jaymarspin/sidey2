@@ -8,6 +8,7 @@ import {GlobalService } from '../global/global.service'
  import { ModalmapPage } from '../modalmap/modalmap.page'
  import {ViewmealPage} from '../client/viewmeal/viewmeal.page'
  import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
+ import * as $ from "jquery";
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
@@ -19,12 +20,13 @@ export class ListingComponent implements OnInit {
   lat:any
   lng:any
   list:any
-  
+  rate:any
   cat:any
   length:any
   
   pass:any = false
   constructor(private modalCtrl:ModalController,private androidFullScreen: AndroidFullScreen,private post: PostService,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
+    this.rate = 4.5
     this.menuCtrl.enable(true)
     
     this.cat = new Array()
@@ -43,6 +45,7 @@ export class ListingComponent implements OnInit {
       
           })
 
+            
             
         
    }
@@ -64,7 +67,7 @@ export class ListingComponent implements OnInit {
       .then((data) => {
         const x = data['data'];
         if(x != null)this.cat = x.selected
-          
+           
     }).then(() =>{
       this.pass = true
       if(this.cat.length > 0){
@@ -88,7 +91,7 @@ export class ListingComponent implements OnInit {
   }
 
   goToResto(id:any,title:any,address:any,distance:any){
-    
+    this.global.enter()
     this.router.navigate(["moderateresto",id,title,address,'client',distance]);
     
   }
@@ -139,6 +142,9 @@ export class ListingComponent implements OnInit {
     }
     this.global.presentModal(ViewmealPage,data,"")
    
+  }
+  ionViewDidEnter(){
+    $(".rating").css({"display": "none"})
   }
   
 

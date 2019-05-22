@@ -45,8 +45,9 @@ ul.sec-menu li{
   line-height: 30px;
 }
 ul.sec-menu li ion-label{
-  border-bottom: 2px dotted #ffce00;
+  border-bottom: 3px dotted #ffce00;
 }
+ 
 
 
 .near{
@@ -94,16 +95,16 @@ ul.sec-menu li ion-label{
   }
  
   #address{
-    color: #333;
-    font-size: 16px;
+    
     padding: 10px;
     border-bottom: 1px solid #dedede;
     background-color: #f5f5f5;
+    
   }
   #address ion-label{
-    color: #333;
-    font-size: 18px;
-    font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif;
+    color: #888;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
   }
   
   #call{
@@ -215,12 +216,17 @@ ul.sec-menu li ion-label{
   .foods{
    
     width: 145px;
-    height: 157px;
-    
-    
-  
+ 
    
   }
+  .food-name{
+    font-size: 15px;
+  }
+  .foods-card{
+    height: 157px;
+    
+  }
+   
   #title{
     font-stretch: condensed;
     font-size: 22px;
@@ -357,23 +363,37 @@ ul.sec-menu li ion-label{
     font-size: 10px;
   }
   .foods-cat{
-    float: left;
+    float: right;
     position: relative;
-    color: #f44242;
+    color: #888;
     font-size: 14px;
     margin-right: 2px;
   }
 .cat-badge{
-  background: none;
-  border:1px solid #f44242;
-  color: #f44242;
+  
+  font-family: Arial, Helvetica, sans-serif;
 }
 #adminControl{
   position: fixed;
   z-index: 5;
   right: 10px;
   top: 15px;
+}.right-label{
+  position: relative;
+  text-align: right;
 }
+#moreInfo{
+  font-family: Arial, Helvetica, sans-serif;
+  color: #888;
+  line-height: 31px;
+}
+.price{
+  font-size: 15px
+}
+ 
+ 
+
+
 
 
 
