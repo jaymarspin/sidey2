@@ -5,7 +5,7 @@ import { ModalmapPage } from '../modalmap/modalmap.page'
 import { NativeGeocoder, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {CategoryPage} from '../moderate/category/category.page'
 import {GlobalService} from '../global/global.service'
 @Component({
@@ -24,20 +24,7 @@ export class PlaceAddPage implements OnInit {
   length:any
   public base64:any
   pass:any = false
-  error_message = {
-    restaurant: [
-      {type: 'required', message: 'This Field is Required'},
-      {type: 'minLength', message: 'character 5'},
-      {type: 'maxLength', message: 'character 10'},
-      
-    ],
-    password: [
-      {type: 'required', message: 'This Field is Required'},
-      {type: 'minLength', message: 'character length must be is less than 5'},
-      {type: 'maxLength', message: 'character length must be is greater than 10'},
-      {type: 'pattern', message: 'invalid email'},
-    ]
-  }
+  
   constructor(private global: GlobalService,public post: PostService,public modal: ModalController,public navCtrl: NavController, public nativeCoder: NativeGeocoder,private toastController: ToastController,private router: Router,public loadingController: LoadingController,private validators: Validators,private formBuilder: FormBuilder) {
     this.cat = new Array()
     

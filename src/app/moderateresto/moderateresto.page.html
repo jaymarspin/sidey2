@@ -188,25 +188,6 @@
           </ion-row>
           
      
-    
-        <ion-row class="rower rower-label"> 
-          <ion-col><ion-label>
-              Menu
-            </ion-label></ion-col>
-        </ion-row>
-        
-        
-        <ion-row class="rower rower-menu">
-          <ion-col class="food-holder">
-              <div class="menu-wrap">
-                  <ion-img src ="http://www.mattthemillers.com/fck_userfiles/image/food-menus/lunch-585-x-420-wide.jpg"></ion-img>
-                </div>
-                <div class="menu-wrap">
-                    <ion-img src ="http://www.mattthemillers.com/fck_userfiles/image/food-menus/lunch-585-x-420-wide.jpg"></ion-img>
-                  </div>
-                  
-          </ion-col>
-        </ion-row>
         
         <ion-row class="rower rower-label"> 
             <ion-col><ion-label>
@@ -217,15 +198,21 @@
           <ion-row class="rower rower-menu">
               <ion-col>
                   <div class="albums img-foods">
-
+                      <div class="album-count">
+                        54 Customers
+                      </div>
                       <ion-img src ="https://i.ytimg.com/vi/XElF5UFmKwU/maxresdefault.jpg"></ion-img>
                   </div>
                   <div class="albums img-ambience">
-
+                      <div class="album-count">
+                          54 Restaurant
+                        </div>
                       <ion-img src ="https://i.ytimg.com/vi/Sq1o76DaOCE/maxresdefault.jpg"></ion-img>
                   </div>
                   <div class="albums img-all img-all-first">
-
+                      <div class="album-count">
+                          54 all
+                        </div>
                       <ion-img src ="https://i.ytimg.com/vi/2Vhfc78XI9Q/maxresdefault.jpg"></ion-img>
                   </div>
                   <div class="albums img-all">
@@ -303,13 +290,63 @@
               </ion-col>
               
             </ion-row>
-            <ion-row class="rower review-label review-wrapper"> 
-              <ion-col><ion-label>
-                  Ratings and Reviews(447)
-                </ion-label></ion-col>
-                <ion-col class="review-filter-wrapper" >
-                  <ion-label id="filter-label" >Filter</ion-label> <ion-icon name="flask"></ion-icon>
+            <ion-row class="rower rower-label"> 
+              <ion-col> 
+                <ion-row class="review-buttons button-one">
+                  <ion-col class="one-left">
+                      <span>1 </span> 
+                  </ion-col>
+                  <ion-col class="one-right">
+                      <ion-icon name="star"></ion-icon>
+                  </ion-col>
+                </ion-row>
+                 
+              </ion-col>
+              <ion-col> 
+                  <ion-row class="review-buttons button-two">
+                    <ion-col class="one-left">
+                        <span>2</span> 
+                    </ion-col>
+                    <ion-col class="one-right">
+                        <ion-icon name="star"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                   
                 </ion-col>
+                <ion-col> 
+                    <ion-row class="review-buttons button-three">
+                      <ion-col class="one-left">
+                          <span>3</span> 
+                      </ion-col>
+                      <ion-col class="one-right">
+                          <ion-icon name="star"></ion-icon>
+                      </ion-col>
+                    </ion-row>
+                     
+                  </ion-col>
+                  <ion-col> 
+                      <ion-row class="review-buttons button-four">
+                        <ion-col class="one-left">
+                            <span>4</span> 
+                        </ion-col>
+                        <ion-col class="one-right">
+                            <ion-icon name="star"></ion-icon>
+                        </ion-col>
+                      </ion-row>
+                       
+                    </ion-col>
+                    <ion-col> 
+                        <ion-row class="review-buttons button-five">
+                          <ion-col class="one-left">
+                              <span>5</span> 
+                          </ion-col>
+                          <ion-col class="one-right">
+                              <ion-icon name="star"></ion-icon>
+                          </ion-col>
+                        </ion-row>
+                         
+                      </ion-col>
+             
             </ion-row>
             <ion-row class="rower review-label review-wrapper"> 
              
@@ -326,6 +363,71 @@
             
             
 <style>
+  .review-buttons{
+    text-align: center;
+    position: relative;
+    clear: both;
+    height: auto;
+    overflow: hidden;
+    color: #f5f5f5;
+    padding: 5px;
+    font-size: 14px;
+    align-content: center;
+    border-radius: 5px;
+    margin-right: 5px;
+    filter: brightness(80%);
+    opacity: 0.8;
+  }
+  .review-buttons span{
+ 
+    
+    display: block;
+    width: 100%;
+    position: relative;
+  
+  }
+  .album-count{
+    position: absolute;
+    padding: 3px;
+    background-color: #211f1f;
+    text-align: center;
+    color: #ccc; 
+    bottom: 0px;
+    font-size: 11px;
+    z-index: 1;
+    width: 100%;
+
+  }
+  .one-left{
+    position: relative;
+    text-align: right;
+
+  }
+  .one-right{
+    position: relative;
+    text-align: left;
+  }
+  .review-buttons ion-icon{
+    font-size: 15px;
+    
+  }
+  .button-one{
+    
+    background-color: #86bc64;
+  }
+  .button-two{
+    
+    background-color: #86f441;
+  }
+  .button-three{
+    background-color: #b54f10;
+  }
+  .button-four{
+    background-color: #b57510;
+  }
+  .button-five{
+    background-color: #ffb400;
+  }
   .cat-badge:active{
   background-color: #f44242;
   color: #f5f5ff;
@@ -337,12 +439,7 @@
   margin-bottom: 0px;
 
 
-}.review-wrapper{
-  background-color: #e8ecf2 !important;
-}.score-wrapper{
-  background-color: #fff !important;
-}
-
+} 
 #review-bar{
   width: 140px;
   height: auto;
@@ -406,7 +503,8 @@
  position: relative;
  width: 20px;
  font-size: 13px;
- color: #333;
+ color: #888;
+ font-family: Arial, Helvetica, sans-serif;
  top: -5px;
 
 }

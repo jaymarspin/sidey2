@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {NavParams} from '@ionic/angular'
 import { TitleEditPage } from '../title-edit/title-edit.page'
 import { AddFoodPage } from '../add-food/add-food.page'
 import { EditSchedPage } from '../edit-sched/edit-sched.page'
@@ -8,7 +9,7 @@ import {MenuPage} from '../menu/menu.page'
 import {MinfoPage} from '../minfo/minfo.page'
 import {GlobalService } from '../../global/global.service'
 import { ModalmapPage } from '../../modalmap/modalmap.page'
-import { min } from 'rxjs-compat/operator/min';
+
  
 @Component({
   selector: 'app-editor',
@@ -16,12 +17,19 @@ import { min } from 'rxjs-compat/operator/min';
   styleUrls: ['./editor.component.scss'],
 })
 export class EditorComponent implements OnInit {
-  @Input('id') id
-  @Input('title') title
+  id:any
+ title:any
+ cuisines:any
+ lat:any
+ long:any
   public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor(private global: GlobalService) { 
-     
-
+  constructor(private global: GlobalService,public navParams:NavParams) { 
+    this.id = this.navParams.get('id');
+    this.title = this.navParams.get('title');
+    this.cuisines = this.navParams.get('cuisines');
+    this.lat = this.navParams.get('lat');
+    this.long = this.navParams.get('long');
+    
   }
 
   ngOnInit() {}
@@ -34,7 +42,8 @@ export class EditorComponent implements OnInit {
   }
   editTile(){
     let data = {
-      title: this.title
+      title: this.title,
+      cuisines: this.cuisines
     }
     this.global.presentModal(TitleEditPage,data,"")
     
@@ -57,12 +66,21 @@ export class EditorComponent implements OnInit {
     
   }
   editAddress(){
+    
     let data = {
-      lat: 6.123961,
-         long: 125.168949,
-         role: "admin"
+         lat: this.lat,
+         long: this.long,
+         role: "admin",
+         change: 1
     }
-    this.global.presentModal(ModalmapPage,data,"")
+    this.global.presentModal(ModalmapPage,data,"").then(() =>{
+      this.global.modalvar.onDidDismiss().then((data) =>{
+          if(data){
+            alert("Awdad")
+          } 
+      });
+    })
+    
   }
   menu(){
     let data = {

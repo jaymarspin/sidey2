@@ -20,7 +20,7 @@
         </ion-row>
             
         
-    <div *ngFor="let item of result" (click)="goToResto(item.id,item.name,item.address,item.d)" class="cards">
+    <div *ngFor="let item of result" (click)="goToResto(item.id,item.name,item.address,item.d,item.lat,item.lng)" class="cards">
         <ion-card>
             <ion-card-header>
               <ion-card-subtitle>{{item.name}}</ion-card-subtitle>

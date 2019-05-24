@@ -32,8 +32,8 @@ export class MyplacePage implements OnInit {
    }
   result = []
   role:any
-  goToResto(id:any,title:any,address:any,d:any){
-    this.router.navigate(["moderateresto",id,title,address,'admin',d]);
+  goToResto(id:any,title:any,address:any,d:any,lat:any,lng:any){
+    this.router.navigate(["moderateresto",id,title,address,'admin',d,lat,lng]);
     
   }
   ngOnInit() {

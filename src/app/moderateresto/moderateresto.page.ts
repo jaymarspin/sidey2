@@ -8,7 +8,7 @@ import {PostService} from '../post/post.service'
 import {GlobalService } from '../global/global.service'
 import {ViewmealPage} from '../client/viewmeal/viewmeal.page'
 import { Router, ActivatedRoute } from '@angular/router';
-import { ModalmapPage } from '../modalmap/modalmap.page'
+ 
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {IonContent} from "@ionic/angular"
 import * as $ from "jquery";
@@ -36,6 +36,8 @@ export class ModeraterestoPage implements OnInit {
   cuisines:any
   distance:any
   rate:any
+  lat:any
+  long:any
   
   constructor(public popoverController: PopoverController,private global: GlobalService,private androidFullScreen: AndroidFullScreen,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) {
     this.category = ["meal","drinks","halo halo","beverage","ramen","noodles","dessert","others"]
@@ -44,16 +46,23 @@ export class ModeraterestoPage implements OnInit {
    }
   
    async presentPopover(ev: any) {
-     let data = {
-       id: this.id,
-       title: this.title
+     if(this.cuisines){
+      
+      let data = {
+        id: this.id,
+        title: this.title,
+        cuisines: this.cuisines,
+        lat: this.lat,
+        long: this.long
+      }
+     var popover = await this.popoverController.create({
+       component: EditorComponent,
+       componentProps: data,
+       event: ev,
+       translucent: true
+     });
      }
-    const popover = await this.popoverController.create({
-      component: EditorComponent,
-      componentProps: data,
-      event: ev,
-      translucent: true
-    });
+     
     return await popover.present();
   }
    
@@ -77,11 +86,7 @@ export class ModeraterestoPage implements OnInit {
   
 
    ngAfterViewInit(){
-    var content = document.querySelector('ion-content');
-content.scrollEvents = true;
-content.addEventListener('ionScrollStart', () => console.log('scroll start'));
-content.addEventListener('ionScroll', (ev) => console.log('scroll', ev));
-content.addEventListener('ionScrollEnd', () => console.log('scroll end'));
+ 
    }
    
   ngOnInit() {
@@ -115,17 +120,19 @@ content.addEventListener('ionScrollEnd', () => console.log('scroll end'));
 
  
 
-  
+  onModelChange(e){
+
+  }
   
  
   ionViewDidEnter(){
-    
-    
     this.title = this.activateRoute.snapshot.paramMap.get("title")
     this.id = this.activateRoute.snapshot.paramMap.get("id")
     this.address = this.activateRoute.snapshot.paramMap.get("address")
     this.role = this.activateRoute.snapshot.paramMap.get("role")
     this.distance = this.activateRoute.snapshot.paramMap.get("distance")
+    this.lat = this.activateRoute.snapshot.paramMap.get("lat")
+    this.long = this.activateRoute.snapshot.paramMap.get("long")
     if(this.role == "admin"){
       this.manage = 1
     }
@@ -154,9 +161,7 @@ content.addEventListener('ionScrollEnd', () => console.log('scroll end'));
   
   
 }
-onModelChange(e){
-  console.log(e)
-}
+ 
 getMeals():any{
   var result = []
   let body = {

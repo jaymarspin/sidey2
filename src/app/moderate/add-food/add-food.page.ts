@@ -105,7 +105,8 @@ export class AddFoodPage implements OnInit {
         }
         
       },(err) =>{
-        alert(err)
+        this.global.loading.dismiss()
+        this.global.presentToast("Success!")
       },()=>{
         this.global.loading.dismiss()
       })

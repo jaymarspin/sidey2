@@ -104,7 +104,7 @@
               <ion-text class="more" color="secondary">See all<ion-icon name="arrow-round-down"></ion-icon></ion-text>
             </div>
               
-                  <ion-label class="title" tappable (click)="goToResto(item.id,item.name,item.string_address,item.d)">{{item.name}}</ion-label>
+                  <ion-label class="title" tappable (click)="goToResto(item.id,item.name,item.string_address,item.d,item.lat,item.lng)">{{item.name}}</ion-label>
                
               
                    
@@ -142,12 +142,7 @@
     
   </ion-virtual-scroll>
 
-<style>
  
-  .rating li ion-icon.hydrated{
-    font-size: 15px !important;
-  }
-</style>
 <!-- 
 <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
   <ion-infinite-scroll-content

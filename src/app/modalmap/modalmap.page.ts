@@ -1,11 +1,10 @@
 import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import {NavController, ModalController} from '@ionic/angular'
 import leaflet from 'leaflet'
-import { AlertController } from '@ionic/angular';
-
+import { AlertController,NavParams } from '@ionic/angular';
+ 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {GlobalService } from '../global/global.service'
-import { LoadingController } from '@ionic/angular';
  
 @Component({
   selector: 'app-modalmap',
@@ -24,19 +23,23 @@ export class ModalmapPage {
 
   public loading: any;
   map:any = null
-  @Input('lat') r_lat: any
-  @Input('long') r_long:any
-  @Input('role') role:any
+  r_lat: any
+  r_long:any
+  role:any
+  change:any
   custom:any
-  constructor(private global:GlobalService,public navController: NavController,public geo: Geolocation,public alertController: AlertController,public modalCtrl: ModalController,private loadingCtrl: LoadingController){
-
-    
+  constructor(public navParams:NavParams,private global:GlobalService,public navController: NavController,public geo: Geolocation,public alertController: AlertController,public modalCtrl: ModalController){
+    this.r_lat = this.navParams.get('lat');
+    this.r_long = this.navParams.get('long');
+    this.role = this.navParams.get('role');
+    this.change = this.navParams.get('change');
 
   }
   
 
 
   ionViewDidEnter(){
+    console.log(this.r_long)
     
     this.loadmap();
     
@@ -98,14 +101,19 @@ export class ModalmapPage {
             marker = leaflet.marker([this.lat,this.long],{icon: customIcon,autoPan: true});
             marker.addTo(this.map).bindPopup("Restaurant Location").openPopup()
             
-          }else{
+          }else if(this.change){
+            marker = leaflet.marker([this.lat,this.long],{icon: customIcon,draggable: true,autoPan: true});
+            marker.addTo(this.map).bindPopup("Your Place Location, drag to desired location").openPopup()
+          }
+          
+          else{
             this.global.presentLoading("please Wait We're locating you").then(() => {
               this.map.locate({
                 setView: true
               }).on('locationfound', e =>{
                // var radius = e.accuracy / 2;
                   this.global.loading.dismiss()
-                  if(this.role == "admin"){
+                  if(this.role == "admin" && !this.change){
                     marker = leaflet.marker(e.latlng,{icon: customIcon,draggable: true,autoPan: true});
                     marker.addTo(this.map).bindPopup("Your Place Location, drag to desired location").openPopup() 
                   }
@@ -199,7 +207,7 @@ export class ModalmapPage {
 
   onMapReady(map: leaflet.Map,customer) {
     setTimeout(() => {
-      if(this.role == "client"){
+      if(this.role == "client" || this.change){
         this.map.addControl(customer);
       }
       

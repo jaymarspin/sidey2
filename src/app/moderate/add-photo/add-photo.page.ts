@@ -1,10 +1,11 @@
 import { Component, OnInit,Input } from '@angular/core';
-import {ModalController,ToastController,LoadingController} from '@ionic/angular'
+import {ModalController,ToastController} from '@ionic/angular'
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { Observable } from 'rxjs/observable'
+import { Camera } from '@ionic-native/camera/ngx';
+import {GlobalService} from '../../global/global.service'
+ 
 import { HttpClient } from '@angular/common/http'
 import {PostService} from '../../post/post.service'
 @Component({
@@ -16,10 +17,11 @@ export class AddPhotoPage implements OnInit {
   imgsrc:string
   base64:any
   loading:any
+  base:any
   @Input('id') id
-  constructor(private post: PostService,private loadingController:LoadingController,private modalCtrl: ModalController,private imagePicker: ImagePicker,private webview:WebView,private file:File,private camera:Camera,private http:HttpClient,private toastController:ToastController) {
+  constructor(private global: GlobalService,private post: PostService,private modalCtrl: ModalController,private imagePicker: ImagePicker,private webview:WebView,private file:File,private camera:Camera,private http:HttpClient,private toastController:ToastController) {
 
-    this.imgsrc = "assets/icon/eating.png"
+ 
    }
 
   ngOnInit() {
@@ -28,71 +30,59 @@ export class AddPhotoPage implements OnInit {
     this.modalCtrl.dismiss()
   }
 
-  private async presentLoading(message): Promise<any> {
-    this.loading = await this.loadingController.create({
-      message: message
-    });
-    return await this.loading.present();
-  }
+  
   pickImage(){
-    let options = {
-      title: "Select picture",
-      message: 'Select min 1',
-      outType: 0,
-      maximumImagesCount: 1,
-    };
+    const options = {
+    // Android only. Max images to be selected, defaults to 15. If this is set to 1, upon
+    // selection of a single image, the plugin will return it.
+    maximumImagesCount: 1,
+    
+    // max width and height to allow the images to be.  Will keep aspect
+    // ratio no matter what.  So if both are 800, the returned image
+    // will be at most 800 pixels wide and 800 pixels tall.  If the width is
+    // 800 and height 0 the image will be 800 pixels wide if the source
+    // is at least that wide.
+  
+    
+    // quality of resized image, defaults to 100
+    quality: 100,
+
+    // output type, defaults to FILE_URIs.
+    // available options are 
+    // window.imagePicker.OutputType.FILE_URI (0) or 
+    // window.imagePicker.OutputType.BASE64_STRING (1)
+ 
+};
+    
 
     this.imagePicker.getPictures(options).then((results) => {
-      for (var i = 0; i < results.length; i++) {
-        var ext = this.webview.convertFileSrc(results[i]).substring(this.webview.convertFileSrc(results[i]).lastIndexOf(".")+1)
-        
-        if(ext == "jpeg" || ext == "JPEG"){
-           alert("png or jpeg is invalid please choose other image!")
-        }else if(ext == "jpg" || ext == "JPG" || ext == "png" || ext == "PNG"){
-          this.presentLoading("Please Wait")
-          this.imgsrc = this.webview.convertFileSrc(results[i]);
-          var imagePath = results[i].substr(0, results[i].lastIndexOf('/') + 1);
-          var imageName = results[i].substr(results[i].lastIndexOf('/') + 1);
-          this.file.readAsDataURL(imagePath, imageName).then((b64str) => {
-          this.base64 = b64str;
-          this.loading.dismiss()
-        }).catch(err => {
-          
-          console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
-        })
-        
-        }
-        
+      if(results.length > 0){
+        this.global.presentLoading("Please Wait").then(() =>{
+          for (var i = 0; i < results.length; i++) {
+            this.imgsrc = this.webview.convertFileSrc(results[i]);
+    
+            
+              this.base.encodeFile(results[i]).then((base64File: string) => {
+                
+                this.base64.push(base64File)
+                this.global.loading.dismiss()
+                
+                
+              }, (err) => {
+                console.log(err);
+              })
+            }
+          })
       }
       
-    }, (err) => {
-      console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
-      
-    });
-  }
-  takeAPic(){
-    const options: CameraOptions = {
-      quality: 100,
-      
-      saveToPhotoAlbum: true,
-      correctOrientation: true,
-      encodingType: this.camera.EncodingType.JPEG,
-      destinationType: this.camera.DestinationType.FILE_URI
-      }
-      this.camera.getPicture(options).then((imageData) => {
         
-        let filename = imageData.substring(imageData.lastIndexOf('/')+1);
-        let path =  imageData.substring(0,imageData.lastIndexOf('/')+1);
-        
-             this.file.readAsDataURL(path, filename).then(res=> {
-              this.imgsrc = res
-              this.base64 = res
-           
-             });
-    }).catch((err)=>{alert(err)})
-    
-    
-  }
+      },(err)=>{
+        console.log('readAsDataURL failed: (' + err.code + ")" + err.message);
+      })
+      
+ 
+    }
+   
   async presentToast(message:any) {
     const toast = await this.toastController.create({
       message: message,
@@ -100,29 +90,35 @@ export class AddPhotoPage implements OnInit {
     });
     toast.present();
   }
+ 
 
   addFood(){
-    let url = this.post.server+"add_photo.php"
-     if(this.imgsrc != "assets/icon/eating.png"){
-      let postdata = new FormData();
-      this.base64 = 'data:image/jpeg;base64,' + this.base64;
-      postdata.append('file',this.base64);
-      postdata.append('id',this.id);
-      let data:Observable<any> = this.http.post(url,postdata)
-      data.subscribe((res) =>{
-       if(res[0].message == "success"){
-        this.modalCtrl.dismiss()
-        this.presentToast("success");
-       }else this.presentToast("Error Occured");
-    })
-    }else{
-      this.presentToast("Choose a photo first");
+   
+     
+    let body = {
+      file: this.base64,
+
+     
+      id: this.id,
+    
     }
     
-
+    this.global.presentLoading("Submitting").then(() => {
+      this.post.postData(body,"add_photo.php").subscribe((res) => {
+        let Response = res.json();
+        if(Response[0].message == "success"){
+          this.global.presentToast("Success!")
+        }
+        
+      },(err) =>{
+        alert(err)
+      },()=>{
+        this.global.loading.dismiss()
+      })
+    })
+    
     
   }
-
   goback(){
     this.modalCtrl.dismiss()
   }

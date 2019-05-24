@@ -1,9 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>menu</ion-title>
+<ion-header no-border >
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start" class= 'back'>
+      <ion-button (click)="goback()"><ion-icon name="arrow-round-back" class= 'back'></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-text class="back-label">Back</ion-text>
+    <ion-text class="head-button" (click)="addMenu()">SAVE</ion-text>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+ <ion-row class="rower">
+  <ion-col class="menu-uploaded">
+    <div class="reviewpicwrapper distance-top">
+      <div class="add-pic uploaded" *ngFor="let item of imgsrc; index as i" [attr.data-index]="i" >
+       
+        <ion-icon name="close-circle-outline" class="ex" (click)="remove(i)"></ion-icon>
+        <ion-img src="{{item}}">
+        </ion-img>
+        </div>
+  <div class="add-pic" (click)="pickImage()">
+    <div class="upload">
+        <ion-icon name="image"></ion-icon><br />
+    <ion-text color="medium">Upload Pic</ion-text>
+  </div>
+  </div>
+  
+  </div>
+  </ion-col>
+ </ion-row>
+  
 </ion-content>
