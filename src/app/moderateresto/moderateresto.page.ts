@@ -20,6 +20,7 @@ import {EditorComponent} from "../moderate/editor/editor.component"
 })
 export class ModeraterestoPage implements OnInit {
   @ViewChild(IonContent) content: IonContent;
+  
   slideOpts = {
     effect: 'flip'
   };
@@ -29,6 +30,7 @@ export class ModeraterestoPage implements OnInit {
   public address:any
   public role:any
   food:any
+  minfo:any
   manage:any
   impress:any
   scrollnd:any = false;
@@ -42,7 +44,7 @@ export class ModeraterestoPage implements OnInit {
   constructor(public popoverController: PopoverController,private global: GlobalService,private androidFullScreen: AndroidFullScreen,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) {
     this.category = ["meal","drinks","halo halo","beverage","ramen","noodles","dessert","others"]
     this.rate = 2.5
-    
+    this.food = new Array()
    }
   
    async presentPopover(ev: any) {
@@ -61,6 +63,16 @@ export class ModeraterestoPage implements OnInit {
        event: ev,
        translucent: true
      });
+     popover.onDidDismiss().then((data:any) =>{
+       
+       if(data.data.data.role == "general-setting"){
+          this.title = data.data.data.title
+          this.cuisines = data.data.data.cuisines
+          this.minfo = data.data.data.minfo
+          console.log(data.data.data.minfo)
+       }
+
+     })
      }
      
     return await popover.present();
@@ -83,7 +95,9 @@ export class ModeraterestoPage implements OnInit {
     }
     
    }
-  
+   receiveMessage(e){
+    console.log(e)
+   }
 
    ngAfterViewInit(){
  
@@ -121,7 +135,7 @@ export class ModeraterestoPage implements OnInit {
  
 
   onModelChange(e){
-
+    
   }
   
  
@@ -146,7 +160,7 @@ export class ModeraterestoPage implements OnInit {
         this.impress = new Array()
         let data = res.json()
         for(var i =0;i < data.length;i++){
-          this.impress[i] = this.post.server+data[i].img
+          this.impress.push(this.post.server+data[i].img)
         }
         if(this.impress.length == 0){
           this.impress.push("https://image.dhgate.com/0x0/f2/albu/g7/M00/09/B9/rBVaSlpqpheAGqouAAJzzx7VRgs819.jpg")
@@ -161,7 +175,11 @@ export class ModeraterestoPage implements OnInit {
   
   
 }
- 
+foodL(food){
+  if(food.length > 0){
+    return true
+  }else return false
+}
 getMeals():any{
   var result = []
   let body = {

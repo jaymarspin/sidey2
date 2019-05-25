@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NavParams} from '@ionic/angular'
+import {NavParams, PopoverController} from '@ionic/angular'
 import { TitleEditPage } from '../title-edit/title-edit.page'
 import { AddFoodPage } from '../add-food/add-food.page'
 import { EditSchedPage } from '../edit-sched/edit-sched.page'
@@ -17,13 +17,13 @@ import { ModalmapPage } from '../../modalmap/modalmap.page'
   styleUrls: ['./editor.component.scss'],
 })
 export class EditorComponent implements OnInit {
+  
   id:any
  title:any
  cuisines:any
  lat:any
  long:any
-  public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor(private global: GlobalService,public navParams:NavParams) { 
+  constructor(private popover: PopoverController,private global: GlobalService,public navParams:NavParams) { 
     this.id = this.navParams.get('id');
     this.title = this.navParams.get('title');
     this.cuisines = this.navParams.get('cuisines');
@@ -42,10 +42,16 @@ export class EditorComponent implements OnInit {
   }
   editTile(){
     let data = {
+      id: this.id,
       title: this.title,
       cuisines: this.cuisines
     }
-    this.global.presentModal(TitleEditPage,data,"")
+    this.global.presentModal(TitleEditPage,data,"").then(()=>{
+      this.global.modalvar.onDidDismiss().then((data) =>{
+        
+        this.popover.dismiss(data)
+      })
+    })
     
   }
 

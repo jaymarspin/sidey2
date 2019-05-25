@@ -2,6 +2,7 @@
 <ion-content overflow-scroll="true" class="moderate-content" [scrollEvents]="true"
 
 (ionScroll)="logScrolling($event)"
+(messageEvent)="receiveMessage($event)"
  >
 
     
@@ -113,7 +114,7 @@
 
       
 
-      <ion-row class="rower" *ngIf="food"> 
+      <ion-row class="rower" *ngIf="foodL(food)"> 
         <ion-col><ion-label>
             Foods({{food.length}})
           </ion-label></ion-col>
@@ -135,7 +136,7 @@
       
       
         
-      <div class="food-wrapper">
+      <div class="food-wrapper" *ngIf="foodL(food)">
 
           <div class="food-holder" *ngIf="!food">
               <ion-skeleton-text animated class="foods-card meal-overlay"></ion-skeleton-text>
@@ -145,7 +146,7 @@
           
       </div>
       
-          <div class="food-holder" *ngIf="food">
+          <div class="food-holder" *ngIf="foodL(food)">
               <div class="foods" *ngFor="let item of food">
               <ion-card class="foods-card meal-overlay"  tappable (click)="viewmeal(item.id,item.name,item.price,item.img,i)">
           
