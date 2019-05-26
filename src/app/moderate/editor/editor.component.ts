@@ -6,7 +6,7 @@ import { EditSchedPage } from '../edit-sched/edit-sched.page'
 import {AddPhotoPage} from '../add-photo/add-photo.page'
 import {AlbumsPage} from '../albums/albums.page'
 import {MenuPage} from '../menu/menu.page'
-import {MinfoPage} from '../minfo/minfo.page'
+
 import {GlobalService } from '../../global/global.service'
 import { ModalmapPage } from '../../modalmap/modalmap.page'
 
@@ -23,12 +23,16 @@ export class EditorComponent implements OnInit {
  cuisines:any
  lat:any
  long:any
+ minfo:any
+
   constructor(private popover: PopoverController,private global: GlobalService,public navParams:NavParams) { 
     this.id = this.navParams.get('id');
     this.title = this.navParams.get('title');
     this.cuisines = this.navParams.get('cuisines');
     this.lat = this.navParams.get('lat');
     this.long = this.navParams.get('long');
+    this.minfo = this.navParams.get('minfo');
+    
     
   }
 
@@ -44,7 +48,8 @@ export class EditorComponent implements OnInit {
     let data = {
       id: this.id,
       title: this.title,
-      cuisines: this.cuisines
+      cuisines: this.cuisines,
+      minfo: this.minfo
     }
     this.global.presentModal(TitleEditPage,data,"").then(()=>{
       this.global.modalvar.onDidDismiss().then((data) =>{
@@ -100,12 +105,7 @@ export class EditorComponent implements OnInit {
     }
     this.global.presentModal(AlbumsPage,data,"")
   }
-  minfo(){
-    let data = {
-      id: this.id
-    }
-    this.global.presentModal(MinfoPage,data,"")
-  }
+  
 
   
 

@@ -11,7 +11,7 @@
       
         <ion-buttons slot="dark" id="moreIcon" >
           <ion-button color="dark">
-            <ion-icon name="notifications-outline"></ion-icon>
+            <ion-icon name="more"></ion-icon>
           </ion-button>      
         </ion-buttons>
     
@@ -20,7 +20,7 @@
 
       <div id="menu-wrapper">
 
-          <ion-segment scrollable color="light" id="menus">
+          <ion-segment scrollable color="light">
               <ion-segment-button checked (click)="listing()" value="listings">
                   <ion-label>Listings</ion-label>
               </ion-segment-button>
@@ -72,7 +72,8 @@
       <style>
         #side{
           color: #333;
-          top: 11px;
+          top: 16px;
+          margin-left: 10px;
           position: absolute;
         }
         
@@ -81,19 +82,19 @@
   top: 0px;
   width: 100%;
   z-index: 10;
-  border-bottom: 1px solid #e8ebef;
-  background-color: #fff;
+  background-color: #f4c242;
 }
 
         #menu-wrapper{
           position: fixed;
           
           width: 100%;
-          margin-top: 52px;
+          margin-top: 54px;
           background-color: #f4c242;
           overflow: hidden;
           z-index: 2;
           padding: 0px;
+          
           text-align:center;
           
           
@@ -153,7 +154,13 @@
   --padding-end: 35px;
   line-height: 35px;
   font-size: 16px;
-  font-weight: bold
+  font-weight: bold;
+  background-color: #f5f5f5;
+  width: 96%;
+  position: relative;
+  left: 2%;
+  border-radius: 10px;
+  margin-top: 5px;
  
 
 }
@@ -161,7 +168,7 @@
 
 #searchIcon, #moreIcon{
   position: absolute;
-  font-size: 25px;
+  font-size: 30px;
   top: 10px;
   color: #ccc;
   
@@ -169,8 +176,11 @@
 #moreIcon{
   right: 0px;
   color: #333;
-  top: 11px;
-  font-size: 20px;
+  top: 16px;
+  
+}
+#moreIcon ion-icon{
+  font-size: 25px;
 }
 
 </style>

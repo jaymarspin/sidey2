@@ -38,6 +38,7 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx
 import { Base64 } from '@ionic-native/base64/ngx';
 import {MakereviewPageModule} from './client/makereview/makereview.module'
 import { Ionic2RatingModule } from 'ionic2-rating'
+import {RestoGalleryPageModule} from './client/resto-gallery/resto-gallery.module'
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -60,7 +61,8 @@ import { Ionic2RatingModule } from 'ionic2-rating'
     AlbumsPageModule,
     MinfoPageModule,
     MenuPageModule,
-    Ionic2RatingModule
+    Ionic2RatingModule,
+    RestoGalleryPageModule
   ], 
   providers: [ 
     StatusBar,

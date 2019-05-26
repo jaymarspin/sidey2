@@ -1,9 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>minfo</ion-title>
+<ion-header no-border >
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start" class= 'back'>
+      <ion-button (click)="goback()"><ion-icon name="arrow-round-back" class= 'back'></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-text class="back-label">Back</ion-text>
+     
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content overflow-scroll="true">
+  <ion-row class="rower rower-label" *ngIf="minfo"> 
+    <ion-col><ion-label>
+        More Information
+      </ion-label></ion-col>
+  </ion-row>
+  <ion-row class="rower" *ngIf="minfo">
+    <ion-col>
+      <p id="moreInfo">
+        {{minfo}}
+        
+      </p>
+    </ion-col>
+</ion-row>
 </ion-content>

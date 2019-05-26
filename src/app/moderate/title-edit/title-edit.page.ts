@@ -12,7 +12,7 @@ import {PostService} from '../../post/post.service'
 })
 export class TitleEditPage implements OnInit {
   id:any
-  @Input("title") title:any
+  title:any
   cuisines:any
   former: FormGroup
   minfo:any
@@ -23,11 +23,13 @@ export class TitleEditPage implements OnInit {
     
     this.cat = new Array()
     this.cuisines = this.navParams.get('cuisines');
-  
+    this.title = this.navParams.get('title');
     this.id = this.navParams.get('id');
+    this.minfo = this.navParams.get('minfo');
     this.cat = this.cuisines
     this.length = this.cat.length
-    this.minfo = ""
+    
+   
   }
   async category() {
     
@@ -96,5 +98,7 @@ export class TitleEditPage implements OnInit {
   ngOnInit() {
     
   }
-
+  ionViewWillLeave(){
+    this.global.leave()
+   }
 }

@@ -7,7 +7,7 @@ import {GlobalService } from '../global/global.service'
  import {CategoryPage} from '../moderate/category/category.page'
  import { ModalmapPage } from '../modalmap/modalmap.page'
  import {ViewmealPage} from '../client/viewmeal/viewmeal.page'
- import { AndroidFullScreen } from '@ionic-native/android-full-screen/ngx';
+
  import * as $ from "jquery";
 @Component({
   selector: 'app-listing',
@@ -25,7 +25,7 @@ export class ListingComponent implements OnInit {
   length:any
   
   pass:any = false
-  constructor(private modalCtrl:ModalController,private androidFullScreen: AndroidFullScreen,private post: PostService,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
+  constructor(private modalCtrl:ModalController,private post: PostService,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
     this.rate = 4.5
     this.menuCtrl.enable(true)
     
@@ -125,10 +125,7 @@ export class ListingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.androidFullScreen.isImmersiveModeSupported()
-    .then(() => {
-      this.androidFullScreen.showSystemUI()
-    })
+    
     
   }
   viewmeal(id,name,price,img,i,cat){

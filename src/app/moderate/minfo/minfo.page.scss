@@ -1,0 +1,35 @@
+
+ion-content{
+    --background: #f5f5f5;
+}
+.rower{
+    width: 100%;
+    float: left;
+    position: relative;
+    clear: both;
+    
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    overflow-x: hidden;
+  
+  }
+  .rower-label{
+    margin-top: 10px;
+    
+    padding-top: 10px;
+  }
+  .rower ion-label{
+    color: #323335 !important;
+    font-size: 23px;
+    font-family: 'Open Sans', sans-serif;
+  
+    
+  }
+  #moreInfo{
+   
+    color: #888;
+    line-height: 31px;
+    word-wrap: break-word;
+    font-size: 18px;
+  }

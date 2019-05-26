@@ -11,7 +11,9 @@ ul.sec-menu{
   padding: 3px;
   margin-bottom: 15px;
   padding-left: 7px;
+  padding-right: 0px;
   border-bottom: 1px solid #dedede;
+  display: flex;
 }
  
 .slide-holder{
@@ -46,6 +48,19 @@ ul.sec-menu li{
 }
 ul.sec-menu li ion-label{
   border-bottom: 3px dotted #ffce00;
+}
+#resto-call{
+  position: relative;
+  line-height: 22px;
+  flex-grow: 100;
+}
+#resto-call ion-icon{
+  position: relative;
+  top: 5px;
+  float: right;
+  font-size: 25px;
+  display: block;
+  
 }
  
 
@@ -111,6 +126,7 @@ ul.sec-menu li ion-label{
     padding: 10px;
     border-bottom: 1px solid #dedede;
     background-color: #f5f5f5;
+    font-family: 'Open Sans', sans-serif;
     
   }
   #address ion-label{
@@ -133,7 +149,7 @@ ul.sec-menu li ion-label{
     transition: all 0.4s;
   }
  #img-col{
-  filter: brightness(90%);
+  filter: brightness(115%);
  }
   #col-right{
     text-align: right;
@@ -162,7 +178,7 @@ ul.sec-menu li ion-label{
     font-size: 32px;
     width: 40px;
     position: fixed;
-    z-index: 3;
+    z-index: 6;
   }
 
   ion-slides{
@@ -172,8 +188,11 @@ ul.sec-menu li ion-label{
     position: relative;
      
     width: 100%;
-
+     
   }
+  
+  
+ 
   .showScroll{
     position: fixed;
     height: 90px;
@@ -233,6 +252,7 @@ ul.sec-menu li ion-label{
   }
   .food-name{
     font-size: 15px;
+    font-family: 'Open Sans', sans-serif;
   }
   .foods-card{
     height: 157px;
@@ -240,10 +260,12 @@ ul.sec-menu li ion-label{
   }
    
   #title{
-    font-stretch: condensed;
-    font-size: 22px;
     font-weight: bold;
-    word-break: break-all;
+    font-size: 26px;
+    color: #333;
+    
+    word-break: normal;
+    
   }#title-left{
     float: left;
     clear: left;
@@ -304,6 +326,7 @@ ul.sec-menu li ion-label{
     margin-top: 10px;
     border-top: 1px solid #dedede;
     padding-top: 10px;
+    font-family: 'Open Sans', sans-serif;
   }
   .rower ion-label{
     color: #323335 !important;
@@ -330,13 +353,17 @@ ul.sec-menu li ion-label{
     height: 100%;
     
   }.albums ion-img{
-    filter: brightness(70%);
+    filter: brightness(101%);
   }
   .albums{
     
     position: relative;
     border-radius: 5px;
     overflow: hidden;
+  }
+  .albums:active{
+    opacity: 0.4;
+    transition: all 0.4s;
   }
   .img-foods{
     float: left;
@@ -375,16 +402,14 @@ ul.sec-menu li ion-label{
     font-size: 10px;
   }
   .foods-cat{
-    float: right;
+    float: left;
     position: relative;
     color: #888;
     font-size: 14px;
     margin-right: 2px;
+    font-family: 'Open Sans', sans-serif;
   }
-.cat-badge{
-  
-  font-family: Arial, Helvetica, sans-serif;
-}
+ 
 #adminControl{
   position: fixed;
   z-index: 5;
@@ -395,12 +420,195 @@ ul.sec-menu li ion-label{
   text-align: right;
 }
 #moreInfo{
-  font-family: Arial, Helvetica, sans-serif;
+   
   color: #888;
   line-height: 31px;
+  text-align: left;
+  word-wrap:break-word;
+  
+  font-size: 15px;
 }
 .price{
   font-size: 15px
+}
+.review-buttons{
+  text-align: center;
+  position: relative;
+  clear: both;
+  height: auto;
+  overflow: hidden;
+  color: #f5f5f5;
+  padding: 5px;
+  font-size: 14px;
+  align-content: center;
+  border-radius: 5px;
+  margin-right: 5px;
+  filter: brightness(80%);
+  opacity: 0.8;
+}
+.review-buttons span{
+
+  
+  display: block;
+  width: 100%;
+  position: relative;
+
+}
+.album-count{
+  position: absolute;
+  padding: 3px;
+  background-color: #211f1f;
+  text-align: center;
+  color: #ccc; 
+  bottom: 0px;
+  font-size: 11px;
+  z-index: 1;
+  width: 100%;
+
+}
+.one-left{
+  position: relative;
+  text-align: right;
+
+}
+.one-right{
+  position: relative;
+  text-align: left;
+}
+.review-buttons ion-icon{
+  font-size: 15px;
+  
+}
+.button-one{
+  
+  background-color: #86bc64;
+}
+.button-two{
+  
+  background-color: #86f441;
+}
+.button-three{
+  background-color: #b54f10;
+}
+.button-four{
+  background-color: #b57510;
+}
+.button-five{
+  background-color: #ffb400;
+}
+.cat-badge:active{
+background-color: none;
+color: #f5f5ff;
+transition: all 0.7s ;
+}
+.review-label{
+
+padding: 10px;
+margin-bottom: 0px;
+
+
+} 
+#review-bar{
+width: 140px;
+height: auto;
+overflow: hidden;
+
+color: #323335;
+font-weight: bold;
+border-radius: 10px;
+margin-top: 10px;
+position: relative;
+float: left;
+clear: left;
+}
+#rating-score{
+position: relative;
+display: block;
+font-size: 50px;
+
+text-align: center;
+
+}
+#ratings-over{
+position: relative;
+display: block;
+font-size: 24px;
+color: #888;
+}
+.stars{
+float: left;
+clear: left;
+position: relative;
+margin-top: -10px;
+}
+#star-layer{
+float: left;
+
+
+position: relative;
+width: 50%;
+height: auto;
+overflow: hidden;
+padding-top: 10px;
+margin-top: 10px;
+}
+
+.progress{
+position: relative;
+margin-bottom: 10px;
+
+
+}
+.progress ion-progress-bar{
+width: calc(100% - 20px);
+float: left;
+clear: left;
+position: relative;
+}
+.progress span{
+display: block;
+float: left;
+position: relative;
+width: 20px;
+font-size: 13px;
+color: #888;
+font-family: Arial, Helvetica, sans-serif;
+top: -5px;
+
+}
+.review-wrapper ion-label{
+position: relative;
+font-size: 15px;
+}
+.review-filter-wrapper{
+text-align: right;
+position: relative;
+}.review-filter-wrapper ion-icon{
+position: relative;
+top: 3px;
+margin-right: 10px;
+margin-left: 5px;
+}
+#readm{
+  position: relative;
+  padding: 5px;
+  border-radius: 7px;
+  color: #a8a4a4;
+  padding-left: 10px;
+  padding-right: 5px;
+  white-space: nowrap;
+  background-image: linear-gradient(to bottom, #efe6e6, #efefef,#efe6e6);
+  
+}
+#readm ion-icon{
+  position: relative;
+  font-size: 25px;
+  top: 7px;
+  margin-left: 10px;
+}
+#readm:active{
+  opacity: 0.4;
+  transition: all;
 }
  
  

@@ -35,7 +35,8 @@ const routes: Routes = [
   { path: 'category', loadChildren: './moderate/category/category.module#CategoryPageModule' },
   { path: 'menu', loadChildren: './moderate/menu/menu.module#MenuPageModule' },
   { path: 'albums', loadChildren: './moderate/albums/albums.module#AlbumsPageModule' },
-  { path: 'minfo', loadChildren: './moderate/minfo/minfo.module#MinfoPageModule' }
+  { path: 'minfo', loadChildren: './moderate/minfo/minfo.module#MinfoPageModule' },
+  { path: 'resto-gallery', loadChildren: './client/resto-gallery/resto-gallery.module#RestoGalleryPageModule' }
   
  
 

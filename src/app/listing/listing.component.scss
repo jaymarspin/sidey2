@@ -40,13 +40,17 @@ ion-item{
     margin-top: 0px;
   }
   .title{
-    font-size: 28px;
+    font-size: 26px;
     color: #173338;
     font-weight: bold;
+    
   }
   .title:active{
     opacity: 0.5;
     transition: all 0.3s;
+  }
+  .skeleton-food-wrapper{
+    overflow-x: hidden;
   }
   
   .address{
@@ -122,6 +126,7 @@ ion-item{
             padding-right: 2px;
             padding-bottom: 6px;
             padding-top: 7px;
+            font-family: 'Open Sans', sans-serif;
             background-image: linear-gradient(to bottom, rgba(255,0,0,0), #333);
           
           }

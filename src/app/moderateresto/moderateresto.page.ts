@@ -8,11 +8,12 @@ import {PostService} from '../post/post.service'
 import {GlobalService } from '../global/global.service'
 import {ViewmealPage} from '../client/viewmeal/viewmeal.page'
 import { Router, ActivatedRoute } from '@angular/router';
- 
+import {MinfoPage} from '../moderate/minfo/minfo.page'
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {IonContent} from "@ionic/angular"
 import * as $ from "jquery";
 import {EditorComponent} from "../moderate/editor/editor.component"
+import {RestoGalleryPage} from '../client/resto-gallery/resto-gallery.page'
 @Component({
   selector: 'app-moderateresto',
   templateUrl: './moderateresto.page.html',
@@ -40,11 +41,14 @@ export class ModeraterestoPage implements OnInit {
   rate:any
   lat:any
   long:any
+  foodCat:any
+ 
   
   constructor(public popoverController: PopoverController,private global: GlobalService,private androidFullScreen: AndroidFullScreen,private activateRoute: ActivatedRoute,private statusBar: StatusBar,private router: Router,private post:PostService) {
     this.category = ["meal","drinks","halo halo","beverage","ramen","noodles","dessert","others"]
-    this.rate = 2.5
+    this.rate = 3.5
     this.food = new Array()
+    this.foodCat = new Array()
    }
   
    async presentPopover(ev: any) {
@@ -55,7 +59,8 @@ export class ModeraterestoPage implements OnInit {
         title: this.title,
         cuisines: this.cuisines,
         lat: this.lat,
-        long: this.long
+        long: this.long,
+        minfo: this.minfo
       }
      var popover = await this.popoverController.create({
        component: EditorComponent,
@@ -64,13 +69,18 @@ export class ModeraterestoPage implements OnInit {
        translucent: true
      });
      popover.onDidDismiss().then((data:any) =>{
-       
-       if(data.data.data.role == "general-setting"){
+     if(data.data.data){
+      
+        if(data.data.data.role == "general-setting"){
           this.title = data.data.data.title
           this.cuisines = data.data.data.cuisines
           this.minfo = data.data.data.minfo
-          console.log(data.data.data.minfo)
-       }
+        
+        
+      }
+     }
+        
+       
 
      })
      }
@@ -81,7 +91,15 @@ export class ModeraterestoPage implements OnInit {
 
     
    logScrolling(e){
-      
+    // var windowTop = parseInt(e.detail.scrollTop);
+   
+ 
+    // if(windowTop <= 175){
+    //   $("#wrap-slider").css({"top": windowTop / 2
+    //   });
+     
+    // } 
+     
     var x = parseInt(e.detail.scrollTop)
     if(parseInt(e.detail.scrollTop) >= 80){
       
@@ -100,7 +118,8 @@ export class ModeraterestoPage implements OnInit {
    }
 
    ngAfterViewInit(){
- 
+  
+    
    }
    
   ngOnInit() {
@@ -171,8 +190,11 @@ export class ModeraterestoPage implements OnInit {
  
     this.getMeals()
     this.getCuisines()
+    this.getMinfo()
+
    
-  
+   
+    
   
 }
 foodL(food){
@@ -193,6 +215,50 @@ getMeals():any{
       let data = res.json();
    
       this.food = data
+     },(e) =>{
+      this.global.presentToast(e)
+     },()=>{
+       var x = 0
+       var y = 0
+      this.food.forEach(element => {
+        let tmp = element.cat.split(",")
+        tmp.forEach(element2 => {
+          var test = true
+          this.foodCat.forEach(element3 => {
+            if(element2 == element3){
+              test = false
+            }
+          });
+          if(test == true) this.foodCat.push(element2)
+           
+        });
+        
+      });
+      
+      
+     })
+ 
+ 
+  
+  return result
+}
+
+
+
+
+getMinfo():any{
+  var result = []
+  let body = {
+    
+    id: this.id
+  } 
+ 
+ 
+  this.post.postData(body,"get_minfo.php").subscribe((res)=>{
+  
+      let data = res.json();
+       
+      this.minfo = data[0].minfo
      })
  
   
@@ -246,6 +312,19 @@ ionViewWillLeave() {
 
   goback(){
     this.router.navigate(['home']);
+  }
+  showminfo(){
+    let data = {
+      minfo: this.minfo
+    }
+    this.global.presentModal(MinfoPage,data,"")
+  }
+  showGallery(e){
+    let data = {
+      role: e,
+      id: this.id
+    }
+    this.global.presentModal(RestoGalleryPage,data,"")
   }
 
 

@@ -1,19 +1,9 @@
 <ion-app>
   <ion-split-pane>
-    <ion-menu>
-       <div class="t_header">
-        <ion-row>
-            <ion-icon class="t_icon" name="cog"></ion-icon>
-            <ion-row>
-            <ion-label class="t_label">Account Settings</ion-label>
-            <ion-label class="t_label2" color="medium">Take care</ion-label>
-            </ion-row>
-        </ion-row> 
-        
-        
-         </div>
-      <ion-content>
-        <ion-list>
+    <ion-menu> 
+       
+      <ion-content class="tab-container">
+        <!-- <ion-list class="tab-list">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
@@ -22,7 +12,32 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list> 
+        </ion-list>  -->
+
+        <ion-card>
+            <div id="user-holder">
+              <ion-img src="https://i.pinimg.com/originals/0d/6b/f9/0d6bf9c225c57d839170563ce4cba1e3.jpg"></ion-img>
+            </div>
+            <div id="user-info">
+              <ion-row>
+                <ion-col>
+                  <ion-text>
+                    Guest one
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+            </div>
+            </ion-card>
+
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+        <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" lines="none">
+            <ion-icon class="tab-label-color" slot="start" [name]="p.icon"></ion-icon>
+          <ion-label class="tab-label-color">
+              
+              {{p.title}}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
       </ion-content>
       
 
@@ -31,5 +46,53 @@
   </ion-split-pane>
 </ion-app>
 <style>
-  
+  .tab-container{
+    --background: #333;
+    
+    
+  }
+  ion-item{
+    --background: #45474c;
+    margin-bottom: 5px;
+  }
+  .tab-label-color{
+    color: #ccc;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+  }
+  #user-holder{
+    float: left;
+    clear: left;
+    position: relative;
+    width: 80px;
+    height: 80px;
+
+    overflow: hidden;
+
+  }
+  #user-info{
+    position: relative;
+    float: left;
+    width: calc(100% - 82px);
+    padding-left: 10px;
+
+  }
+  #user-info ion-text{
+    color: #ccc;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+  }
+  ion-icon.tab-label-color{
+    font-size: 22px;
+  }
+  #user-holder ion-img{
+    size: cover;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    
+  }
+  ion-card{
+    margin-bottom: 40px;
+  }
 </style>

@@ -1,0 +1,29 @@
+<ion-header no-border >
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start" class= 'back'>
+      <ion-button (click)="goback()"><ion-icon name="arrow-round-back" class= 'back'></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-text class="back-label">Back</ion-text>
+ 
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <ion-segment scrollable color="light" class="menu-gallery">
+        <ion-segment-button checked (click)="customersImage()"  value="customers">
+            <ion-label>Customers</ion-label>
+        </ion-segment-button>
+        <ion-segment-button (click)="restaurantImage()" value="restaurant">
+            <ion-label>Restaurant</ion-label>
+        </ion-segment-button>
+        <ion-segment-button (click)="allImage()" value="all">
+            <ion-label>All</ion-label>
+        </ion-segment-button>
+        
+      </ion-segment>
+      <div id="wrapper">
+  <div class="gallery-img" *ngFor = "let item of imgholder">
+    <ion-img src="{{post.server}}{{item.name}}"></ion-img>
+  </div>
+</div>
+</ion-content>
