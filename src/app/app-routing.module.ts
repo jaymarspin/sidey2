@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import { AuthGuard } from './guards/auth.guard';
+import {LoginGuard} from './guards/login-guard.guard'
+import { from } from 'rxjs';
 const routes: Routes = [
   {
     path: '',
+    canActivate: [LoginGuard],
     redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: 'home',
+    canActivate: [AuthGuard],
     loadChildren: './home/home.module#HomePageModule'
   },
 
@@ -36,17 +40,14 @@ const routes: Routes = [
   { path: 'menu', loadChildren: './moderate/menu/menu.module#MenuPageModule' },
   { path: 'albums', loadChildren: './moderate/albums/albums.module#AlbumsPageModule' },
   { path: 'minfo', loadChildren: './moderate/minfo/minfo.module#MinfoPageModule' },
-  { path: 'resto-gallery', loadChildren: './client/resto-gallery/resto-gallery.module#RestoGalleryPageModule' }
-  
- 
+  { path: 'resto-gallery', loadChildren: './client/resto-gallery/resto-gallery.module#RestoGalleryPageModule' },
+  { path: 'photoviewer', loadChildren: './client/photoviewer/photoviewer.module#PhotoviewerPageModule' },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' }
 
-  
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

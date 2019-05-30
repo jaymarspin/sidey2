@@ -39,11 +39,15 @@ import { Base64 } from '@ionic-native/base64/ngx';
 import {MakereviewPageModule} from './client/makereview/makereview.module'
 import { Ionic2RatingModule } from 'ionic2-rating'
 import {RestoGalleryPageModule} from './client/resto-gallery/resto-gallery.module'
+ 
+import {PhotoviewerPageModule} from './client/photoviewer/photoviewer.module'
+import { IonicStorageModule } from '@ionic/storage';
+import { Facebook} from '@ionic-native/facebook/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    
+     
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(),
@@ -62,7 +66,10 @@ import {RestoGalleryPageModule} from './client/resto-gallery/resto-gallery.modul
     MinfoPageModule,
     MenuPageModule,
     Ionic2RatingModule,
-    RestoGalleryPageModule
+    RestoGalleryPageModule,
+    PhotoviewerPageModule,
+    IonicStorageModule.forRoot()
+    
   ], 
   providers: [ 
     StatusBar,
@@ -82,6 +89,7 @@ import {RestoGalleryPageModule} from './client/resto-gallery/resto-gallery.modul
     AndroidPermissions,
     NativePageTransitions,
     Base64,
+    Facebook,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

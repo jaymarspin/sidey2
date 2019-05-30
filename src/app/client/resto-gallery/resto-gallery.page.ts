@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {ModalController } from '@ionic/angular'
 import {PostService} from '../../post/post.service'
 import {GlobalService } from '../../global/global.service'
+import {PhotoviewerPage} from '../photoviewer/photoviewer.page'
 @Component({
   selector: 'app-resto-gallery',
   templateUrl: './resto-gallery.page.html',
@@ -57,6 +58,12 @@ getPhotos(){
 }
   goback(){
     this.modalCtrl.dismiss()
+  }
+  view(name:any){
+    let data = {
+      img: name
+    }
+    this.global.presentModal(PhotoviewerPage,data,"")
   }
   ionViewWillLeave(){
     this.global.leave()

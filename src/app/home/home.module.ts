@@ -14,26 +14,27 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     FormsModule,
     IonicModule,
     Ionic2RatingModule,
+    
     RouterModule.forChild([
       {
         path: '',
         component: HomePage,
-        children: [
-          {
-            path: '',
-            redirectTo: 'listing',
-            pathMatch: 'full'
-          },
-          {
-            path: 'listing',
-            component: ListingComponent,
-          },
-          {
-            path: 'events',
-            component: EventsComponent,
-          }
+        // children: [
+        //   {
+        //     path: '',
+        //     redirectTo: 'listing',
+        //     pathMatch: 'full'
+        //   },
+        //   {
+        //     path: 'listing',
+        //     component: ListingComponent,
+        //   },
+        //   {
+        //     path: 'events',
+        //     component: EventsComponent,
+        //   }
 
-        ]
+        // ]
       }
     ])
   ],

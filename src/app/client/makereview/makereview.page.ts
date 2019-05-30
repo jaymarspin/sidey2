@@ -159,7 +159,10 @@ export class MakereviewPage implements OnInit {
   goback(){
     this.modalCtrl.dismiss()
   }
-  onRateChange(event){
+  
+  onModelChange(event:any){
     this.rate = event;
+    alert(this.rate)
+
   }
 }

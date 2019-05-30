@@ -62,10 +62,9 @@ export class TitleEditPage implements OnInit {
     }); 
     await modal.present();
   }
-  dismiss(){
-    this.modalCtrl.dismiss()
-  }
+  
   goback(){
+    
     this.modalCtrl.dismiss()
   }
   edit(){

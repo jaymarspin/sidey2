@@ -23,7 +23,7 @@
       </ion-segment>
       <div id="wrapper">
   <div class="gallery-img" *ngFor = "let item of imgholder">
-    <ion-img src="{{post.server}}{{item.name}}"></ion-img>
+    <ion-img src="{{post.server}}{{item.name}}" (click)="view(item.name)"></ion-img>
   </div>
 </div>
 </ion-content>

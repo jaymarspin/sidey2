@@ -24,7 +24,7 @@ export class EditorComponent implements OnInit {
  lat:any
  long:any
  minfo:any
-
+  impress:any
   constructor(private popover: PopoverController,private global: GlobalService,public navParams:NavParams) { 
     this.id = this.navParams.get('id');
     this.title = this.navParams.get('title');
@@ -32,6 +32,7 @@ export class EditorComponent implements OnInit {
     this.lat = this.navParams.get('lat');
     this.long = this.navParams.get('long');
     this.minfo = this.navParams.get('minfo');
+    this.impress = this.navParams.get('impress');
     
     
   }
@@ -39,9 +40,21 @@ export class EditorComponent implements OnInit {
   ngOnInit() {}
   addPhoto(){
     let data = {
-      id: this.id
+      id: this.id,
+      impress: this.impress
     }
-    this.global.presentModal(AddPhotoPage,data,"")
+    this.global.presentModal(AddPhotoPage,data,"").then(() =>{
+      this.global.modalvar.onDidDismiss().then((data)=>{
+        console.log(data)
+        
+        if(data.data.role){
+          if(data.data.role == "add-photo"){
+          this.popover.dismiss(data)
+          
+          }
+        }
+      })
+    })
     
   }
   editTile(){
@@ -53,8 +66,13 @@ export class EditorComponent implements OnInit {
     }
     this.global.presentModal(TitleEditPage,data,"").then(()=>{
       this.global.modalvar.onDidDismiss().then((data) =>{
+        if(data.data.role){
+          if(data.data.role == "general-setting"){
+          this.popover.dismiss()
+          }
+        }
         
-        this.popover.dismiss(data)
+        
       })
     })
     
@@ -86,9 +104,9 @@ export class EditorComponent implements OnInit {
     }
     this.global.presentModal(ModalmapPage,data,"").then(() =>{
       this.global.modalvar.onDidDismiss().then((data) =>{
-          if(data){
-            alert("Awdad")
-          } 
+          // if(data){
+          //   alert("Awdad")
+          // } 
       });
     })
     

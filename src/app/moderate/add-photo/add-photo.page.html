@@ -6,7 +6,7 @@
         <ion-button (click)="goback()"><ion-icon name="arrow-round-back" class= 'back'></ion-icon></ion-button>
       </ion-buttons>
       <ion-text class="back-label">Back</ion-text>
-      <ion-text class="head-button" (click)="addFood()">SAVE</ion-text>
+      <ion-text class="head-button" (click)="save()">SAVE</ion-text>
     </ion-toolbar>
   </ion-header>
 <ion-content>
@@ -24,7 +24,24 @@
         <ion-text color="medium">You can only add one photo</ion-text>
     </ion-col>
   </ion-row>
-          
+  <ion-row class="rower">
+      <div class="reviewpicwrapper slider-edit">
+          <div class="add-pic uploaded slider-edit-img" *ngFor="let item of imgcol; index as i" [attr.data-index]="i" >
+           
+            <ion-icon name="close-circle-outline" class="ex" (click)="remove(i,item)"></ion-icon>
+            <img [src]="item">
+           
+            </div>
+      
+      
+    </div>
+
+    </ion-row>
+   <ion-row>
+     <ion-col>
+       {{pp}}
+     </ion-col>
+   </ion-row>
             
                 
 

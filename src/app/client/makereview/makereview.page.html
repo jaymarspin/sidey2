@@ -5,6 +5,7 @@
       <ion-button (click)="goback()"><ion-icon name="arrow-round-back" class= 'back'></ion-icon></ion-button>
     </ion-buttons>
     <ion-text class="back-label">Back</ion-text>
+    <ion-text class="head-button" (click)="addReview()">DONE</ion-text>
   </ion-toolbar>
 </ion-header>
 <ion-content style="--padding-bottom: 0">
@@ -15,14 +16,18 @@
 
   </div>
   <div class="reviewtitle">
-    <ion-label class="reviewname">Sample title</ion-label>
+    <ion-label class="reviewname">{{name}}</ion-label>
     <ion-row class="starplace">
-      <ion-col class="reviewprice">P 3434</ion-col>
-      <ion-col class="reviewprice"><rating [rate]="rate"
-        readonly="false" 
-        size="large" 
-        (rateChange)="onRateChange($event)">
-      </rating>
+      <ion-col class="reviewprice">&#x20B1;{{price}}</ion-col>
+      <ion-col class="reviewprice"><div class="stars"><rating [(ngModel)]="rate" 
+        readOnly="false" 
+        max="5" 
+        emptyStarIconName="star-outline" 
+        halfStarIconName="star-half" 
+        starIconName="star"
+        nullable="false"
+        (ngModelChange)="onModelChange($event)"></rating>
+      </div>
 
 </ion-col>
     </ion-row>
@@ -34,7 +39,7 @@
     <ion-col>
 
 
-        
+         
 
       <div class="reviewpicwrapper">
           <div class="add-pic uploaded" *ngFor="let item of imgsrc; index as i" [attr.data-index]="i" >
@@ -80,101 +85,5 @@
     </ion-row>
   </ion-radio-group>
 </ion-row>
-<div class="footer">
-        <ion-button color="warning" expand="full" (click)="addReview()">Submit</ion-button>
-  </div>
-
-  <style>
-    .ex{
-      position: absolute;
-      z-index: 1;
-      top: 2px;
-      left: 2px;
-      font-size: 16px;
-      color: #888;
-    }
-    .reviewer{
-      color: #888;
-      font-size: 22px;
-    }
-    
-  .picreview{
-    width: 50px;
-    height: 54px;
-    position: relative;
-    clear: left;
-    
-  }
   
-  .paddingTop{
-
-    padding-top: 10px;
-    border-top: 5px solid #dedede;
-    margin-right: 5px;
-  }
-  .input{
-    --padding: 0;
-    width: 100%;
-    clear: both;
-    margin-right: 5px;
-    padding: 0;
-    margin-top: 5px;
-    border-top: 1px solid #888;
-  }
-  .pic-holder{
-    width: 100%;
-    clear: both;
-    
-  }
-  
-
-  
-    
-  .review-holder{
-    padding-left: 5px;
-  }
-  .picreview img{
-    width: 100%;
-    height: 100%;
-  }
-  .reviewname{
-    font-size: 28px;
-    font-weight: bold;
-  }
-  .reviewprice{
-    position: relative;
-    color: #888;
-  }
-  .starplace{
-    width: 100%;
-  }
-  .reviewtitle{
-    width: calc(100% - 70px);
-    
-    
-    margin-left: 5px;
-  }
-  .reviewtitle ion-label{
-    width: 100%;
-    line-height: 22px;
-  }
-  .reviewprice{
-    position: relative;
-    float: left;
-    width: calc(100% - 70px);
-    height: 22px;
-    top: 5px;
-  }
-  .reviewprice rating{
-    position: relative;
-    top: -10px;
-  }
- .footer{
-   padding: 0;
-   width: 100%;
-   position: fixed;
-   bottom: 0px;
- }
-  
-  </style>
 </ion-content>

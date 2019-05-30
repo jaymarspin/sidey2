@@ -1,0 +1,86 @@
+
+
+<ion-content>
+
+    <div id="container">
+      <div id="trans"></div>
+     
+     
+          <div padding>
+              <ion-row>
+                <ion-col>
+                  <img class="logo" src="assets/icon/logo.png" />
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-list inset class="no-border">
+                      <ion-item>
+                          <ion-label>First Name</ion-label>
+                          <ion-input type="text" [(ngModel)] = "fname" ctl="ngModel"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                          <ion-label>Last Name</ion-label>
+                          <ion-input type="text" [(ngModel)] = "lname" ctl="ngModel"></ion-input>
+                      </ion-item>
+                      <ion-item>
+                          <ion-label>Contact</ion-label>
+                          <ion-input type="text" [(ngModel)] = "contact" ctl="ngModel"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Birthdate</ion-label>
+                            <ion-input type="date" [(ngModel)] = "birthdate" ctl="ngModel"></ion-input>
+                          </ion-item>
+                    <ion-item>
+                      <ion-label>Username</ion-label>
+                      <ion-input type="text" [(ngModel)] = "username" ctl="ngModel"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label>Password</ion-label>
+                      <ion-input type="password" [(ngModel)] = "password" ctl="ngModel"></ion-input>
+                    </ion-item>
+                  </ion-list>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button color="secondary" class="login-button" (click)="done()">Done</ion-button>
+                </ion-col>
+              </ion-row>
+              
+            </div>
+        
+  
+    </div>
+  </ion-content>
+  <style>
+  
+    #container{
+      width: 100%;
+      height: 100%;
+      position: relative;
+      top: 0px;
+      left: 0px;
+      
+      background-image: url("https://i2.wp.com/outoftownblog.com/wp-content/uploads/2012/04/Sisig-Burrito.jpg?ssl=1"); 
+      background-attachment: fixed;
+      background-size: cover;
+  
+    }
+   
+  
+   .row{
+     border-bottom: 1px solid #dedede;
+   }
+  
+  
+    #trans{
+      background-color: #000;
+      opacity: 0.4;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: -40px;
+      left: 0px;
+    }
+  </style>

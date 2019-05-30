@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild,Input  } from '@angular/core';
 import {PostService} from '../post/post.service'
 import { Router } from '@angular/router';
-import {MenuController,IonInfiniteScroll, IonVirtualScroll,ModalController } from '@ionic/angular';
+import {MenuController,IonInfiniteScroll, IonVirtualScroll,ModalController,NavController  } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {GlobalService } from '../global/global.service'
  import {CategoryPage} from '../moderate/category/category.page'
@@ -17,35 +17,23 @@ import {GlobalService } from '../global/global.service'
 export class ListingComponent implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   @ViewChild(IonVirtualScroll) virtualScroll: IonVirtualScroll;
-  lat:any
-  lng:any
+  
   list:any
   rate:any
   cat:any
   length:any
-  
+  @Input() lat:any
+  @Input() lng:any
   pass:any = false
-  constructor(private modalCtrl:ModalController,private post: PostService,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
+  constructor(private navCtrl:NavController ,private modalCtrl:ModalController,private post: PostService,private menuCtrl: MenuController,private geo: Geolocation,private global: GlobalService,private router: Router) {
     this.rate = 4.5
     this.menuCtrl.enable(true)
     
     this.cat = new Array()
-   
-          this.geo.getCurrentPosition().then(pos =>{
+    
+         
 
-      
-            this.lat = pos.coords.latitude
-            this.lng = pos.coords.longitude
-        
-            
-             this.firstLoad(this.lat,this.lng,1,this.cat)
-          }).catch( err => {
-            alert("To find the nearest restaurants you must allow this app to access location")
-            this.router.navigate(['home']);
-      
-          })
-
-            
+          
             
         
    }
@@ -77,6 +65,7 @@ export class ListingComponent implements OnInit {
         this.length = null
       }
     }); 
+  
     await modal.present();
   }
   
@@ -87,11 +76,12 @@ export class ListingComponent implements OnInit {
       long: lng,
       role: "client"
     }
+    
    this.global.presentModal(ModalmapPage,data,"")
   }
 
   goToResto(id:any,title:any,address:any,distance:any,lat:any,lng:any){
-    this.global.enter()
+  
     this.router.navigate(["moderateresto",id,title,address,'client',distance,lat,lng]);
     
   }
@@ -125,7 +115,8 @@ export class ListingComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+   
+    this.firstLoad(this.lat,this.lng,1,this.cat)
     
   }
   viewmeal(id,name,price,img,i,cat){
@@ -137,11 +128,12 @@ export class ListingComponent implements OnInit {
       img: img,
 
     }
+ 
     this.global.presentModal(ViewmealPage,data,"")
    
   }
   ionViewDidEnter(){
-    $(".rating").css({"display": "none"})
+     
   }
   
 

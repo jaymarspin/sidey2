@@ -1,12 +1,11 @@
 import { Component, OnInit,Input } from '@angular/core';
-import {ModalController,ToastController} from '@ionic/angular'
+import {NavParams,ModalController} from '@ionic/angular'
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { Camera } from '@ionic-native/camera/ngx';
+ 
 import {GlobalService} from '../../global/global.service'
  
-import { HttpClient } from '@angular/common/http'
+import { Base64 } from '@ionic-native/base64/ngx';
 import {PostService} from '../../post/post.service'
 @Component({
   selector: 'app-add-photo',
@@ -17,19 +16,81 @@ export class AddPhotoPage implements OnInit {
   imgsrc:string
   base64:any
   loading:any
-  base:any
+  pp:any
+  imgcol:any
   @Input('id') id
-  constructor(private global: GlobalService,private post: PostService,private modalCtrl: ModalController,private imagePicker: ImagePicker,private webview:WebView,private file:File,private camera:Camera,private http:HttpClient,private toastController:ToastController) {
-
+   impress:any
+   toRemove:any
+  constructor(private base: Base64,public navParams:NavParams,private global: GlobalService,private post: PostService,private modalCtrl: ModalController,private imagePicker: ImagePicker,private webview:WebView) {
+    
+    this.base64 = new Array()
+    this.impress = this.navParams.get('impress');
+    this.imgcol = Object.assign([], this.impress);
+    this.toRemove = new Array()
  
    }
-
+   ionViewDidEnter(){
+      
+  }
   ngOnInit() {
+  }
+  remove(i:any,id:any){
+    this.toRemove.push(id)
+    this.imgcol.splice(i, 1)
+     
   }
   dismiss(){
     this.modalCtrl.dismiss()
   }
-
+  save(){
+    if(this.base64.length > 0 || this.toRemove.length > 0){
+      let body = {
+        file: this.base64,
+        toRemove: this.toRemove,
+       
+        id: this.id,
+      
+      }
+      
+      this.global.presentLoading("Submitting").then(() => {
+        this.post.postData(body,"add_photo.php").subscribe((res) => {
+          let Response = res.json();
+     
+          if(Response[0].message == "success"){
+            this.global.presentToast("Success!")
+            if(this.base64.length > 0 ){
+              let data = {
+                imgpush: Response[0].name,
+                role: "add-photo"
+              }
+              this.global.modalvar.dismiss(data)
+              this.global.loading.dismiss()
+            }else{
+              
+              let data = {
+                
+                role: "add-photo"
+              }
+              this.global.modalvar.dismiss(data)
+              
+            }
+            
+          }
+          
+        },(err) =>{
+          this.global.presentToast("Error Occured")
+          this.global.loading.dismiss()
+        },()=>{
+          this.global.loading.dismiss()
+        })
+      })
+    }else{
+      this.global.presentToast("No Changes Have Been Made")
+    }
+    
+    
+    
+  }
   
   pickImage(){
     const options = {
@@ -67,7 +128,6 @@ export class AddPhotoPage implements OnInit {
                 this.base64.push(base64File)
                 this.global.loading.dismiss()
                 
-                
               }, (err) => {
                 console.log(err);
               })
@@ -83,40 +143,12 @@ export class AddPhotoPage implements OnInit {
  
     }
    
-  async presentToast(message:any) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 6000
-    });
-    toast.present();
-  }
  
 
   addFood(){
+    
+     
    
-     
-    let body = {
-      file: this.base64,
-
-     
-      id: this.id,
-    
-    }
-    
-    this.global.presentLoading("Submitting").then(() => {
-      this.post.postData(body,"add_photo.php").subscribe((res) => {
-        let Response = res.json();
-        if(Response[0].message == "success"){
-          this.global.presentToast("Success!")
-        }
-        
-      },(err) =>{
-        alert(err)
-      },()=>{
-        this.global.loading.dismiss()
-      })
-    })
-    
     
   }
   goback(){

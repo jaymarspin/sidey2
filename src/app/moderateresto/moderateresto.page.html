@@ -1,33 +1,55 @@
 
+
+<ion-header>
+  
+</ion-header>
+
 <ion-content overflow-scroll="true" class="moderate-content" [scrollEvents]="true"
 
 (ionScroll)="logScrolling($event)"
 
  >
 
-    
-<ion-row id="wrap-slider" *ngIf="!impress" style="top: 0px;margin-top: -8px;position: relative;">
-  <ion-skeleton-text animated style="width: 100%;height: 250px;"></ion-skeleton-text>
-</ion-row>
-
-  <ion-row id="wrap-slider" *ngIf="impress">
-    <ion-col>
-  <ion-slides pager="true" [options]="slideOpts" class="slide-holder" id="slider">
-    <ion-slide *ngFor="let item of impress">
-      <img [src] ='item' id="img-col"/>
-    </ion-slide>
-    
-  </ion-slides>
+ 
+<ion-row id="wrap-slider" *ngIf="impress && impress.length > 0">
+  <ion-col>
+<ion-slides pager="true" [options]="slideOpts" class="slide-holder" id="slider">
+  <ion-slide *ngFor="let item of impress">
+    <img src ='{{item}}' id="img-col"/>
+  </ion-slide>
   
-  <ion-label id="photos"><ion-icon name="images"></ion-icon> {{impress.length}} photos</ion-label>
+</ion-slides>
+
+<ion-label id="photos"><ion-icon name="images"></ion-icon> {{impress.length}} photos</ion-label>
 </ion-col>
 </ion-row>
+
+
+<ion-row id="wrap-slider" *ngIf="!impress || impress.length == 0">
+  <ion-col>
+<ion-slides pager="true" [options]="slideOpts" class="slide-holder" id="slider">
+  <ion-slide>
+      <ion-skeleton-text animated style="width: 100%;height: 250px"></ion-skeleton-text>
+    <!-- <img src ='https://image.dhgate.com/0x0/f2/albu/g7/M00/09/B9/rBVaSlpqpheAGqouAAJzzx7VRgs819.jpg' id="img-col"/> -->
+  </ion-slide>
+  
+</ion-slides>
+
+<ion-label id="photos"><ion-icon name="images"></ion-icon> 0 photos</ion-label>
+</ion-col>
+</ion-row>
+
+
+
 <ion-label id="back">
-  <ion-icon name="arrow-round-back" tappable (click)="goback()"></ion-icon>
+<ion-icon name="arrow-round-back" tappable (click)="goback()"></ion-icon>
 </ion-label>
 <ion-button *ngIf="manage" color="warning"  id="adminControl" tappable (click)="presentPopover($event)">
-    <ion-icon style="font-size: 26px;" name="more"></ion-icon>
+<ion-icon style="font-size: 26px;" name="more"></ion-icon>
 </ion-button>
+  
+
+
 <ion-row class="showScroll showScroll-label">
     <ion-col>
         <ion-label>{{title}}</ion-label>

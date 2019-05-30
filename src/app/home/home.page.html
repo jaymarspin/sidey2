@@ -7,7 +7,7 @@
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
   
-        <ion-input placeholder="Search here" id="input"></ion-input>
+        <ion-input placeholder="Gensan" disabled id="input"></ion-input>
       
         <ion-buttons slot="dark" id="moreIcon" >
           <ion-button color="dark">
@@ -131,15 +131,20 @@
         </ion-scroll> -->
        
        
-        <router-outlet></router-outlet>
+        <!-- <router-outlet></router-outlet> -->
 
-              <!-- <app-listing></app-listing> -->
+              <app-listing class="first listing" [lat] ="lat" [lng]="lng" *ngIf = "lat && lng"></app-listing>
+              <app-events class="tabs events" [message]="mes" *ngIf = "lat && lng"></app-events>
   
       </div>
 </ion-content>
 
 
 <style>
+  .tabs{
+    display: none;
+  }
+  
 #maincontent{
   position: relative;
   margin-top: 110px;
