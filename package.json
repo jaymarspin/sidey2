@@ -75,7 +75,7 @@
     "ionic2-rating": "^1.2.2",
     "ionic3-star-rating": "^1.1.5",
     "ionic4-rating": "^1.0.9",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "leaflet": "^1.4.0",
     "leaflet-easybutton": "^2.4.0",
     "rxjs": "^6.3.3",
